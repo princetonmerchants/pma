@@ -1,0 +1,105 @@
+require File.dirname(__FILE__) + '/../spec_helper'
+
+describe Page do
+	dataset :event_pages
+	
+	describe "#events_by_month" do
+	  it "should return a list of pages with events in the current month" do
+	    Page.events_by_month.should have(3).items
+	  end
+	
+		it "should accept a date to change the month to search within" do
+		  Page.events_by_month(1.month.ago).should have(1).items
+		end
+	end
+	
+	describe "#event_count_by_month" do
+	  it "should return the number of pages with events in the current month" do
+	    Page.event_count_by_month.should == 3
+	  end
+
+		it "should accept a date to change the month to search within" do
+		  Page.event_count_by_month(1.month.ago).should == 1
+		end
+	end
+
+	describe "#upcoming_events" do
+		
+		before(:all) do
+		  create_page "Another event", :event_datetime_start => (Time.now.at_beginning_of_month.next_month - 4.minutes).to_s(:db)
+		end
+		
+	  it "should return the pages for the next 3 upcoming events" do
+			Page.upcoming_events.should have(3).items
+	  end
+	
+		it "should return the home page, the next event, as the first page" do
+		  Page.upcoming_events.first.should == pages(:home)
+		end
+		
+	end
+
+	describe "#upcoming_events with more upcoming events" do
+		
+		before(:all) do
+		  create_page "Yet another event", :event_datetime_start => (Time.now.at_beginning_of_month.next_month - 3.minutes).to_s(:db)
+			create_page "Final event", :event_datetime_start => (Time.now.at_beginning_of_month.next_month - 1.minutes).to_s(:db)
+		end
+		
+	  it "should return only return 3 events, even if there are more" do
+			Page.upcoming_events.should have(3).items
+	  end
+	
+		it "should allow more than 3 events with a different argument value" do
+		  Page.upcoming_events(5).should have(5).items
+		end
+	end
+
+	describe "#next_event" do
+				
+	  it "should return the page with the next upcoming event" do
+	    Page.next_event.should == pages(:home)
+	  end
+	end
+end
+
+
+describe Page do
+  dataset :event_ranges
+
+  describe "#events_in_range" do
+
+    it "should find all events in a given year" do
+      Page.events_in_range("2009").
+        should == pages(:march_first, :march_tenth, :april_first, :august_sixth, :next_christmas)
+    end
+
+    it "should find all events in a given month" do
+      Page.events_in_range("2009/03").should == pages(:march_first, :march_tenth)
+      Page.events_in_range("2009/04").should == [pages(:april_first)]
+      Page.events_in_range("2009/08").should == [pages(:august_sixth)]
+    end
+    
+    it "should find events on a given day" do
+      Page.events_in_range("2009/04/01").should == [pages(:april_first)]
+    end
+    
+    it "should find all events within a given range, inclusive" do
+      Page.events_in_range("2009/03/01","2009/03/10").should == pages(:march_first, :march_tenth)
+    end
+    
+    it "should find all events within a given range, even if start/end dates are in wrong order" do
+      Page.events_in_range("2009/03/10","2009/03/01").should == pages(:march_first, :march_tenth)
+    end
+    
+    it "should raise an exception when given an invalid date" do
+      lambda { Page.events_in_range("3009/04/01") }.should raise_error(ArgumentError)
+    end
+
+    it "should raise an exception when given no arguments" do
+      lambda { Page.events_in_range() }.should raise_error(ArgumentError)
+    end
+    
+  end
+  
+end

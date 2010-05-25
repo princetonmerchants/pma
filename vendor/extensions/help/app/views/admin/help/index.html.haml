@@ -1,0 +1,16 @@
+- content_for :page_css do
+  = render :partial => 'styles.html.haml'
+- content_for :page_scripts do
+  = render :partial => 'scripts.js.erb'
+
+.Help
+  .MainTopics
+    %h1= @cms_name + " Help"
+    - render_region :main do |main|
+      - main.introduction do
+        %p Use this reference to help guide your way through editing your website.
+      - main.render_region :organizing
+      - main.render_region :editing
+  .Extras
+    - render_region :extras do |extras|
+      - extras.render_region :extension_docs_list 

@@ -1,0 +1,12 @@
+- content_for :page_css do
+  = render :partial => 'styles.html.haml'
+- content_for :page_scripts do
+  = render :partial => 'scripts.js.erb'
+
+.Help
+  .MainTopics
+    %h1= "#{(@custom_role || @role).titleize} Help"
+    = render :partial => "#{@role}_index"
+  .Extras 
+    - render_region :extras do |extras|
+      - extras.render_region :extension_docs_list 

@@ -1,0 +1,16 @@
+- @page_title = 'Config - ' + default_page_title
+
+.outset
+  = render 'top'
+  #config_table
+    %table#config_index.index
+      %tr
+        %th.key Name
+        %th.value Value
+  
+      - @configs.each do |key, node|
+        = render_node key, node, :reset_depth => true
+
+#actions
+  %ul
+    %li= link_to "New Config", new_admin_config_url if admin?

@@ -1,0 +1,1 @@
+= text_field_tag "page[parts_attributes][#{page_part_counter}][content]", page_part.content.try(:strftime, "%B %d, %Y"), :id => "part_#{page_part.name.to_slug}_content", :class => 'date'

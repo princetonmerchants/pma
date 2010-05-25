@@ -1,0 +1,17 @@
+%h1 New Config
+
+- form_for :conf, :url => admin_configs_path do |f|
+  .form-area
+    %p.title
+      %label
+        Name
+        = f.text_field :key, :class => 'textbox'
+    %p.title
+      %label
+        Value
+        = f.text_field :value, :class => 'textbox'
+    
+    %br/
+    
+    %p.buttons
+      = submit_tag 'Create', :class => 'button'

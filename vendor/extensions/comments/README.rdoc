@@ -1,0 +1,53 @@
+= Radiant Comments Extension
+
+Adds blog-like comment functionality to Radiant. Currently maintained by http://github.com/saturnflyer
+
+== Patches
+
+If you want to contribute features or fixes please write your specs and code and submit pull requests to these github.com users:
+
+- saturnflyer
+- artofmission
+
+== Dependencies
+
+* Requires Radiant 0.7.1 or greater.
+* Requires will_paginate Rails plugin (http://github.com/mislav/will_paginate/tree/master)
+* Requires fastercsv 1.2.3 or greater.
+* Requires sanitize 1.0.8 or greater.
+
+== Installation 
+
+To install Comments, run: 
+
+  rake radiant:extensions:comments:install
+
+This _WILL_ delete any snippets named 'comment', 'comments' and 'comment_form' if these exist.
+
+== More Help
+
+See the included HELP docs here or read them in your Radiant interface with the Help extension installed.
+
+== Contributors
+
+* John Muhl
+* Sven Schwyn
+* Gerrit Kaiser
+* Stephen Lombardo
+* Benny Degezelle
+* Frank Louwers (thanks to Jan De Poorter for the Mollom ruby lib)
+* Jim Gay of http://www.saturnflyer.com, sponsored by http://ignitesocialmedia.com/.
+* Michael Hale of http://halethegeek.com/, sponsored by http://ignitesocialmedia.com/.
+* Nathaniel Talbott of http://terralien.com/, sponsored by http://ignitesocialmedia.com/.
+* John Croisant
+* Jon Leighton
+* Witter Cheng
+* Keith Bingman
+* Sean Cribbs, partly sponsored by http://opscode.com/
+* Ryan Heneise
+
+If you contribute, go ahead and add your name to the list! 
+
+== Credits
+
+Included icons come from the FamFamFam Silk icon set.  http://famfamfam.com

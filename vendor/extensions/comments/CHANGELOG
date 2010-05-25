@@ -1,0 +1,40 @@
+= Git
+
+= 0.0.6
+
+* Added spam_answer_tag for simple spam protection or CAPTCHA
+* Added comments.notify_creator and comments.notify_updater to send emails to the page creator/updater [Jim Gay]
+* Added accept.png icon and rake task to copy it. [ryan@artofmission.com]
+
+= 0.0.5
+
+* Pluralized the `comments` tag so that it does not conflict with the standard Radiant `comment` tag. [nathaniel@terralien.com]
+* Added posting confirmation support. [nathaniel@terralien.com]
+* Added validation support. [nathaniel@terralien.com]
+* Allow disabling of input filters. [nathaniel@terralien.com]
+* Updated to work with Radiant 0.6.7. [nathaniel@terralien.com]
+
+= 0.0.4
+* Added additional options and formatting to admin interface [rch]
+* Added comment approval options [rch]
+* Comments must now be approved before they will show up [rch]
+
+= 0.0.3
+* Changed dependency from admin_parts to shards. [hcf]
+* Added the snippets to a migration, so that the users no longer have to do this manually. [hcf]
+* Changed filter_id from integer to string to make it similar to radiant core. [hcf]
+* Removed the 'Comments' tab, and moved the functionality to the 'Pages' tab instead using shards. [hcf]
+* Added support for filters in comments, through the comment:filter_box_tag tag. [hcf]
+* Simplified the comment snippets. [hcf]
+
+= 0.0.2
+
+* Added Akismet support. 
+* Added admin tools for moderating comments. 
+* Added destroy dependency to Page#Comments association. 
+* Added no_login_required to CommentsController. Comment should no longer force login when posted. 
+
+= 0.0.1
+
+* Basic comment functionality in place
+

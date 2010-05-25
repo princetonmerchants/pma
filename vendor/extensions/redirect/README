@@ -1,0 +1,6 @@
+= Redirect
+
+A redirect page will redirect to the url defined in the first page part.
+
+Based on the radiant-vapor-extension by Jim Gay:
+http://github.com/saturnflyer/radiant-vapor-extension/tree/master

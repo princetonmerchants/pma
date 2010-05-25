@@ -1,0 +1,18 @@
+- content_for 'popups' do
+  #add_part_popup.popup{:style => "display: none"}
+    #add_part_busy.busy{:style => "display: none"}= image('spinner.gif', :alt => "")
+    %h3.title Add Part
+    - form_for([:admin, PagePart.new], :html => { :onsubmit => "addPart(this); return false" }) do |f|
+      %p
+        %label{:for => 'part_name_field'} Name
+        = f.text_field :name, :id => 'part_name_field', :maxlength => 100, :style => "width: 15em", :class => "textbox big"
+        = hidden_field_tag 'index', @page.parts.size, :id => 'page_part_index_field'
+      %p
+        %label{:for => 'page_part_page_part_type'} Part Type
+        %select{:id => 'page_part_page_part_type', :name => 'page_part[page_part_type]'}
+          = options_for_select parts.sort{|x,y| x.part_name <=> y.part_name}.map{|x| [x.part_name, x.name]}, PagePart.name
+      %p.buttons
+        = submit_tag "Add Part", :id => 'add_part_button', :class => "button"
+        or
+        = link_to_function 'Cancel', "$(this).closePopup()"
+  = render_region :popups

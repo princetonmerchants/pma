@@ -1,0 +1,92 @@
+Developing for Help is easy.
+
+If you'd like to include help information for your own extensions you have some options. You may
+
+1. Create plain text help files (formatted in RDoc, Markdown, or Textile syntax)
+2. Inject partials into the Help interface
+
+== Multiple Options
+
+"Why so many ways to provide help? It's overkill."
+
+They each have separate purposes and benefits. First, the purpose of Help is to provide basic information about the functions of Radiant. Second, Help allows developers to provide documentation for features added through extensions.
+
+=== The lowest barrier to entry is plain text files. 
+
+Extension developers may include the appropriate files (explained below) and if users of their extension have Help installed it will appear in the Help interface, if users do not have Help installed there is no worry about dependencies and Radiant will function normally.
+
+=== Make the Help docs your own.
+
+You may inject partials into the interface to include information about features that are tightly coupled with the existing interface and make it appear to the users as though that is what is standard.
+
+For example, suppose a developer created a category for pages such as "hot" or "cold" (perhaps to represent the mood of the author) and she added this selection to the page editing interface with a partial injection. To the average user it would appear that the "hot" or "cold" selection was a part of the CMS, so it would be important to add a reference to the new feature within the documentation for the basic pieces of Radiant.
+
+=== Features
+
+If you are building an extension and are considering using Help, keep these features in mind:
+
+1. Plain Text Files - No Failures if Help is not installed, clean slate of (role-based) information, all information (per role) is provided on one screen
+2. Partial Injection - Will fail if Help is not installed (unless you check for the objects you need properly), integrated with the standard (per role) help information, easy to break up topics in to small parts
+
+== RDoc Help Files
+
+Help looks through all of your installed extensions to find relevant HELP.rdoc files. These files must follow the naming conventions of:
+
+1. HELP.rdoc (this is for general users)
+2. HELP_developer.rdoc (this will only be shown to users with the developer role)
+3. HELP_admin.rdoc (this will only be show to users with the admin role)
+
+These files must be placed in the root of your extension. If you do not wish to provide help for a certain user group, do not create the pertinent RDoc.
+
+== Partial Injection Based Help
+
+You may inject partials into the interface by adding code such this into your extension's activate method:
+
+  admin.help.index.add :main, "client_welcome", :before => "introduction"
+
+* "admin.help.index" refers to the main help page (the help index) and ".add" is called to add information to the section provided in the next argument. 
+* ":main" is the argument that specifies which section will receive your partial. 
+* "client_welcome" is the partial that you want to add and should be located in your extension directory app/views/admin/help/_client_welcome.html.haml
+* :before => "introduction" will place your partial before the introduction region (or you could do :after). This is optional, and if left out, your partial will be appended to the ":main" section.
+
+For a list of all of the regions provided by Help, see help_extension.rb around line 65, and app/views/admin/index.html.haml for details about where they appear.
+
+When adding your partials, you may specify inline decisions about whom should see your documentation with the admin_help and developer_help helper methods. These can be used in your HAML by doing:
+
+  - admin_help do
+    %p Hello Madame Admin!
+  - developer_help do
+    %p You are special, Mr. Developer.
+
+Those helper methods make use of the admin? and developer? helpers provided by Radiant. The blocks of text will only be shown to the user if they are in those roles, but keep in mind that currently developer? returns true if the user is selected only as an admin (meaning developer_help will be seen by developers and admins).
+
+=== Dependency
+
+If you know that you extension will always have Help available, you may use the above approach without worry. If, however, your extension will be used where Help may or may not be installed, you should first check for the existence of the appropriate region into which you plan to inject partials.
+
+Here is an example:
+
+  if admin.respond_to?(:help)
+	if admin.help.index
+	  admin.help.index.add :main, "client_welcome", :before => "introduction"
+	end
+	if admin.help.role
+	  admin.help.role.add :extras, "contact_info"
+	end
+  end
+
+The nested if statements may be overkill but if for some reason Help regions change in the future, your extension will be protected from failing because a certain region does not exist.
+
+=== Expanding Documentation
+
+Each of the Radius tags displayed under the developer documentation also allows you to add more details.
+
+  admin.help.role.add 'archive:children', "all_about_archives"
+
+== Source Code
+
+Help is made freely available at http://github.com/saturnflyer/radiant-help-extension/
+
+Help was built by Saturn Flyer 
+
+http://www.saturnflyer.com

@@ -1,0 +1,19 @@
+.page{:id => "page_#{page_part.name.to_slug}", 'data-caption'=>h(page_part.name)}
+  .part{:id => "part-#{page_part.name.to_slug}"}
+    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][name]", page_part.name, :id => "part_#{page_part_counter}_name"
+    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][id]", page_part.id, :id => "part_#{page_part_counter}_id", :class => "id_input"
+    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][_delete]", false, :class => "delete_input"
+    = hidden_field_tag "page[parts_attributes][#{page_part_counter}][page_part_type]", page_part.class.to_s
+    %p
+      - if page_part.show_filters?
+        %label{:for => "part_#{page_part.name.to_slug}_filter_id"} Filter
+        = select_tag "page[parts_attributes][#{page_part_counter}][filter_id]", filter_options_for_select(page_part.filter_id), :id => "part_#{page_part.name.to_slug}_filter_id"
+        %span.reference_links
+          Reference:
+          %span{:id => "filter_reference_link_#{page_part.name.to_slug}"}
+            = link_to_function "Filter", "loadFilterReference('#{page_part.name.to_slug}');"
+          %span{:id => "tag_reference_link_#{page_part.name.to_slug}"}
+            = link_to_function 'Available Tags', "loadTagReference('#{page_part.name.to_slug}');"
+      = render_region :part_controls, :locals => {:page_part => page_part}
+    %div
+    = render :partial => 'admin/page_parts/' + page_part.partial_name, :locals => { :page_part => page_part, :page_part_counter => page_part_counter }

@@ -1,0 +1,6 @@
+= TODO: 
+
+* Write better specs.
+* Move tests to specs.
+* Add user notification message when a comment is posted.
+* captcha mollom implementation

@@ -1,0 +1,34 @@
+- @page_title = t('snippets') + ' - ' + default_page_title
+
+.outset
+  = render_region :top
+  %table#snippets.index
+    %thead
+      %tr
+        - render_region :thead do |thead|
+          - thead.title_header do
+            %th.snippet= t('snippet')
+          - thead.modify_header do
+            %th.modify= t('modify')
+    %tbody
+      - if @snippets.any?
+        - @snippets.each do |snippet|
+          %tr.node.level_1
+            - render_region :tbody, :locals => {:snippet => snippet} do |tbody|
+              - tbody.title_cell do
+                %td.snippet
+                  = image('snippet', :alt => '')
+                  %span= link_to snippet.name, edit_admin_snippet_url(snippet)
+              - tbody.modify_cell do
+                %td.remove
+                  = link_to t('remove'), remove_admin_snippet_url(snippet)
+      - else
+        %tr
+          %td.empty{:colspan => admin.snippet.index.tbody.length}= t('no_snippets')
+
+- render_region :bottom do |bottom|
+  - bottom.new_button do
+    #actions
+      = will_paginate(@snippets)
+      %ul
+        %li= link_to image('plus') + " " + t('new_snippet'), new_admin_snippet_url

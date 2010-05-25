@@ -1,0 +1,15 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[remote "radiant"]
+	fetch = +refs/heads/*:refs/remotes/go/*
+	url = git://github.com/squaretalent/radiant-go.git
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = git@github.com:username/egsample.com.git
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master

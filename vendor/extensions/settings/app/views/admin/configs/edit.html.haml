@@ -1,0 +1,21 @@
+%h1
+  = @conf.key
+
+- form_for :conf, :url => admin_config_path(@conf), :html => { :method => :put } do |f|
+  .form-area
+    %p.title
+      %label
+        Config Value
+        - if @conf.protected?
+          = f.password_field :value, :class => 'textbox'
+        - else
+          = f.text_field :value, :class => 'textbox'
+    
+    %br/
+    
+    %p.buttons= submit_tag 'Save', :class => 'button'
+      
+%p.buttons
+  - if admin?
+    This system relies on some of these settings to work properly. Deleting settings may cause unexpected errors. 
+    = link_to "I understand. Delete this setting entirely.", admin_config_path(@conf), :method => :delete if admin?

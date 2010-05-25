@@ -1,0 +1,27 @@
+%tr.node
+  %td.layout
+    - @depth.times do
+      .nest-padding
+    
+    - if conf
+      %span.title= link_to "#{image_tag('admin/extensions/settings/setting.png', :size => '16x16')} #{key.humanize}", edit_admin_config_path(conf), :title => key
+    
+    - else
+      %span.title.label= key.humanize
+  
+  
+  %td
+    - if conf
+      = conf.protected_value
+      
+- if hash
+  - @depth += 1
+  
+  - hash.each do |key, value|
+    = render_node key, value
+  
+  - @depth -= 1
+  
+  - if @depth == 0
+    %tr.spacer
+      %td{ :colspan => 2 }

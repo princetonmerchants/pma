@@ -1,0 +1,22 @@
+input[type=text], textarea
+  :width                    250px
+  :height                 = !line_height
+  :padding
+    :top                    4px
+  :font
+    :size                   16px  
+  :border                   0
+    :top                  = "#{!grey} 1px solid"
+    :left                 = "#{!grey+#111} 1px solid"
+    
+  &:active, &:focus
+    :border
+      :color              = "#{!grey-#222}"
+      
+textarea
+  :width                    450px
+  :height                   150px
+  
+    
+#form_contact
+  :margin                     20px 0 0 10px

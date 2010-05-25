@@ -1,0 +1,36 @@
+@import                       ../modules.sass
+
+!line_height                = 24px
+!font_size                  = 14px
+!ninesixty_gutter_width     = 10px
+!ninesixty_grid_width       = 960px
+!ninesixty_columns          = 24
+!sticky_footer_height       = !line_height*3
+
+!white                      = #ffffff
+!grey                       = #606060
+!light_grey                 = #A0A0A0
+!black                      = #000000
+!black_off                  = #141414
+!blue                       = #312e7c
+!red                        = #ca3502
+!green                      = #3d8018
+!purple                     = #99349a
+!light_purple               = #ffccff
+!pink                       = #e9a5eb
+
+=font(!family, !size, !css3 = false, !weight = "normal", !style = "normal")
+  @if !css3
+    :font
+      :family               = "#{!family}-#{!weight}-#{!style}"
+      :size                 = !size
+  @else
+    :font
+      :family               = !family
+      :size                 = !size
+      :weight               = !weight
+      :style                = !style
+
+      
++global-reset
++sticky-footer( "20px", "#root", "#root_foot", "#foot_container" )

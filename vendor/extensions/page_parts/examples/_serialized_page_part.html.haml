@@ -1,0 +1,7 @@
+.row
+  = hidden_field_tag "page[parts_attributes][#{page_part_counter}][content][_reset]", true
+  - SerializedPagePart.colors.each do |color|
+    = check_box_tag "page[parts_attributes][#{page_part_counter}][content][#{color}]", true, page_part.content[color], :id => "part_#{page_part.name.to_slug}_content-#{color}"
+    %label{:for => "part_#{page_part.name.to_slug}_content-#{color}"}
+      = color
+    %br/

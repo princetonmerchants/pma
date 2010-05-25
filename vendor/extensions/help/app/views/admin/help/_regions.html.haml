@@ -1,0 +1,34 @@
+.Regions
+  %h2 Current Regions
+  %p Below is a list of editable regions from your installation of the application interface
+  - admin.instance_variables.sort.each do |reg|
+    .ui_region
+      %h3{:class => 'region_header'}= reg.gsub(/^@/,'').camelize
+      - region_instance = admin.send(:instance_variable_get, reg)
+      - if region_instance.respond_to?(:marshal_dump)
+        - unless region_instance.marshal_dump.blank?
+          %ul
+            - region_instance.marshal_dump.each do |key, value|
+              %li
+                %h4= key
+                - value_regions = value.send(:instance_variable_get, "@regions")
+                - unless value_regions.blank?
+                  %ul
+                    - value_regions.each do |vr_key, vr_value|
+                      %li
+                        = vr_key
+                        - unless vr_value.blank?
+                          %ul
+                            - vr_value.each do |endpoint|
+                              %li= endpoint
+      - else
+        - unless region_instance.blank?
+          %ul
+            - region_instance.each do |reg|
+              %li
+                %h4
+                  = reg.name
+                - reg.each do |r|
+                  %p
+                    = link_to r.name, r.url
+                    = "(#{r.url})"

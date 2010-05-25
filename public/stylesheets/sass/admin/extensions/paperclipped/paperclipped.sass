@@ -1,0 +1,537 @@
+#show_bucket,
+#show_custom_fields
+  :margin
+    :top          -4px
+  :float          right
+  
+  a
+    :margin       -20px 5px 0
+    :padding      3px 8px
+    :border
+      :radius     4px
+    :-moz
+      :border
+        :radius   4px
+    :-webkit
+      :border
+        :radius   4px
+    :background
+      :color      rgb(85, 85, 85)
+    :font 
+      :size       80%
+    :text
+      :decoration none
+      :shadow     0pt 0pt 20px rgba(255, 255, 255, 0.1)
+    :color        white
+    
+
+#assets
+  :background     #f5f1e2 url(/images/admin/vertical_tan_gradient.png) repeat-x top
+
+#attachments
+  :clear          both
+  :color          #333
+  :margin         10px 0
+  :border
+    :radius       8px
+  :-moz
+    :border
+      :radius     8px
+  :-webkit
+    :border
+      :radius     8px
+
+  .toolbar
+    :float        right
+    :padding      6px
+      :bottom     0
+    :width        50px
+    :text
+      :align      right
+
+    img
+      :padding    5px
+      :cursor     pointer
+
+
+  h3, p.notice
+    :background   #eae3c5
+    :margin       0
+    :padding      0.5em
+    
+  p
+  
+    &.notice
+      :padding    .5em .8em
+      :font
+        :style    italic
+        :size     90%
+      :color      red
+
+    &.title
+      :border     0
+        :bottom   1px #eae3c5 solid
+      :width      66%
+      :font
+        :size     17px
+        :weight   bold
+      :margin     1em 0
+      
+  h3
+    :font
+      :size       16px
+    :padding      7px 0
+        
+  .attachment_upload
+    :padding      0.8em
+      :top        0
+      
+    img
+      :cursor     pointer
+      :padding    2px
+      :margin 
+        :left     7px
+
+  .attachment
+    
+    .delete
+      :cursor     pointer
+      :padding    2px
+      :margin 
+        :left     7px
+
+    .deleted 
+    
+      em
+        :color    #ff0000
+        :margin   0
+          :right  20px
+          :bottom 10px
+      
+      a
+        :opacity  0.5
+        :text
+          :decoration line-through
+
+      .delete
+        :visibility  hidden
+        
+    .drag_order
+      :cursor     move
+      :float      right
+      :padding    2px
+      :margin
+        :right    6px
+
+  ol
+    :list-style   none
+    :padding      0 10px
+    :margin       0
+    
+    li
+      :width      100%
+      :padding    8px 0
+      :margin
+        :left     0
+      :border     0
+        :bottom   1px dashed #cccccc
+        
+      &:last-child
+        :border
+          :bottom 0
+
+      div
+        :float    left
+        :width    25px
+    
+      .thumbnail
+        :float    left
+        :margin   0 10px
+      
+      p
+        :margin
+          :right  5px
+
+      img
+        :background white
+        :border     1px solid #d4cba4
+          :radius   3px
+        :padding    3px
+        :-moz-border-radius     3px
+        :-webkit-border-radius  3px
+
+  table
+    :margin-top     1em
+
+    th
+      :width        120px
+      :padding      0
+        :right      10px
+        :bottom     5px
+      :font
+        :weight     bold
+      :text
+        :align      right
+    
+    td
+      :padding
+        :bottom     5px
+
+
+#assets_table
+
+  td
+    &.asset
+      :width        72px
+      :text
+        :align      center
+
+      a img
+        :padding    2px
+        :background
+          :color    #eee
+        :border     1px solid #ccc
+
+    &.asset-title,
+    &.tag-name
+      :font
+        :size       115%
+        :weight     bold
+      
+      a
+        :text
+          :decoration none
+        :color      black
+
+        &:hover
+          :color    #06c
+          :text
+            :decoration underline
+
+    &.asset-tags
+    
+      a
+        :color      black
+        :text
+          :decoration none
+    
+    &.asset-tags,
+    &.tag-name
+    
+      a:hover
+        :color      #06c
+        :text
+          :decoration underline
+
+  .caption
+    :color          #9eb3bf
+    :font
+      :style        italic
+      :weight       normal
+    :margin         10px
+
+  .content_type
+    :width          180px
+    :color          #9eb3bf
+    :font
+      :style        italic
+      :weight       normal
+
+  .add-to-bucket
+    :width        90px
+
+#assets
+  clear: both
+  position: relative
+  margin-bottom: 4px
+  padding: 0
+  cursor: default
+  border: solid #cdc295
+  border-width: 0 1px 1px 1px
+  min-height: 150px
+  height: auto !important
+  height: 150px
+  background: white
+
+
+#asset-bucket
+  background: white
+  padding: 20px
+  width: 720px
+
+
+#close-link
+  margin-top: 10px
+
+
+#assets
+  h4
+    font-size: 100%
+    font-weight: bold
+    margin: 0
+
+  .note
+    font-size: 85%
+    font-weight: normal
+    color: black
+
+  p
+    padding: 0 10px 7px
+    background: #eae3c5
+    margin: 0
+    height: 20px
+    line-height: 22px
+
+    &.note
+      margin: 5px 0
+      font-size: 85%
+      font-style: italic
+      background: #fff
+
+
+#clear-bucket, #reorder, #done
+  position: absolute
+  right: 10px
+
+
+#clear-bucket a, #reorder a, #done a
+  text-align: right
+  font-weight: bold
+  font-size: 85%
+  color: black
+  text-decoration: none
+
+
+#clear-bucket a:hover, #reorder a:hover, #done a:hover
+  color: blue
+  text-decoration: underline
+
+
+#assets .pane
+
+#asset-tabs
+  margin: 0
+  border-bottom: 1px solid #cdc295
+
+  .asset-tab
+    background-color: #f5f1e2
+    border: 1px solid #f5f1e2
+    border-bottom: 1px solid #cdc295
+    color: black
+    display: inline-block
+    font-size: 100%
+    font-weight: bold
+    text-align: left
+    margin: 0 0 -1px 0
+    padding: 7px 10px 4px
+    text-decoration: none
+    text-transform: titlecase
+    outline: none
+    -moz-outline: none
+
+    &.here
+      background-color: #eae3c5
+      border: 1px solid #cdc295
+      border-bottom: 1px solid #eae3c5
+
+
+#bucket ul, #page-attachments ul, #search-results ul
+  list-style: none
+  margin: 0
+  padding: 0 10px 0 0
+
+
+#assets
+  li
+    position: relative
+    float: left
+    margin: 8px 0 8px 8px
+    height: 106px
+    padding-right: 24px
+
+  .asset
+    position: relative
+
+    img
+      padding: 3px
+      background-color: #eaeaea
+      border: 1px solid #ccc
+
+  .info
+    position: absolute
+    top: 0
+    right: 0
+
+    p
+      margin: 0
+
+    a
+      display: block
+      color: black
+      text-decoration: none
+      height: 16
+      width: 16px
+      border: 1px solid #ccc
+      margin: 0 0 5px 0
+
+      &#edit_asset
+        background: #fff url('/images/admin/extensions/paperclipped/extensions/paperclipped/edit.png') center center no-repeat
+
+      &#add_asset
+        background: #fff url('/images/admin/plus.png') center center no-repeat
+
+      &#remove_asset
+        background: #fff url('/images/admin/minus.png') center center no-repeat
+
+    img.reorder
+      border: 1px solid #ccc
+      cursor: move
+
+    a:hover
+      color: blue
+      text-decoration: underline
+
+  .image_info h4
+    margin: 0 0 10px 0
+    padding: 0
+    background: none
+
+
+.pagination
+  margin: -18px 0 60px 12px
+  font-weight: bold
+  font-size: 90%
+  color: silver
+
+  a
+    text-decoration: none
+    color: black
+
+    &:hover
+      text-decoration: underline
+      color: blue
+
+  .current
+    color: red
+
+
+#content
+  .form-area
+    p.upload
+      margin: 2px 0 10px 0
+      padding: 10px 10px
+      background: white
+      border: 1px solid #cdc295
+
+    div.asset
+      margin: 2px 0
+      padding: 10px
+      background: white
+      border: 1px solid #cdc295
+
+  p.content label.filename
+    margin-bottom: -5px
+    display: block
+
+  .form-area p.upload label
+    margin-bottom: 5px
+    display: block
+
+
+p
+  &#asset-name
+    padding-top: 8px
+    font-size: 80%
+
+  &.info
+    font-size: 85%
+
+
+.asset-buttons
+  font-size: 80%
+
+
+table#site-map
+  td.assets, th.assets
+    text-align: right
+    border: 1px solid red
+
+
+#upload-assets a
+  color: black
+  font-weight: bold
+  text-decoration: none
+
+  &:hover
+    color: blue
+    text-decoration: underline
+
+
+#upload-form
+  .file
+    padding: 10px 10px 5px
+
+  .upload-buttons
+    padding: 0 10px
+    font-size: 80%
+
+  label
+    margin-bottom: 5px
+    display: block
+    font-weight: bold
+    margin-left: 10px
+
+  iframe
+    width: 1px
+    height: 1px
+    border: 0
+
+
+#asset-upload
+  .spinner
+    display: none
+    width: 16px
+    height: 16px
+    background-image: url(/images/admin/spinner.gif)
+
+  &.waiting
+    color: #666
+
+    .spinner
+      display: block
+
+    .button
+      display: none
+
+
+#filesearchform
+  margin-bottom: 18px
+
+  #search p input
+    margin: -3px 0 -3px
+    padding: 1px
+
+  label
+    font-weight: bold
+
+  a
+    font-weight: bold
+    color: black
+    text-decoration: none
+    outline: none
+    -moz-outline: none
+
+    &:hover
+      color: blue
+      text-decoration: underline
+
+    &.pressed
+      color: #cc0000
+
+
+#actions form
+  display: inline
+
+
+.move a
+  cursor: move

@@ -1,0 +1,73 @@
+body.Calendar
+    
+  #root
+  
+    #content_container
+    
+      #content
+      
+        #content_main
+        
+          ul.listing
+          
+            li
+              :padding               0 0 0 0 
+                
+          div.article
+        
+          .calendar
+            :margin                 0 0 10px 0
+            :padding                0
+            :background-color       #ffffff
+            
+            .monthName, .monthLink
+              :text-align           center
+              :font-size            16px
+              :height               30px
+              
+              a
+                :font-size          30px
+                :text-decoration    none
+                
+            th
+              :width                97px
+              :font-weight          bold
+              :border               1px solid #ffffff
+              :border-bottom        none
+              :border-right         none
+              :margin               0
+              :padding              0
+              :text-align           center
+              :background-color     #eaeaea
+            
+            td
+              :width                97px
+              :border               1px solid #ffffff
+              :border-bottom        none
+              :border-right         none
+              :margin               0
+              :padding              0 2px 2px 5px
+              :line-height          15px
+              :font-size            12px
+              :background-color     #eaeaea
+              :vertical-align       top
+              
+              span.time
+                :display            none
+              
+              .date
+                :float              right
+                :font-size          11px
+                :margin             0 0 5px 5px
+                
+              p.event
+                :padding            10px 0 0 0
+                :margin             0
+                
+            td.otherMonth
+              :color             = !light_grey
+              
+            
+          #inner-right
+            :margin-top             10px
+            

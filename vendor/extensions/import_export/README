@@ -1,0 +1,18 @@
+= Import Export
+
+Uses the code from yaml_db to easily export the database, changes are that this
+includes the schema_migrations, so that extension migrations continue to work
+
+To import use: 
+
+ $ rake db:import
+
+To export, browse to /admin/export or use:
+
+ $ rake db:export
+ 
+updated Dirk Kelly
+  March 31, 2010
+
+by Sean Cribbs
+  April 18, 2007

@@ -1,0 +1,19 @@
+- @page_title = 'Assets - ' + default_page_title
+
+.outset
+  = render_region :top 
+  = render 'top'
+  #assets_table
+    = render :partial => 'asset_table', :locals => { :assets => @assets }
+
+#actions
+  %ul
+    %li= link_to "New Asset", new_admin_asset_path 
+    %li= link_to "Show Bucket", "#asset-bucket", :class => "popup"
+    %li
+      - form_tag nil, :method => 'get' do 
+        %input{ :type => "search", :id => "search", :name => "search" , :value => params[:search] }
+        = submit_tag "Search"
+        = observe_field 'search',  :frequency => 1, :update => 'assets_table', :url =>  { :controller => 'assets', :action=> 'index' }, :method => 'get', :with => "'search=' + escape(value)"
+      
+= render :partial => 'admin/bucket/assets_bucket'

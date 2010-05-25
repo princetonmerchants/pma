@@ -1,0 +1,48 @@
+- form_for [:admin, @asset], :html => {:onsubmit_status => onsubmit_status(@asset)}, :html => { :enctype => 'multipart/form-data' } do |f|
+  = render_region :form_top
+  .form_area
+    - render_region :form do |form|
+      - form.edit_title do
+        %p.title
+          = f.label :title, 'Title' # t('title')
+          = f.text_field :title, :class => 'textbox activate', :maxlength => 255
+      - form.edit_extended_metadata do      
+        .drawer
+          .drawer_contents#attributes
+            %table.fieldset
+              %tr
+                %th.label Caption
+                %td.field= f.text_field :caption, :class => 'textbox', :maxlength => 255 
+              %tr
+                %th.label Path
+                %td= @asset.thumbnail(:original)
+              = render_region :extended_metadata
+          .drawer_handle
+            %a.toggle{:href=>'#attributes', :rel=>"toggle[attributes]", :class=>"#{(meta_errors? ? 'less' : 'more')}"}= meta_label
+      - form.edit_content do
+        - unless @asset.new_record?
+          %p.filename
+            = "Filename: #{@asset.asset_file_name unless @asset.new_record?}"
+          %p.content
+            - if @asset.image?
+              = image_tag @asset.thumbnail(Radiant::Config['assets.display_size'].to_sym)
+            - else
+              = link_to image_tag(@asset.thumbnail(:thumbnail)), @asset.asset.url
+          %p
+            = f.label :asset, "Replace File"
+            = f.file_field :asset
+        - else
+          %p
+            = f.label :asset, "File"
+            = f.file_field :asset
+            
+  - render_region :form_bottom do |form_bottom|
+    - form_bottom.edit_buttons do
+      %p.buttons{:style=>"clear: left"}
+        = save_model_button(@asset)
+        = save_model_and_continue_editing_button(@asset)
+        or
+        = link_to "Cancel", admin_assets_url
+    - form_bottom.edit_timestamp do
+      %p.updated_line
+        = updated_stamp @asset

@@ -1,0 +1,14 @@
+config/database.yml
+db/*.db
+log/*.log
+pkg
+tmp/*
+.DS_Store
+.svn
+TAGS
+public/tmp
+public/stylesheets/admin/styles.css
+spec/datasets/tmp
+*.tmproj
+.idea
+rerun.txt

@@ -1,0 +1,40 @@
+#content 
+
+  table.index 
+  
+    tr.dragging 
+      :background
+        :color        #D3ECF4
+  
+      td
+        :color        white
+
+.drag_order
+  :width              24px
+
+  img
+    :cursor           move
+
+
+#drag_line
+  :position           relative
+  :height             3px
+  :font
+    :size             0px
+  :background
+    :color            #800080
+
+  div
+    :position         absolute
+    :height           9px
+    :width            9px
+    :margin           -3px 0 0 -9px
+    :background
+      :image          url(/images/admin/extensions/drag/circle.png)
+
+    &.copy
+      :height         20px
+      :width          20px
+      :margin         -9px 0 0 -20px
+      :background
+        :image        url(/images/admin/extensions/drag/copy.png)

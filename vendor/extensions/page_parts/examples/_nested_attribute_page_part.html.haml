@@ -1,0 +1,10 @@
+-# Notice that we're not rendering form elements for this part. We're dealing
+-# directly with the page -- the data doesn't have to pass through the Part at
+-# all. We do have to guard against a nil @page when dealing with new records.
+
+.row
+  %label{:for => "page[favorite_book_attributes][title]"} Title:
+  = text_field_tag "page[favorite_book_attributes][title]", @page.try(:favorite_book).try(:title)
+  %br/
+  %label{:for => "page[favorite_book_attributes][isbn]"} ISBN:
+  = text_field_tag "page[favorite_book_attributes][isbn]", @page.try(:favorite_book).try(:isbn)

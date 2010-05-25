@@ -1,0 +1,7 @@
+- options_for = ['created_at', 'updated_at', 'published_at', 'now'].map { |d| [d.humanize, d] }
+- format = page_part.date_format || "%B %d, %Y"
+.row
+  %label{:for => "page[parts_attributes][#{page_part_counter}][content][for_date]"}Date field:
+  =select_tag "page[parts_attributes][#{page_part_counter}][content][for_date]", options_for_select(options_for, page_part.for_date), :id => "part_#{page_part.name.to_slug}_content-for"
+  %label{:for => "page[parts_attributes][#{page_part_counter}][content][date_format]"}Format:
+  =text_field_tag "page[parts_attributes][#{page_part_counter}][content][date_format]", format, :id => "part_#{page_part.name.to_slug}_content-format"

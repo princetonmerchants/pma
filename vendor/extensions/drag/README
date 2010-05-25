@@ -1,0 +1,52 @@
+= Drag v0.3.4 For Radiant 0.9.0
+
+Created by Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension.
+
+== Notes
+
+Only designers and admins have the ability to re-order pages
+
+== Installation
+
+    git clone git://github.com/squaretalent/radiant-drag-extension.git vendor/extensions/drag
+    
+    rake radiant:extensions:drag:migrate
+    rake radiant:extensions:drag:update
+
+== Version History
+
+# v0.3.4 - 29-03-2010
+- Moved assets to extension/drag directory
+- Updated instructions
+
+# v0.3.3 - 09-02-2010
+- Made compatible with Radiant 0.9.0
+
+# v0.3.2 - 18-11-2009
+- Made compatible with Radiant 0.8.1. This extension should now be compatible with at least version >= 0.6.9
+
+# v0.3.1 - 25-05-2009
+- FIX: if the move request takes some time to finish, the dragline now stays put when dropped instead of still being 
+dragged along with the mouse.
+- Changed color of the row that is being dragged to fit better with default Radiant colors.
+- Small robustness-fix for cases when the rake migrate is forgotten.
+- Modified install instructions in README.
+
+# v0.3   - 16-03-2009
+- Incorporated copy functionality. When pressing Ctrl or Command, you can copy the item.
+- Fixed errors which occurred when trying to place two pages with the same slugs. Now, the second one is seen as a copy.
+
+- Fixed some JS errors.
+
+# v0.2.3 - 16-03-2009
+- v0.2.2. was not really compatible with Radiant > 0.6.9... This one should be compatible with versions both before and 
+after 0.7.
+
+# v0.2.2 - 12-03-2009
+- Made compatible with Radiant > 0.6.9
+
+# v0.2.1 - 23-02-2009
+- Fixed JS bug that did not allow dragging of child pages which were loaded using AJAX after expanding a page.
+
+# v0.2   - 21-02-2009
+- Initial commit

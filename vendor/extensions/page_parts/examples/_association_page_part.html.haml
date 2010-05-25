@@ -1,0 +1,9 @@
+-# Instead of populating this field with the content of the page part, we get
+-# the association IDs directly from the page itself (with some safety for new
+-# records.) Since this is an actual association, the content of the page part
+-# itself should be considered superfluous.
+-# A complete implementation would present a user-friendly page selection
+-# interface instead of just exposing the IDs.
+
+.row
+  = text_field_tag "page[parts_attributes][#{page_part_counter}][content]", @page.try(:related_page_ids).try(:join, ',')

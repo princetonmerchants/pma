@@ -1,0 +1,20 @@
+#config_table {
+  padding-bottom: 18px; }
+  #config_table #config_index {
+    background: #fff;
+    color: #121212; }
+    #config_table #config_index .key {
+      width: 25%; }
+  #config_table span.label {
+    color: #666;
+    font-size: 1.2em; }
+  #config_table .nest-padding {
+    width: 35px;
+    height: 10px;
+    float: left; }
+  #config_table .spacer {
+    height: 3px; }
+    #config_table .spacer td {
+      background: #EAEAEA;
+      height: 3px;
+      padding: 0; }
