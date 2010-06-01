@@ -1,0 +1,31 @@
+<h2><%= t(:'adva.users.titles.register') %></h2>
+<% form_for @user, :url => user_path, :html => {:id => 'register'} do |f| %>
+    <p><%= f.text_field :first_name, :label => true %></p>
+    <p><%= f.text_field :last_name, :label => true %></p>
+    <p><%= f.text_field :homepage, :label => true %></p>
+    <p><%= f.text_field :email, :label => true %></p>
+    <p><%= f.password_field :password, :label => true %>
+    <% if @site.mailchimp.lists.length > 1 %>
+      <h2>Email Newsletters</h2>
+      <% @site.mailchimp.lists.each do |list| %>
+        <p>
+          <input type="checkbox" name="user[newsletters" id="newsletters-<%= list['id'] %>" value="<%= list['id'] %>"
+            <%= 'checked="checked"' if @user.newsletters.to_a.include?(list['id']) %> />
+          <label for="newsletters-<%= list['id'] %>" class="inline"><%= list['name'] %></label>
+        </p>   
+      <% end %>
+    <% else list = @site.mailchimp.lists.first %>
+      <p>
+        <input type="checkbox" name="user[newsletters" id="newsletters-<%= list['id'] %>" value="<%= list['id'] %>"
+          <%= 'checked="checked"' if @user.newsletters.to_a.include?(list['id']) %> />
+        <label for="newsletters-<%= list['id'] %>" class="inline">
+        I want to receive your email newsletter</label>
+      </p> 
+    <% end %>
+  <% f.buttons do %>
+  	<%= submit_tag t(:'adva.titles.register'), :id => "register" %> or
+  	<%= link_to t(:'adva.titles.login'), login_url, :id => 'login' %>
+  <% end %>
+<% end %>
+
+

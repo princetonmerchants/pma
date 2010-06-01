@@ -1,0 +1,6 @@
+#header .sub-nav ul li{background-image:expression((this===this.parentNode.childNodes[0]) ? "none" : "auto");}
+#nav ul li{padding-left:expression((this===this.parentNode.childNodes[0]) ? "23px" : "58px");}
+#nav .sub-nav li{padding-left:expression((this===this.parentNode.childNodes[0]) ? "26px" : "48px");}
+.links-list li{background-image:expression((this===this.parentNode.childNodes[0]) ? "none" : "auto");}
+#main .news-list ul li{margin-top:expression((this===this.parentNode.childNodes[0]) ? "0" : "20px");}
+#footer ul li{background-image:expression((this===this.parentNode.childNodes[0]) ? "none" : "auto");}

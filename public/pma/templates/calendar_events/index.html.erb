@@ -1,0 +1,12 @@
+<div id="events">
+	<h2><%= collection_title(@category, @tags) %></h2>
+	<% if @events.present? -%>
+		<ul>
+		  <%= render :partial => 'event', :collection => @events %>
+		</ul>
+		<%= will_paginate @events, :id => 'pagination' %>
+	<% else -%>
+		<div class="empty">No events listed.</div>
+	<% end -%>
+  <%= render :partial => 'calendar', :locals => { :calendar_section => @section } %>
+</div>

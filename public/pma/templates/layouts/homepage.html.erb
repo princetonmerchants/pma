@@ -1,0 +1,33 @@
+<% content_for :extra_head do %>
+  <%= theme_stylesheet_link_tag 'pma', 'homepage.css' %>
+<% end %>
+<%= render :partial => '/shared/top' %>
+<%= yield :above_main %>
+<% if true %>
+  <div class="intro">
+    <div class="content welcome">
+      <%= @article.body_html if @article %>
+    </div>
+    <div class="image-wrapper">
+      <%= render :partial => '/shared/banner_1' %>
+    </div>
+  </div>
+<% end %>
+<div id="main">
+  <div class="main-holder">
+    <div class="col1">
+      <%= render :partial => '/shared/featured_merchant' %>
+    </div>
+    <div class="col2">
+      <%= render_cell :misc, :latest_news %>
+    </div>
+    <div class="col3">
+      <%= render_cell :misc, :upcoming_events %>
+      <%= render_cell :misc, :latest_resources %>
+      <%= render_cell :misc, :share_and_subscribe %>
+    </div>
+  </div>
+</div>
+<%= yield :below_main %>
+<%= render :partial => '/shared/bottom' %>
+<%= yield :foot %>

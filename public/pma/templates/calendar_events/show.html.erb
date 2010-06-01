@@ -1,0 +1,39 @@
+<div id="<%= dom_id @event %>" class="entry clearing">
+  <div class="meta">
+    <p>
+      <%= link_to t(:'adva.calendar.links.all_events'), calendar_events_path(@section) %>
+      <% authorized_tag :span, :update, @event do -%>
+        | <%= link_to_edit @event, :namespace => 'admin' %>
+      <% end -%>
+    </p>
+    <p><%= @event.location %></p>
+    <p>
+    <% if @event.all_day? %>
+      <span class="all_day"><%= t(:'adva.calendar.titles.all_day') %></span>
+    <% end %>
+    <% if event_dates_from_to(@event)[1].blank? -%>
+      <%= event_dates_from_to(@event)[0].in_time_zone.strftime('%B %d, %Y at %I:%M %p') %>
+    <% else -%>
+      <%= event_dates_from_to(@event)[0].in_time_zone.strftime('%B %d, %Y at %I:%M %p') %> to
+      <% if event_dates_from_to(@event)[1].in_time_zone.strftime('%B %d, %Y') == 
+      event_dates_from_to(@event)[1].in_time_zone.strftime('%B %d, %Y') -%>
+        <%= event_dates_from_to(@event)[1].in_time_zone.strftime('%I:%M %p') %>
+      <% else -%>
+        <%= event_dates_from_to(@event)[1].in_time_zone.strftime('%B %d, %Y at %I:%M %p') %>
+      <% end -%>
+    <% end -%>
+    </p>
+    <p>
+      <%= links_to_content_categories(@event, :'adva.common.content_categories') %><br />
+      <%= links_to_content_tags(@event, :'adva.common.content_tags') %>
+    </p>
+  </div>
+  <div class="content">
+    <h2><%= link_to_event @event %></h2>
+    <%= h(@event.host) %>
+    <%= @event.body_html %>
+  </div>
+</div>
+
+<%#= render :partial => 'comments/list', :locals => { :commentable => @event, :comments => @event.approved_comments } %>
+<%#= render :partial => 'comments/form', :locals => { :commentable => @event } if @event.accept_comments? %>
