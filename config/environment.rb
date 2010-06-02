@@ -80,10 +80,9 @@ Radiant::Initializer.run do |config|
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'rubypants', :source => 'http://gemcutter.org'
   config.gem 'bluecloth', :source => 'http://gemcutter.org'
-  config.gem 'sanitize'
-  config.gem 'fastercsv'
-  config.gem "calendar_date_select"
-  config.gem "savon"
+  config.gem 'sanitize', :source => 'http://gemcutter.org'
+  config.gem 'fastercsv', :source => 'http://gemcutter.org'
+  config.gem 'calendar_date_select', :source => 'http://gemcutter.org'
 
   config.after_initialize do
     # Add new inflection rules using the following format:

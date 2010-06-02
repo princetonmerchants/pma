@@ -4,3 +4,5 @@ config/database.yml
 *.log
 tmp
 public/assets
+config/initializers/keys.rb
+db/data.yml

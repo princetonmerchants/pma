@@ -11,5 +11,4 @@ gem 'bluecloth'
 gem 'sanitize'
 gem 'fastercsv'
 gem 'calendar_date_select'
-gem 'savon'
 
