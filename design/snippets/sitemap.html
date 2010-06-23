@@ -1,0 +1,14 @@
+<r:children:each>
+  <r:unless_content part='no-map'>
+    <li>
+      <r:link />
+      <r:unless_content part='no-map-children'>
+        <r:if_children>
+          <ul>
+            <r:snippet name='sitemap' />
+          </ul>
+        </r:if_children>
+      </r:unless_content>
+    </li>
+  </r:unless_content>
+</r:children:each> 

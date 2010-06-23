@@ -1,0 +1,14 @@
+<r:find url="/members/">
+  <r:children:each limit="1" order="desc" by="position">
+    <div class="image-holder">
+      <a href="<r:content part="website" />"><r:content part="logo" /></a>
+    </div>
+    <div class="content">
+      <h3><r:link /></h3>
+      <r:content name="bio" />
+      <ul class="links-list">
+        <li><a href="<r:content part="website" />">VISIT WEBSITE</a></li>
+      </ul>
+    </div>
+  </r:children:each>
+</r:find> 

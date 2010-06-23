@@ -20,7 +20,7 @@ Radiant::Initializer.run do |config|
   # config.extensions = [ :all ]
   config.extensions = [:help, :textile_filter, :wym_editor_filter, :page_preview, :layouts, :settings, 
     :redirect, :navigation, :import_export, :drag, :mailer, :paperclipped, :search, :tags,
-    :page_factory, :page_parts, :bespin_editor, :comments, :archive, :file_system]
+    :page_factory, :page_parts, :bespin_editor, :comments, :archive, :file_system, :dashboard]
   
   # By default, only English translations are loaded. Remove any of these from
   # the list below if you'd like to provide any of the supported languages
@@ -33,7 +33,7 @@ Radiant::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :key => '_pma_session',
-    :secret      => '528f6a20c4e132ec46403847be5d08723a99a109'
+    :secret => '528f6a20c4e132ec46403847be5d08723a99a109'
   }
 
   # Comment out this line if you want to turn off all caching, or

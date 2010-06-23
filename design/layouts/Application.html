@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <r:snippet name='meta' />
+    <r:snippet name='stylesheets' />
+    <link href="/feeds/news.atom" rel="alternate" title="News Feed" type="application/atom+xml">
+  </head>
+  <body class="<r:layout /> <r:slug /> <r:if_url matches="^/$">Home</r:if_url>">
+    <div id="wrapper">
+      <div id="header">
+        <r:snippet name="header" />
+      </div>
+      <div id="nav">
+        <r:snippet name="nav" />
+      </div>
+      <r:content_for_layout />
+      <div id="footer">
+        <r:snippet name="footer"
+      </div>
+    </div>
+  </body>
+  <r:snippet name='javascripts' /> 
+</html>

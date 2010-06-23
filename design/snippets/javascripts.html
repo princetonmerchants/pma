@@ -1,0 +1,27 @@
+<script type='text/javascript' src='http://www.google.com/jsapi'></script>
+<script type='text/javascript'>
+  google.load('jquery', '1.4.2');
+  google.load('jqueryui', '1.8.0');
+</script>
+
+<script type="text/javascript"> 
+var $buoop = {} 
+$buoop.ol = window.onload; 
+window.onload=function(){ 
+ if ($buoop.ol) $buoop.ol(); 
+ var e = document.createElement("script"); 
+ e.setAttribute("type", "text/javascript"); 
+ e.setAttribute("src", "http://browser-update.org/update.js"); 
+ document.body.appendChild(e); 
+} 
+</script> 
+
+<script type='text/javascript'> 
+  var gaJsHost = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.');
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  try
+  {
+    var pageTracker = _gat._getTracker("<r:config:setting key='site.analytics' />");
+    pageTracker._trackPageview();
+  } catch(err) {}
+</script> 

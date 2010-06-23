@@ -1,0 +1,13 @@
+<r:unless_content part="ignore">
+  <entry>
+    <id><r:url /></id>
+    <title type="html"><r:escape_html><r:title/></r:escape_html></title>
+    <updated><r:date for="updated_at" format="%Y-%m-%dT%H:%M:%SZ"/></updated>
+    <content type="html"><r:escape_html><r:content/></r:escape_html></content>
+    <link rel="alternate" type="text/html" href="<r:url />"/>
+    <r:if_content part="extended">
+      <summary><r:content part="extended"/></summary>
+    </r:if_content>
+    <published><r:date for="published_at" format="%Y-%m-%dT%H:%M:%SZ"/></published>
+  </entry>
+</r:unless_content>  

@@ -1,0 +1,21 @@
+<r:find url="/resources/">
+  <div class="headline">
+    <a href="/resources.atom" class="btn-rss">rss</a>
+    <div class="heading">
+      <strong>Resources</strong>
+    </div>
+  </div>
+  <div class="content">
+    <div id="resources">
+      <ul class="resources-list">
+        <r:children:each limit="5" order="desc" by="published_at">
+          <li>
+            <span>NEW!</span>
+            <r:link />
+          </li>
+        </r:children:each>
+      </ul>
+    </div>
+    <a href="/resources" class="btn-more">MORE RESOURCES</a>
+  </div>
+</r:find> 

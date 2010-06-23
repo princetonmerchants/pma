@@ -1,0 +1,12 @@
+<r:children:each>
+  <r:unless_content part='no-map'>
+    <url>
+      <loc><r:config:setting key='site.url' /><r:url /></loc>
+      <lastmod><r:date format='%Y-%m-%d' /></lastmod>  
+      <r:if_content part='changefreq'><changefreq><r:content part='changefreq' /></changefreq></r:if_content>
+      <r:unless_content part='changefreq'><changefreq>weekly</changefreq></r:unless_content>
+      <r:if_content part='priority'><priority><r:content part='priority' /></priority></r:if_content>
+    </url>
+    <r:snippet name='sitemap_xml' />
+  </r:unless_content>
+</r:children:each> 

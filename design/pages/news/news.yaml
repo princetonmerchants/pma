@@ -1,0 +1,17 @@
+--- 
+layout_name: <inherit> [Normal]
+class_name: ""
+slug: news
+virtual: false
+title: News
+updated_by_id: 
+breadcrumb: News
+page_factory: ""
+created_by_id: 1
+enable_comments: false
+description: ""
+comments_count: 0
+published_at: 2010-06-22 00:00:00 Z
+status_id: 100
+position: 0
+keywords: ""

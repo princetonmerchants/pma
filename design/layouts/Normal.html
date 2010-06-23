@@ -1,0 +1,62 @@
+<r:inside_layout name='Application'>
+  <r:if_url matches="^/$">
+    <div class="intro">
+      <div class="spotlight">
+        <r:content part="spotlight" />
+      </div>
+      <div class="welcome">
+        <r:content part="welcome" />
+      </div>
+    </div>
+    <div id="main">
+      <div class="main-holder">
+        <div class="col1">
+          <r:snippet name="featured_merchant" />
+        </div>
+        <div class="col2">
+          <r:snippet name="latest_news" />
+        </div>
+        <div class="col3">
+          <r:snippet name="upcoming_events" />
+          <r:snippet name="latest_resources" />
+          <r:snippet name="share_and_subscribe" />
+        </div>
+      </div>
+    </div>
+  </r:if_url>
+  <r:unless_url matches="^/$">
+    <div id="main">
+      <div class="main-holder">
+        <div class="col1">
+          <div class="content">
+            <r:if_content part="banner_left">
+              <r:content part="banner_left" />
+            </r:if_content>
+            <div id="secondary-nav">
+              <r:if_children>
+                <h2>In this section</h2>
+                <ul>
+                  <li class="item"><r:link /></li>
+                </ul>
+              </r:if_children>
+              <r:snippet name="upcoming_events" />
+              <r:snippet name="tag_cloud" />
+            </div>
+          </div>
+        </div>
+        <div class="col2">
+          <div class='headline breadcrumbs'>
+            <r:breadcrumbs />
+          </div>
+          <div class="content">
+            <r:content />
+          </div>
+        </div>
+        <div class="col3">
+          <r:snippet name="banner_right" />
+          <r:snippet name="share_and_subscribe" />
+        </div>
+      </div>
+    </div>
+  </r:unless_url>
+</r:inside_layout>

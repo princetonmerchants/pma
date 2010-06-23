@@ -5,4 +5,4 @@ config/database.yml
 tmp
 public/assets
 db/data.yml
-design
+
