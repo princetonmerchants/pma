@@ -20,7 +20,7 @@ Radiant::Initializer.run do |config|
   # config.extensions = [ :all ]
   config.extensions = [:help, :textile_filter, :wym_editor_filter, :page_preview, :layouts, :settings, 
     :redirect, :navigation, :import_export, :drag, :mailer, :paperclipped, :search, :tags,
-    :page_factory, :page_parts, :bespin_editor, :comments, :archive, :page_event]
+    :page_factory, :page_parts, :bespin_editor, :comments, :archive, :file_system]
   
   # By default, only English translations are loaded. Remove any of these from
   # the list below if you'd like to provide any of the supported languages
@@ -32,7 +32,7 @@ Radiant::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random,
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_pma_session',
+    :key => '_pma_session',
     :secret      => '528f6a20c4e132ec46403847be5d08723a99a109'
   }
 
@@ -82,7 +82,6 @@ Radiant::Initializer.run do |config|
   config.gem 'bluecloth', :source => 'http://gemcutter.org'
   config.gem 'sanitize', :source => 'http://gemcutter.org'
   config.gem 'fastercsv', :source => 'http://gemcutter.org'
-  config.gem 'calendar_date_select', :source => 'http://gemcutter.org'
 
   config.after_initialize do
     # Add new inflection rules using the following format:

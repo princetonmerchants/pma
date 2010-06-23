@@ -1,0 +1,6 @@
+[submodule "vendor/extensions/chronicle"]
+	path = vendor/extensions/chronicle
+	url = git://github.com/jgarber/radiant-chronicle-extension.git
+[submodule "vendor/extensions/concurrent_draft"]
+	path = vendor/extensions/concurrent_draft
+	url = git://github.com/avonderluft/radiant-concurrent_draft-extension.git

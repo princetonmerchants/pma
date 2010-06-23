@@ -24,6 +24,7 @@ Author:         #{author.name} <#{author.email}>
 Source code:    #{repository_url}
 Download:       #{download_url}
 Install type:   #{install_type}
+Supports:       Radiant #{supports_radiant_version}
 }.strip
     end
   end
@@ -181,20 +182,25 @@ Install type:   #{install_type}
   end
 
   class Gem < Download
+    def gem_name(name)
+      name.gsub(/-\d+\.\d+\.\d+(.+)?\.gem/, '')
+    end
+
     def download
       # Don't download the gem if it's already installed
+      extension = gem_name(filename)
       begin
-        gem filename.split('-').first
+        gem extension
       rescue ::Gem::LoadError
         super
-        `gem install #{filename}`
+        `gem install #{extension}`
       end
     end
 
     def unpack
       output = nil
       cd(Dir.tmpdir) do
-        output = `gem unpack #{filename.split('-').first}`
+        output = `gem unpack #{gem_name(filename)}`
       end
       self.path = output.match(/'(.*)'/)[1]
     end

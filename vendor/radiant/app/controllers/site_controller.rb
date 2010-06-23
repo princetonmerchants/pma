@@ -1,8 +1,10 @@
 class SiteController < ApplicationController
+  include Radiant::Pagination::Controller
+  
   skip_before_filter :verify_authenticity_token
   no_login_required
   cattr_writer :cache_timeout
-
+  
   def self.cache_timeout
     @@cache_timeout ||= 5.minutes
   end
@@ -58,7 +60,7 @@ class SiteController < ApplicationController
     def process_page(page)
       page.pagination_parameters = pagination_parameters
       page.process(request, response)
-   end
+    end
 
     def dev?
       if dev_host = @config['dev.host']

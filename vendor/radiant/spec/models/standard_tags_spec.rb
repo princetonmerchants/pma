@@ -77,12 +77,31 @@ describe "Standard Tags" do
       page.should render('<r:children:each by="title"><r:slug /> </r:children:each>').as('a b c d e f g h i j ').on('dev.site.com')
     end
 
-    it 'should paginate results when "paginated" attribute is "true"' do
-      page.pagination_parameters = {:page => 1, :per_page => 10}
-      page.should render('<r:children:each paginated="true" per_page="10"><r:slug /> </r:children:each>').as('a b c d e f g h i j ')
-      page.should render('<r:children:each paginated="true" per_page="2"><r:slug /> </r:children:each>').matching(/div class="pagination"/)
+    describe 'with paginated="true"' do
+      it 'should limit correctly the result set' do
+        page.pagination_parameters = {:page => 1, :per_page => 10}
+        page.should render('<r:children:each paginated="true" per_page="10"><r:slug /> </r:children:each>').as('a b c d e f g h i j ')
+        page.should render('<r:children:each paginated="true" per_page="2"><r:slug /> </r:children:each>').not_matching(/a b c/)
+      end
+      it 'should display a pagination control block' do
+        page.pagination_parameters = {:page => 1, :per_page => 1}
+        page.should render('<r:children:each paginated="true"><r:slug /> </r:children:each>').matching(/div class="pagination"/)
+      end
+      it 'should link to the correct paginated page' do
+        page(:another)
+        page.pagination_parameters = {:page => 1, :per_page => 1}
+        page.should render('<r:find url="/assorted"><r:children:each paginated="true"><r:slug /> </r:children:each></r:find>').matching(%r{href="/another})
+      end
+      it 'should pass through selected will_paginate parameters' do
+        page(:assorted)
+        page.pagination_parameters = {:page => 5, :per_page => 1}
+        page.should render('<r:children:each paginated="true" separator="not that likely a choice"><r:slug /> </r:children:each>').matching(/not that likely a choice/)
+        page.should render('<r:children:each paginated="true" previous_label="before"><r:slug /> </r:children:each>').matching(/before/)
+        page.should render('<r:children:each paginated="true" next_label="after"><r:slug /> </r:children:each>').matching(/after/)
+        page.should render('<r:children:each paginated="true" inner_window="1" outer_window="0"><r:slug /> </r:children:each>').not_matching(/\?p=2/)
+      end
     end
-
+    
     it 'should error with invalid "limit" attribute' do
       message = "`limit' attribute of `each' tag must be a positive number between 1 and 4 digits"
       page.should render(page_children_each_tags(%{limit="a"})).with_error(message)
@@ -903,6 +922,10 @@ describe "Standard Tags" do
     it "should not render the contained block when not on the dev site" do
       page.should render('-<r:if_dev>dev</r:if_dev>-').as('--')
     end
+    
+    it "should not render the contained block when no request is present" do
+      page(:devtags).render_part('if_dev').should_not have_text('dev')
+    end
 
     describe "on an included page" do
       it "should render the contained block when on the dev site" do
@@ -922,6 +945,10 @@ describe "Standard Tags" do
 
     it "should render the contained block when not on the dev site" do
       page.should render('-<r:unless_dev>not dev</r:unless_dev>-').as('-not dev-')
+    end
+
+    it "should render the contained block when no request is present" do
+      page(:devtags).render_part('unless_dev').should have_text('not dev')
     end
 
     describe "on an included page" do

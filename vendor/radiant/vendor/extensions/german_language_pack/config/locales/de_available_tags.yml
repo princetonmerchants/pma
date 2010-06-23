@@ -2,552 +2,623 @@
 de: 
   desc: 
     author:
-      Renders the name of the author of the current page.
+      Autor der aktuellen Seite.
   
     breadcrumb:
-        Renders the @breadcrumb@ attribute of the current page.
+      @breadcrumb@-Attribut der aktuellen Seite.
       
     breadcrumbs:
-      Renders a trail of breadcrumbs to the current page. The separator attribute
-      specifies the HTML fragment that is inserted between each of the breadcrumbs. By
-      default it is set to @>@. The boolean nolinks attribute can be specified to render
-      breadcrumbs in plain text, without any links (useful when generating title tag).
+      Gibt eine komplette Breadcrumb-Navigation bis zur aktuellen Seite aus. Der Separator
+      spezifiziert das HTML-Fragment, das zwischen die einzelnen Breadcrumbs eingefügt wird.
+      Der Default dafür ist @>@. Das bool'sche Attribut 'nolinks' kann verwendet werden, um die
+      Breadcrumbs als reinen Text (ohne Links) anzuzeigen. Das kann zum Generieren des
+      Title-Tags verwendet werden.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;breadcrumbs [separator="separator_string"] [nolinks="true"] /></code></pre>
+      <pre><code><r:breadcrumbs [separator="separator_string"] [nolinks="true"] /></code></pre>
   
     children-count:
-      Renders the total number of children.
+      Gibt die Gesamtzahl der Kinder dieser Seite aus.
   
-    children-each-child:
-      Page attribute tags inside of this tag refer to the current child. This is occasionally
-      useful if you are inside of another tag (like &lt;r&#58;find&gt;) and need to refer back to the
-      current child.
-
-      *Usage&#58;*
+    children-each:
+      Gibt alle Kinder aus. Innerhalb dieses Tags werden alle Seitenattribut-Tags
+      auf die aktuelle Kind-Seite gemappt.
       
-      <pre><code><r&#58;children&#58;each>
-        <r&#58;child>...</r&#58;child>
-      </r&#58;children&#58;each>
+      Mit @paginated="true"@ wird eine paginierte Liste ausgegeben. Die @will_paginate@-Optionen
+      können ebenfalls angegeben werden, einschließlich 
+      @per_page@, @previous_label@, @next_label@, @separator@, @inner_window@ und @outer_window@.
+
+      *Verwendung&#58;*
+      
+      <pre><code><r:children:each [offset="number"] [limit="number"]
+       [by="published_at|updated_at|created_at|slug|title|keywords|des</code><code>cription"]
+       [order="asc|des</code><code>c"] [status="draft|reviewed|published|hidden|all"]
+       [paginated="true"] [per_page="number"]>
+       ...
+      </r:children:each>
+      </code></pre>
+
+ 
+    children-each-child:
+      Seiten-Attribut-Tags innerhalb dieses Tags beziehen sich auf das aktuelle Kind. Das ist
+      manchmal nützlich, wenn man sich innerhalb eines anderen Tags befindet (z.B.  &lt;r&#58;find&gt;)
+      und auf das aktuelle Kind zurückverweisen will.
+
+      *Verwendung&#58;*
+      
+      <pre><code><r:children:each>
+        <r:child>...</r:child>
+      </r:children:each>
       </code></pre>
   
     children-each-header:
-      Renders the tag contents only if the contents do not match the previous header. This
-      is extremely useful for rendering date headers for a list of child pages.
+      Gibt den Tag-Inhalt nur aus, wenn er nicht mit dem vorherigen Header übereinstimmt.
+      Sehr nützlich zum Anzeigen des Date-Headers für eine Liste von Kind-Seiten.
 
-      If you would like to use several header blocks you may use the @name@ attribute to
-      name the header. When a header is named it will not restart until another header of
-      the same name is different.
+      Wenn mehrere Header-Blocks ausgegeben werden sollen, kann das @name@-Attribut
+      für den Namen des Headers verwendet werden. Ein benamter Header wird nicht ausgegeben,
+      bis ein anderer Header mit dem gleichen Namen einen anderen Inhalt hat.
 
-      Using the @restart@ attribute you can cause other named headers to restart when the
-      present header changes. Simply specify the names of the other headers in a semicolon
-      separated list.
+      Mit dem @restart@-Attribut können andere Header zum Neustart verwendet werden,
+      wenn sich der jetzige Header ändert. Dazu müssen die Namen der anderen Header
+      in einer mit Semikolon getrennten Liste spezifiziert werden.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children&#58;each>
-        <r&#58;header [name="header_name"] [restart="name1[;name2;...]"]>
+      <pre><code><r:children:each>
+        <r:header [name="header_name"] [restart="name1[;name2;...]"]>
             ...
-        </r&#58;header>
-      </r&#58;children&#58;each>
+        </r:header>
+      </r:children:each>
       </code></pre>
   
     children-each-if_first:
-      Renders the tag contents only if the current page is the first child in the context of
-      a children&#58;each tag
+      Gibt den Tag-Inhalt nur aus, wenn die aktuelle Seite das erste Kind im Kontext
+      eines children&#58;each-Tag ist.
       
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children&#58;each>
-        <r&#58;if_first >
+      <pre><code><r:children:each>
+        <r:if_first >
             ...
-        </r&#58;if_first>
-      </r&#58;children&#58;each>
+        </r:if_first>
+      </r:children:each>
       </code></pre>
       
   
     children-each-if_last:
-      Renders the tag contents only if the current page is the last child in the context of
-      a children&#58;each tag
+      Gibt den Tag-Inhalt nur aus, wenn die aktuelle Seite das letzte Kind im Kontext
+      eines children&#58;each-Tag ist.
       
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children&#58;each>
-        <r&#58;if_last >
+      <pre><code><r:children:each>
+        <r:if_last >
             ...
-        </r&#58;if_last>
-      </r&#58;children&#58;each>
+        </r:if_last>
+      </r:children:each>
       </code></pre>
       
   
     children-each-unless_first:
-      Renders the tag contents unless the current page is the first child in the context of
-      a children&#58;each tag
+      Gibt den Tag-Inhalt aus, bis die aktuelle Seite das erste Kind im Kontext
+      eines children&#58;each-Tag ist.
       
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children&#58;each>
-        <r&#58;unless_first >
+      <pre><code><r:children:each>
+        <r:unless_first >
             ...
-        </r&#58;unless_first>
-      </r&#58;children&#58;each>
+        </r:unless_first>
+      </r:children:each>
       </code></pre>
       
   
     children-each-unless_last:
-      Renders the tag contents unless the current page is the last child in the context of
-      a children&#58;each tag
+      Gibt den Tag-Inhalt aus, bis die aktuelle Seite das letzte Kind im Kontext
+      eines children&#58;each-Tag ist.
       
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children&#58;each>
-        <r&#58;unless_last >
+      <pre><code><r:children:each>
+        <r:unless_last >
             ...
-        </r&#58;unless_last>
-      </r&#58;children&#58;each>
+        </r:unless_last>
+      </r:children:each>
       </code></pre>
-      
-  
-    children-each:
-      Cycles through each of the children. Inside this tag all page attribute tags
-      are mapped to the current child page.
 
-      *Usage&#58;*
-      
-      <pre><code><r&#58;children&#58;each [offset="number"] [limit="number"]
-       [by="published_at|updated_at|created_at|slug|title|keywords|description"]
-       [order="asc|desc"] [status="draft|reviewed|published|hidden|all"]>
-       ...
-      </r&#58;children&#58;each>
-      </code></pre>
-  
+
     children-first:
-      Returns the first child. Inside this tag all page attribute tags are mapped to
-      the first child. Takes the same ordering options as @<r&#58;children&#58;each>@.
+      Gibt das erste Kind aus. Innerhalb dieses Tags werden alle Seitenattribut-Tags
+      auf die erste Kind-Seite gemappt. Benutzt die selben Sortieroptionen wie
+      @<r:children:each>@.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children&#58;first>...</r&#58;children&#58;first></code></pre>
+      <pre><code><r:children:first>...</r:children:first></code></pre>
   
     children-last:
-      Returns the last child. Inside this tag all page attribute tags are mapped to
-      the last child. Takes the same ordering options as @<r&#58;children&#58;each>@.
+      Gibt das letzte Kind aus. Innerhalb dieses Tags werden alle Seitenattribut-Tags
+      auf die erste Kind-Seite gemappt. Benutzt die selben Sortieroptionen wie
+      @<r:children:each>@.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children&#58;last>...</r&#58;children&#58;last></code></pre>
+      <pre><code><r:children:last>...</r:children:last></code></pre>
   
     children:
-      Gives access to a page's children.
+      Ermöglicht Zugriff auf alle Kinder der Seite.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;children>...</r&#58;children></code></pre>
+      <pre><code><r:children>...</r:children></code></pre>
   
     comment:
-      Nothing inside a set of comment tags is rendered.
+      Der Inhalt innerhalb eines Kommentar-Tags wird nicht ausgegeben.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;comment>...</r&#58;comment></code></pre>
+      <pre><code><r:comment>...</r:comment></code></pre>
   
     content:
-      Renders the main content of a page. Use the @part@ attribute to select a specific
-      page part. By default the @part@ attribute is set to body. Use the @inherit@
-      attribute to specify that if a page does not have a content part by that name that
-      the tag should render the parent's content part. By default @inherit@ is set to
-      @false@. Use the @contextual@ attribute to force a part inherited from a parent
-      part to be evaluated in the context of the child page. By default 'contextual'
-      is set to true.
+      Gibt den Hauptinhalt einer Seite aus. Mit dem @part@-Attribut kann ein spezifischer
+      Page-Part ausgewählt werden. Default für das @part@ Attribut ist 'body' 
+      genommen. Das @inherit@-Attribut legt fest, daß wenn eine Seite keinen Content-Part
+      mit diesem Namen besitzt, das Tag den entprechenden Content-Part der Eltern-Seite
+      ausgibt. Der Default für @inherit@ ist 'false'. Das @contextual@-Attribut wird 
+      benutzt, um die Auswertung des Parts einer vererbten Seite im Kontext der 
+      Kind-Seite zu erzwingen. Der Default für @contextual@ ist 'true'.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;content [part="part_name"] [inherit="true|false"] [contextual="true|false"] /></code></pre>
+      <pre><code><r:content [part="part_name"] [inherit="true|false"] [contextual="true|false"] /></code></pre>
   
     cycle:
-      Renders one of the passed values based on a global cycle counter.  Use the @reset@
-      attribute to reset the cycle to the beginning.  Use the @name@ attribute to track
-      multiple cycles; the default is @cycle@.
+      Gibt einen der übergebenen Werte basierend auf einem globalen Zyklus-Zähler aus. Das
+      @reset@-Attribut setzt den Zähler auf den Anfang zurück. Mit dem @name@-Attribut
+      können mehrere Zyklen benutzt werden. Der Default dafür ist 'cycle'.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;cycle values="first, second, third" [reset="true|false"] [name="cycle"] /></code></pre>
+      <pre><code><r:cycle values="first, second, third" [reset="true|false"] [name="cycle"] /></code></pre>
   
     date:
-      Renders the date based on the current page (by default when it was published or created).
-      The format attribute uses the same formating codes used by the Ruby @strftime@ function. By
-      default it's set to @&#37;A, &#37;B &#37;d, &#37;Y@.  The @for@ attribute selects which date to render.  Valid
-      options are @published_at@, @created_at@, @updated_at@, and @now@. @now@ will render the
-      current date/time, regardless of the  page.
+      Gibt das Datum der aktuellen Seite aus (als Default wird das Anlege- oder Publikations-Datum
+      genommen). Das @format@-Attribut benutzt die Format-Codes der Ruby-Funktion @strftime@. Als
+      Default dient '&#37;A, &#37;B &#37;d, &#37;Y'. Das @for@-Attribut bestimmt das Datum,
+      das ausgegeben wird. Die gültigen Optionen sind @published_at@, @created_at@, @updated_at@, und @now@.
+      @now@ gibt das (von der Seite unabhängige) aktuelle Datum/Zeit aus. 
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;date [format="&#37;A, &#37;B &#37;d, &#37;Y"] [for="published_at"]/></code></pre>
+      <pre><r:date [format="%A, %B % d, %Y"] [for="published_at"]/></pre>
   
     escape_html:
-      Escapes angle brackets, etc. for rendering in an HTML document.
+      Escaped spitze Klammern, damit sie als HTML ausgegeben werden können.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;escape_html>...</r&#58;escape_html></code></pre>
+      <pre><code><r:escape_html>...</r:escape_html></code></pre>
   
     find:
-      Inside this tag all page related tags refer to the page found at the @url@ attribute.
-      @url@s may be relative or absolute paths.
+      Innerhalb dieses Tags beziehen sich alle seitenabhängigen Tags auf die Seite, die
+      das @url@-Attribut bezeichnet. @url@s können relative oder absolute Pfade sein.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;find url="value_to_find">...</r&#58;find></code></pre>
-  
+      <pre><code><r:find url="value_to_find">...</r:find></code></pre>
+ 
+    gravatar:
+      Gibt den Gravatar des Seitenautors aus.
+
+      *Verwendung&#58;*
+
+      <pre><code> <r:gravatar /></code></pre>
+
+      Oder
+
+      <pre><code> <r:gravatar [name="User Name"] [rating="G | PG | R | X"] [size="32px"] /> </code></pre>
+
+ 
     if_ancestor_or_self:
-      Renders the contained elements if the current contextual page is either the actual page or one of its parents.
+      Gibt die enthaltenen Elemente aus, wenn der aktuelle Seitenkontext entweder die tatsächliche Seite
+      oder eine der Elternseiten ist.
+     
+      Wird typischerweise innerhalb eines anderen Tags wie (&lt;r&#58;children&#58;each&gt;) verwendet,
+      um Markup auszugeben, wenn das Kind-Element von der aktuellen Seite abstammt.
 
-      This is typically used inside another tag (like &lt;r&#58;children&#58;each&gt;) to add conditional mark-up if the child element is or descends from the current page.
-
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;if_ancestor_or_self>...</r&#58;if_ancestor_or_self></code></pre>
+      <pre><code><r:if_ancestor_or_self>...</r:if_ancestor_or_self></code></pre>
   
     if_children:
-      Renders the contained elements only if the current contextual page has one or
-      more child pages.  The @status@ attribute limits the status of found child pages
-      to the given status, the default is @"published"@. @status="all"@ includes all
-      non-virtual pages regardless of status.
+      Gibt die enthaltenen Elemente nur aus, wenn der Seitenkontext ein oder mehrere Kind-Seiten
+      hat. Das @status@-Attribut schränkt die gefundenen Kind-Seiten auf den angegebenen Status
+      ein. Default dafür ist @published@. Mit @status="all"@ werden alle nicht-virtuellen Kind-Seiten
+      unabhängig vom Status gefunden.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;if_children [status="published"]>...</r&#58;if_children></code></pre>
+      <pre><code><r:if_children [status="published"]>...</r:if_children></code></pre>
   
     if_content:
-      Renders the containing elements if all of the listed parts exist on a page.
-      By default the @part@ attribute is set to @body@, but you may list more than one
-      part by separating them with a comma. Setting the optional @inherit@ to true will
-      search ancestors independently for each part. By default @inherit@ is set to @false@.
+      Gibt die enthaltenen Elemente nur aus, wenn alle angegebenen Parts auf der Seite
+      existieren. Default ist @body@, es können aber auch mehrere Parts als durch Kommas getrennte
+      Liste angegeben werden. Wird das optionale @inherit@-Attribut auf @true@ gesetzt,
+      werden Kinder unabhängig von jedem Part gefunden. Default dafür ist @false@.
 
-      When listing more than one part, you may optionally set the @find@ attribute to @any@
-      so that it will render the containing elements if any of the listed parts are found.
-      By default the @find@ attribute is set to @all@.
+      Wird mehr als ein Part ausgegeben, kann das @find@-Attribut auf den Wert @any@ gesetzt
+      werden, damit die enthaltenen Elemente ausgegeben werden, wenn irgendeiner der angegebenen
+      Parts gefunden werden. Default für dieses Attribut ist @all@.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;if_content [part="part_name, other_part"] [inherit="true"] [find="any"]>...</r&#58;if_content></code></pre>
+      <pre><code><r:if_content [part="part_name, other_part"] [inherit="true"] [find="any"]>...</r:if_content></code></pre>
   
     if_dev:
-      Renders the containing elements only if Radiant in is development mode.
+      Gibt die enthaltenen Elemente nur aus, wenn Radiant gerade im development-Modus läuft.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;if_dev>...</r&#58;if_dev></code></pre>
+      <pre><code><r:if_dev>...</r:if_dev></code></pre>
   
     if_parent:
-      Renders the contained elements only if the current contextual page has a parent, i.e.
-      is not the root page.
+      Gibt die enthaltenen Elemente nur aus, wenn die aktuelle Seite Eltern hat, d.h. es handelt
+      sich nicht um die Startseite.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;if_parent>...</r&#58;if_parent></code></pre>
+      <pre><code><r:if_parent>...</r:if_parent></code></pre>
   
     if_self:
-      Renders the contained elements if the current contextual page is also the actual page.
+      Gibt die enthaltenen Elemente nur aus, falls der aktuelle Seitenkontext auch 
+      die aktuelle Seite ist.
 
-      This is typically used inside another tag (like &lt;r&#58;children&#58;each&gt;) to add conditional mark-up if the child element is the current page.
+      Wird typischerweise innerhalb eines anderen Tags (wie &lt;r&#58;children&#58;each&gt;) 
+      benutzt, um zusätzlichen Markup auszugeben, falls das Kind-Elemente die aktuelle Seite ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;if_self>...</r&#58;if_self></code></pre>
+      <pre><code><r:if_self>...</r:if_self></code></pre>
   
     if_url:
-      Renders the containing elements only if the page's url matches the regular expression
-      given in the @matches@ attribute. If the @ignore_case@ attribute is set to false, the
-      match is case sensitive. By default, @ignore_case@ is set to true.
+      Gibt die enthaltenen Elemente nur aus, falls die Seiten-URL den im @matches@ angegebenen
+      regulären Ausdruck matcht. Ist @ignore_case@ auf 'false' gesetzt wird dabei Groß-/Kleinschreibung
+      beachtet. Default für @ignore_case@ ist 'true'.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;if_url matches="regexp" [ignore_case="true|false"]>...</r&#58;if_url></code></pre>
+      <pre><code><r:if_url matches="regexp" [ignore_case="true|false"]>...</r:if_url></code></pre>
   
     link:
-      Renders a link to the page. When used as a single tag it uses the page's title
-      for the link name. When used as a double tag the part in between both tags will
-      be used as the link text. The link tag passes all attributes over to the HTML
-      @a@ tag. This is very useful for passing attributes like the @class@ attribute
-      or @id@ attribute. If the @anchor@ attribute is passed to the tag it will
-      append a pound sign (<code>#</code>) followed by the value of the attribute to
-      the @href@ attribute of the HTML @a@ tag--effectively making an HTML anchor.
+      Gibt einen Link auf die Seite aus. Als Einzel-Tag wird der Seitentitel als
+      Link-Name benutzt. Als Doppel-Tag wird der Text zwischen den beiden Tags als
+      Link-Name genommen. Das link-Tag reicht alle Attribute an das HTML-@a@-Tag 
+      weiter. Das ist nützlich, um Attribute wie @class@ oder @id@ weiterzureichen.
+      Falls das @anchor@-Attribut and das Tag weitergereicht wird, hängt es ein
+      Pound-Zeichen (<code>#</code>) gefolgt vom Wert des Attributs des HTML-@a@-Tag
+      @href@-Attributs. Dadurch wird ein HTML-Anchor erzeugt.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;link [anchor="name"] [other attributes...] /></code></pre>
+      <pre><code><r:link [anchor="name"] [other attributes...] /></code></pre>
       
-      or
+      oder
       
-      <pre><code><r&#58;link [anchor="name"] [other attributes...]>link text here</r&#58;link></code></pre>
+      <pre><code><r:link [anchor="name"] [other attributes...]>link text here</r:link></code></pre>
   
     markdown:
-      Filters its contents with the Markdown filter.
+      Der Inhalt wird mit dem Markdown-Filter gefiltert.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;markdown>** bold text **</r&#58;markdown></code></pre>
+      <pre><code><r:markdown>** bold text **</r:markdown></code></pre>
 
-      produces
+      erzeugt
 
       <pre><code><strong> bold text </strong></code></pre>
   
     meta-description:
-      Emits the page description field in a meta tag, unless attribute
-      'tag' is set to 'false'.
+      Gibt das Seitenbeschreibungsfeld als Meta-Tag aus, solange 'tag'
+      auf 'false' gesetzt ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code> <r&#58;meta&#58;description [tag="false"] /> </code></pre>
+      <pre><code> <r:meta:des</code><code>cription [tag="false"] /> </code></pre>
   
     meta-keywords:
-      Emits the page keywords field in a meta tag, unless attribute
-      'tag' is set to 'false'.
+      Gibt die Keywords der Seite als Meta-Tag aus, solange 'tag'
+      auf 'false' gesetzt ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code> <r&#58;meta&#58;keywords [tag="false"] /> </code></pre>
+      <pre><code> <r:meta:keywords [tag="false"] /> </code></pre>
   
     meta:
-      The namespace for 'meta' attributes.  If used as a singleton tag, both the description
-      and keywords fields will be output as &lt;meta /&gt; tags unless the attribute 'tag' is set to 'false'.
+      Der Namensraum des 'meta'-Attributs. Falls als Einzeltag genutzt, werden sowohl
+      Beschreibungs- und Keyword-Felder als &lt;meta /&gt;-Tags ausgegeben, solange
+      das Attribut 'tag' auf 'false' gesetzt ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code> <r&#58;meta [tag="false"] />
-       <r&#58;meta>
-         <r&#58;description [tag="false"] />
-         <r&#58;keywords [tag="false"] />
-       </r&#58;meta>
+      <pre><code> <r:meta [tag="false"] />
+       <r:meta>
+         <r:des</code><code>cription [tag="false"] />
+         <r:keywords [tag="false"] />
+       </r:meta>
       </code></pre>
   
     navigation-if_first:
-      Renders the containing elements if the element is the first
-      in the navigation list
+      Gibt die enthaltenen Elemente aus, falls das Element das erste Element in der
+      Navigationsliste ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;normal><r&#58;if_first>...</r&#58;if_first></r&#58;normal></code></pre>
+      <pre><code><r:normal><r:if_first>...</r:if_first></r:normal></code></pre>
   
     navigation-if_last:
-      Renders the containing elements if the element is the last
-      in the navigation list
+      Gibt die enthaltenen Elemente aus, falls das Element das letzte Element in der
+      Navigationsliste ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;normal><r&#58;if_last>...</r&#58;if_last></r&#58;normal></code></pre>
+      <pre><code><r:normal><r:if_last>...</r:if_last></r:normal></code></pre>
+  
+    navigation-unless_first:
+      Gibt die enthaltenen Elemente aus, falls das Element nicht das erste Element in der
+      Navigationsliste ist.
+
+      *Verwendung&#58;*
+
+      <pre><code><r:normal><r:unless_first>...</r:unless_first></r:normal></code></pre>
+  
+    navigation-unless_last:
+      Gibt die enthaltenen Elemente aus, falls das Element nicht das letzte Element in der
+      Navigationsliste ist.
+
+      *Verwendung&#58;*
+
+      <pre><code><r:normal><r:unless_last>...</r:unless_last></r:normal></code></pre>
   
     navigation:
-      Renders a list of links specified in the @urls@ attribute according to three
-      states&#58;
+      Gibt eine Liste von Links (spezifiziert im @url@-Attribut) anhand der folgenden
+      drei Stati aus&#58;
 
-      * @normal@ specifies the normal state for the link
-      * @here@ specifies the state of the link when the url matches the current
-         page's URL
-      * @selected@ specifies the state of the link when the current page matches
-         is a child of the specified url
-      # @if_last@ renders its contents within a @normal@, @here@ or
-        @selected@ tag if the item is the last in the navigation elements
-      # @if_first@ renders its contents within a @normal@, @here@ or
-        @selected@ tag if the item is the first in the navigation elements
+      * @normal@ spezifiziert den normalen Link-Status
 
-      The @between@ tag specifies what should be inserted in between each of the links.
+      * @here@ spezifiziert den Link-Status, falls die URL die aktuelle Seiten-URL matcht
 
-      *Usage&#58;*
+      * @selected@ spezifiziert den Link-Status, wenn die aktuelle Seite ein Kind der
+        spezifizierten URL ist
 
-      <pre><code><r&#58;navigation urls="[Title&#58; url | Title&#58; url | ...]">
-        <r&#58;normal><a href="<r&#58;url />"><r&#58;title /></a></r&#58;normal>
-        <r&#58;here><strong><r&#58;title /></strong></r&#58;here>
-        <r&#58;selected><strong><a href="<r&#58;url />"><r&#58;title /></a></strong></r&#58;selected>
-        <r&#58;between> | </r&#58;between>
-      </r&#58;navigation>
-      </code></pre>
+      # @if_last@ gibt den Inhalt innerhalb eines  @normal@, @here@ or
+        @selected@ Tags aus, falls das Element das letzte Navigationselement ist.
+
+      # @if_first@ gibt den Inhalt innerhalb eines  @normal@, @here@ or
+        @selected@ Tags aus, falls das Element das erste Navigationselement ist.
+     
+      Das @between@-Tag legt fest, was zwischen den Links ausgegeben wird.  
+
+      *Verwendung&#58;*
+
+      <pre>
+        <code>
+        <r:navigation urls="[Title</code>:<code> url | Title</code>:<code> url | ...]">
+        <r:normal><a href="<r:url />"><r:title /></a></r:normal>
+        <r:here><strong><r:title /></strong></r:here>
+        <r:selected><strong><a href="<r:url />"><r:title /></a></strong></r:selected>
+        <r:between> | </r:between>
+      </r:navigation>
+      </code>
+      </pre>
+
+
   
     page:
-      Causes the tags referring to a page's attributes to refer to the current page.
+      Legt fest, daß Tags, die auf Seitenattribute verweisen, sich auf die aktuelle
+      Seite beziehen.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;page>...</r&#58;page></code></pre>
-  
+      <pre><code><r:page>...</r:page></code></pre>
+
+    pagination:
+      Dieses Tag wird normalerweise nicht direkt aufgerufen. Mit dem Attribut @pagination="true"@  
+      wird eine Liste beim Anzeigen automatisch paginiert.
+
+      *Verwendung&#58;*
+
+      <pre><code>
+      <r:children:each paginated="true" per_page="50">
+          <r:child>...</r:child>
+        </r:children:each>
+      </code></pre>
+      
     parent:
-      Page attribute tags inside this tag refer to the parent of the current page.
+      Seitenattribut-Tags innerhalb dieses Tags verweisen auf die Elternseite der
+      aktuellen Seite.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;parent>...</r&#58;parent></code></pre>
+      <pre><code><r:parent>...</r:parent></code></pre>
   
     random:
-      Randomly renders one of the options specified by the @option@ tags.
+      Gibt zufällig eine der im @option@-Tag spezifizierten Optionen aus.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;random>
-        <r&#58;option>...</r&#58;option>
-        <r&#58;option>...</r&#58;option>
+      <pre><code><r:random>
+        <r:option>...</r:option>
+        <r:option>...</r:option>
         ...
-      <r&#58;random>
+      <r:random>
       </code></pre>
   
     rfc1123_date:
-      Outputs the published date using the format mandated by RFC 1123. (Ideal for RSS feeds.)
+      Das Datum wird im RFC1123-Format ausgegeben (Ideal für RSS-Feeds).
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;rfc1123_date /></code></pre>
+      <pre><code><r:rfc1123_date /></code></pre>
   
     slug:
-        Renders the @slug@ attribute of the current page.
+        Gibt das @slug@-Attribut der aktuellen Seite aus.
       
     smarty_pants:
-      Filters its contents with the SmartyPants filter.
+      Inhalt wir mit dem Smarty-Pants-Filter gefiltert.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;smarty_pants>"A revolutionary quotation."</r&#58;smarty_pants></code></pre>
+      <pre><code><r:smarty_pants>"A revolutionary quotation."</r:smarty_pants></code></pre>
 
-      produces
+      gibt folgendes aus&#58;
 
-      <pre><code>&#8220;A revolutionary quotation.&#8221;</code></pre>
+      <pre><code> </code>&#8220;<code>A revolutionary quotation.</code>&#8221;<code> </code></pre>
   
     snippet:
-      Renders the snippet specified in the @name@ attribute within the context of a page.
+      Gibt das im @name@-Attribut angegebene Snippet im Seitenkontext aus.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;snippet name="snippet_name" /></code></pre>
+      <pre><code><r:snippet name="snippet_name" /></code></pre>
 
-      When used as a double tag, the part in between both tags may be used within the
-      snippet itself, being substituted in place of @<r&#58;yield/>@.
+      Falls als Doppel-Tag benutzt, kann der Teil innerhalb der beiden Tags
+      im Snippet selbst benutzt werden. Im Falle von @<r:yield/>@ wird er
+      ersetzt.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;snippet name="snippet_name">Lorem ipsum dolor...</r&#58;snippet></code></pre>
+      <pre><code><r:snippet name="snippet_name">Lorem ipsum dolor...</r:snippet></code></pre>
   
     status:
-      Prints the page's status as a string.  Optional attribute 'downcase'
-      will cause the status to be all lowercase.
+      gibt den Status der Seite als String aus. Das optionale Attribut 'downcase'
+      gibt den Status in Kleinbuchstaben aus. 
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;status [downcase='true'] /></code></pre>
+      <pre><code><r:status [downcase='true'] /></code></pre>
   
     textile:
-      Filters its contents with the Textile filter.
+      Inhalt wir mit dem Textile-Filter gefiltert.
 
-      *Usage*&#58;
+      *Verwendung*&#58;
 
-      <pre><code><r&#58;textile>
-      * First
-      * Second
-      </r&#58;textile></code></pre>
+      <pre><code><r:textile>
+      * Erster
+      * Zweiter
+      </r:textile></code></pre>
 
-      produces&#58;
+      erzeugt&#58;
 
       <pre><code><ul>
-        <li>First</li>
-        <li>Second</li>
+        <li>Erster</li>
+        <li>Zweiter</li>
       </ul></code></pre>
   
     title:
-        Renders the @title@ attribute of the current page.
+        Gibt das @title@-Attribute der aktuellen Seite aus.
       
     unless_ancestor_or_self:
-      Renders the contained elements unless the current contextual page is either the actual page or one of its parents.
+      Gibt die enthaltenen Elemente solange aus, bis der aktuelle Seitenkontext
+      entweder die tatsächliche Seite oder eines ihrer Eltern ist.
 
-      This is typically used inside another tag (like &lt;r&#58;children&#58;each&gt;) to add conditional mark-up unless the child element is or descends from the current page.
+      Wird typischerweise innerhalb eines anderen Tags (wie &lt;r&#58;children&#58;each&gt;) 
+      benutzt, um zusätzlichen Markup auszugeben, bis der aktuelle Seitenkontext
+      entweder die tatsächliche Seite oder einer seiner Eltern ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;unless_ancestor_or_self>...</r&#58;unless_ancestor_or_self></code></pre>
+      <pre><code><r:unless_ancestor_or_self>...</r:unless_ancestor_or_self></code></pre>
   
     unless_children:
-      Renders the contained elements only if the current contextual page has no children.
-      The @status@ attribute limits the status of found child pages to the given status,
-      the default is @"published"@. @status="all"@ includes all non-virtual pages
-      regardless of status.
+      Gibt die enthaltenen Elemente nur aus, wenn der aktuelle Seitenkontext
+      keine Kinder hat. Mit dem @status@-Attribut kann der Status der gefundenen
+      Kind-Seiten auf den angegebenen Status beschränkt werden. Default dafür
+      ist @published@. @status@="all" erfasst alle nicht-virtuellen Seiten.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;unless_children [status="published"]>...</r&#58;unless_children></code></pre>
+      <pre><code><r:unless_children [status="published"]>...</r:unless_children></code></pre>
   
     unless_content:
-      The opposite of the @if_content@ tag. It renders the contained elements if all of the
-      specified parts do not exist. Setting the optional @inherit@ to true will search
-      ancestors independently for each part. By default @inherit@ is set to @false@.
-
-      When listing more than one part, you may optionally set the @find@ attribute to @any@
-      so that it will not render the containing elements if any of the listed parts are found.
-      By default the @find@ attribute is set to @all@.
-
-      *Usage&#58;*
+      Das Gegenteil des @if_content@-Tags. 
+      Gibt die enthaltenen Elemente nur aus, wenn keiner der angegebenen Parts auf der Seite
+      existiert. Es können mehrere Parts als mit Komma getrennte Liste angegeben werden. 
+      Wird das optionale @inherit@-Attribut auf 'true' gesetzt,
+      werden Kinder unabhängig von jedem Part gefunden. Default für @inherit@ ist @false@.
       
-      <pre><code><r&#58;unless_content [part="part_name, other_part"] [inherit="false"] [find="any"]>...</r&#58;unless_content></code></pre>
+      Wenn mehr als ein Part angegeben ist, kann das optionale @find@-Attribut auf @any@
+      gesetzt werden. Damit wird ein Element nicht ausgegeben, wenn irgendeiner der angegebenen
+      Parts gefunden wird. Default für das @any@-Attribut ist @all@.
+
+      *Verwendung&#58;*
+      
+      <pre><code><r:unless_content [part="part_name, other_part"] [inherit="false"] [find="any"]>...</r:unless_content></code></pre>
   
     unless_dev:
-      The opposite of the @if_dev@ tag.
+      Das Gegenteil des @if_dev@ Tags.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;unless_dev>...</r&#58;unless_dev></code></pre>
+      <pre><code><r:unless_dev>...</r:unless_dev></code></pre>
   
     unless_parent:
-      Renders the contained elements only if the current contextual page has no parent, i.e.
-      is the root page.
+      Gegenteil von if_parent.  Gibt die enthaltenen Elemente nur aus, wenn die aktuelle 
+      Seite keine Eltern hat, d.h. es handelt sich um die Startseite.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;unless_parent>...</r&#58;unless_parent></code></pre>
+      <pre><code><r:unless_parent>...</r:unless_parent></code></pre>
   
     unless_self:
-      Renders the contained elements unless the current contextual page is also the actual page.
+      Zeigt die enthaltenen Elemente nur an, wenn der Seitenkontext nicht die aktuelle Seite ist.
 
-      This is typically used inside another tag (like &lt;r&#58;children&#58;each&gt;) to add conditional mark-up unless the child element is the current page.
+      Wird typischerweise innerhalb eines anderen Tags (wie &lt;r&#58;children&#58;each&gt;) 
+      benutzt, um zusätzlichen Markup auszugeben, falls das Kind-Elemente nicht die aktuelle Seite ist.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
 
-      <pre><code><r&#58;unless_self>...</r&#58;unless_self></code></pre>
+      <pre><code><r:unless_self>...</r:unless_self></code></pre>
   
     unless_url:
-      The opposite of the @if_url@ tag.
+      Gegenteil des @if_url@ Tags.
 
-      *Usage&#58;*
+      *Verwendung&#58;*
       
-      <pre><code><r&#58;unless_url matches="regexp" [ignore_case="true|false"]>...</r&#58;unless_url></code></pre>
+      <pre><code><r:unless_url matches="regexp" [ignore_case="true|false"]>...</r:unless_url></code></pre>
   
     url:
-      Renders the @url@ attribute of the current page.
+      Gibt das @url@-Attribut der aktuellen Seite aus.
   
     yield:
-      Used within a snippet as a placeholder for substitution of child content, when
-      the snippet is called as a double tag.
+      Wird innerhalb eines Snippets als Platzhalter für die Ersetzung von Kind-Inhalten
+      verwendet, falls das Snippet als Doppel-Tag aufgerufen wird.
 
-      *Usage (within a snippet)&#58;*
+      *Verwendung (Innerhalb eines Snippets)&#58;*
       
       <pre><code>
       <div id="outer">
-        <p>before</p>
-        <r&#58;yield/>
-        <p>after</p>
+        <p>vorher</p>
+        <r:yield/>
+        <p>danach</p>
       </div>
       </code></pre>
 
-      If the above snippet was named "yielding", you could call it from any Page,
-      Layout or Snippet as follows&#58;
+      Heißt das obige Snippet "yielding", kann es von jeder Seite, Layout oder
+      Snippet wie folgt aufgerufen werden&#58;
 
-      <pre><code><r&#58;snippet name="yielding">Content within</r&#58;snippet></code></pre>
+      <pre><code><r:snippet name="yielding">Inhalt innerhalb..</r:snippet></code></pre>
 
-      Which would output the following&#58;
+      Erzeugt folgenden Output&#58;
 
       <pre><code>
       <div id="outer">
-        <p>before</p>
-        Content within
-        <p>after</p>
+        <p>vorher</p>
+        Inhalt innerhalb..
+        <p>danach</p>
       </div>
       </code></pre>
 
-      When called in the context of a Page or a Layout, @<r&#58;yield/>@ outputs nothing.
+      Ein Aufruf von @<r:yield/>@ im Seitenkontext oder Layout erzeugt keinen Output.
   

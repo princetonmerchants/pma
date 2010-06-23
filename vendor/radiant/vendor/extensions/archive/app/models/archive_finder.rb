@@ -8,6 +8,11 @@ class ArchiveFinder
     @block.call(method, options)
   end
   
+  # stub for page tag finding
+  def all(method, options ={})
+    self.find(:all)
+  end
+  
   class << self
     def year_finder(finder, year)
       new do |method, options|
