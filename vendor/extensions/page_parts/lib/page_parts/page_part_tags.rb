@@ -135,5 +135,28 @@ module PageParts
       tag.expand unless part.content == tag.attr['to'].to_i
     end
 
+    tag 'date' do |tag|
+      page = tag.locals.page
+      format = (tag.attr['format'] || '%A, %B %d, %Y')
+      time_attr = tag.attr['for']
+      date = if time_attr
+        case
+        when time_attr == 'now'
+          Time.now
+        when ['published_at', 'created_at', 'updated_at'].include?(time_attr)
+          page[time_attr]
+        else
+          if part = page.part(time_attr)
+            part.content
+          else
+            raise StandardTags::TagError, "Invalid value for 'for' attribute."
+          end
+        end
+      else
+        page.published_at || page.created_at
+      end
+      date.strftime(format)
+    end
+
   end
 end
