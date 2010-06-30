@@ -1,13 +1,13 @@
 <r:find url="/resources/">
-  <div class="headline">
-    <a href="/resources.atom" class="btn-rss">rss</a>
-    <div class="heading">
-      <strong>Resources</strong>
+  <div id="resources" class="block">
+    <div class="headline">
+      <a href="/resources.atom" class="btn-rss">rss</a>
+      <div class="heading">
+        <strong>Resources</strong>
+      </div>
     </div>
-  </div>
-  <div class="content">
-    <div id="resources">
-      <ul class="resources-list">
+    <div class="inner">
+      <ul>
         <r:children:each limit="5" order="desc" by="published_at">
           <li>
             <span>NEW!</span>
@@ -15,7 +15,7 @@
           </li>
         </r:children:each>
       </ul>
+      <a href="/resources" class="btn-more">MORE RESOURCES</a>
     </div>
-    <a href="/resources" class="btn-more">MORE RESOURCES</a>
   </div>
 </r:find> 

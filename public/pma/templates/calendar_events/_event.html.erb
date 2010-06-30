@@ -1,5 +1,0 @@
-<li id="<%= dom_id event %>" <%= ' class="all_day"' if event.all_day? %>>
-  <h4><%= link_to_event event %></h4>
-  <%= event_dates_from_to(event)[0].in_time_zone.strftime('%A, %B %d at %I:%M %p') %>
-  <%= t(:'adva.calendar.attributes.all_day') if event.all_day? %></td>
-</li>

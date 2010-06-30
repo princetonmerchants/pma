@@ -1,27 +1,29 @@
 <r:find url="/news/">
-  <div class="headline">
-    <a href="/news.atom" class="btn-rss">rss</a>
-    <div class="heading">
-      <strong>News &amp; Announcements</strong>
+  <div id="latest-news" class="block">
+    <div class="headline">
+      <a href="/news.atom" class="btn-rss">rss</a>
+      <div class="heading">
+        <strong>News &amp; Announcements</strong>
+      </div>
     </div>
+    <div class="inner">
+      <ul>
+        <r:children:each limit="5" order="desc" by="published_at">
+          <li>
+            <span class="date"><r:date format="%b %d, %Y" /></span>
+            <h3><r:link /></h3>
+            <ul class="info">
+              <li class="author">By <r:author /></li>
+              <li class="tags"><r:tag_list /></li>
+              <r:if_enable_comments>
+                <li class="comments"><r:link anchor="comments">Comments (<r:comments:count />)</r:link></li>
+              </r:if_enable_comments>
+              <li class="read"><r:link>READ MORE</r:link></li>
+            </ul>
+          </li>
+        </r:children:each>
+      </ul>
+    </div>
+    <a href="/news">MORE NEWS AND ANNOUNCEMENTS</a>
   </div>
-  <div class="news-list" id="news">
-    <ul>
-      <r:children:each limit="5" order="desc" by="published_at">
-        <li>
-          <span class="date"><r:date format="%b %d, %Y" /></span>
-          <h3><r:link /></h3>
-          <ul class="info">
-            <li class="author">By <r:author /></li>
-            <li class="tags"><r:tag_list /></li>
-            <r:if_enable_comments>
-              <li class="comments"><r:link anchor="comments">Comments (<r:comments:count />)</r:link></li>
-            </r:if_enable_comments>
-            <li class="read"><r:link>READ MORE</r:link></li>
-          </ul>
-        </li>
-      </r:children:each>
-    </ul>
-  </div>
-  <a href="/news">MORE NEWS AND ANNOUNCEMENTS</a>
 </r:find>

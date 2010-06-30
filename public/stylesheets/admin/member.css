@@ -1,0 +1,160 @@
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+
+.clearfix {
+  display: inline-block; }
+
+.clearfix {
+  display: block; }
+
+.grey {
+  background-color: #9E9E9E;
+  height: 21px;
+  margin: -20px -20px 0 -20px; }
+
+table.results {
+  width: 100%; }
+  table.results a.sort_asc {
+    background: transparent url(/images/admin/metadata_toggle.png) no-repeat scroll 95% 5px;
+    padding-right: 15px; }
+  table.results a.sort_desc {
+    background: transparent url(/images/admin/metadata_toggle.png) no-repeat scroll 95% -23px;
+    padding-right: 15px; }
+  table.results thead th {
+    background-color: #7E7E7E;
+    font-weight: normal;
+    padding: 2px 4px;
+    text-shadow: 1px 1px 0 #666666;
+    color: white;
+    font-size: 90%; }
+    table.results thead th.actions {
+      width: 180px; }
+    table.results thead th.emailed_at {
+      width: 270px; }
+    table.results thead th a {
+      text-shadow: 1px 1px 0 #666666;
+      color: white;
+      font-size: 90%; }
+  table.results tbody tr:hover {
+    background-color: #ecf4ff; }
+  table.results tbody td {
+    border-bottom: 1px solid #F0F0F0;
+    padding: 8px 4px;
+    text-align: left;
+    vertical-align: top; }
+    table.results tbody td.actions a, table.results tbody td.emailed_at a {
+      color: black;
+      text-decoration: none; }
+      table.results tbody td.actions a:hover, table.results tbody td.emailed_at a:hover {
+        text-decoration: underline; }
+  table.results tfoot th {
+    background-color: #7E7E7E;
+    font-weight: normal;
+    padding: 2px 4px;
+    text-shadow: 1px 1px 0 #666666;
+    color: white;
+    font-size: 90%;
+    vertical-align: middle; }
+    table.results tfoot th a {
+      text-shadow: 1px 1px 0 #666666;
+      color: white;
+      font-size: 90%; }
+
+.pagination {
+  text-align: center;
+  float: right;
+  margin-right: 20px; }
+  .pagination a {
+    text-shadow: 1px 1px 0 #666666;
+    color: white;
+    font-size: 90%;
+    padding: .2em .3em;
+    text-decoration: none; }
+    .pagination a:hover, .pagination a:focus {
+      text-decoration: underline; }
+  .pagination span {
+    padding: .2em .3em; }
+    .pagination span.disabled {
+      color: #CCC; }
+    .pagination span.current {
+      font-weight: bold;
+      background-color: #cac8c0;
+      display: inline-block;
+      padding: 3px 8px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px; }
+
+table.form tr {
+  border-top: 1px solid #999999; }
+  table.form tr:first-child {
+    border: none; }
+table.form th, table.form td {
+  padding: 5px;
+  vertical-align: middle; }
+table.form th {
+  width: 100px; }
+  table.form th.errors {
+    width: 200px; }
+  table.form th label {
+    color: white;
+    font-size: 80%; }
+table.form td.errors, table.form td .error {
+  color: red; }
+table.form input[type="text"], table.form select {
+  width: 150px; }
+table.form a {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: #555;
+  font-size: 80%;
+  padding: 3px 8px;
+  text-decoration: none;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  margin-right: 10px;
+  color: white; }
+  table.form a:hover {
+    text-decoration: underline; }
+
+.top {
+  background-color: #7E7E7E;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  color: white;
+  margin: 5px 0 10px 0;
+  padding: 0 10px; }
+  .top a {
+    color: white; }
+  .top .search_form {
+    padding-top: 1px;
+    float: left; }
+  .top .links {
+    float: right;
+    padding: 8px 0; }
+    .top .links a {
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      background-color: #555;
+      font-size: 80%;
+      padding: 3px 8px;
+      text-decoration: none;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      margin-left: 10px; }
+      .top .links a:hover {
+        text-decoration: underline; }
+
+.member_form {
+  background-color: #7E7E7E;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border: 1px solid #999999;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  color: white; }
+  .member_form table.form {
+    margin-left: 20px; }
+    .member_form table.form input[type="text"], .member_form table.form input[type="password"] {
+      width: 300px; }

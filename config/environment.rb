@@ -18,9 +18,10 @@ Radiant::Initializer.run do |config|
   # extensions in vendor/extensions are loaded, in alphabetical order. :all
   # can be used as a placeholder for all extensions not explicitly named.
   # config.extensions = [ :all ]
-  config.extensions = [:help, :textile_filter, :wym_editor_filter, :page_preview, :layouts, :settings, 
-    :redirect, :navigation, :import_export, :drag, :mailer, :paperclipped, :search, :tags,
-    :page_factory, :page_parts, :bespin_editor, :comments, :archive, :file_system, :dashboard]
+  config.extensions = [:help, :textile_filter, :wym_editor_filter, :page_preview, 
+    :layouts, :settings, :redirect, :navigation, :import_export, :drag, :mailer, :paperclipped, 
+    :search, :tags, :page_factory, :bespin_editor, :comments, :archive, :file_system, 
+    :dashboard, :member, :pma]
   
   # By default, only English translations are loaded. Remove any of these from
   # the list below if you'd like to provide any of the supported languages
@@ -55,7 +56,9 @@ Radiant::Initializer.run do |config|
   #  :metastore => "radiant:tmp/cache/meta"
   #    Sets the meta store type and storage location.  We recommend you use
   #    radiant: since this will enable manual expiration and acceleration headers.
-  config.middleware.use ::Radiant::Cache
+  config.middleware.use ::Radiant::Cache,
+    :entitystore => "radiant:tmp/cache/entity",
+    :metastore => "radiant:tmp/cache/meta"
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
@@ -82,6 +85,7 @@ Radiant::Initializer.run do |config|
   config.gem 'bluecloth', :source => 'http://gemcutter.org'
   config.gem 'sanitize', :source => 'http://gemcutter.org'
   config.gem 'fastercsv', :source => 'http://gemcutter.org'
+  config.gem 'exceptional'
 
   config.after_initialize do
     # Add new inflection rules using the following format:

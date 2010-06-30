@@ -1,33 +1,24 @@
-<div class="headline">
-  <div class="heading">
-    <strong>Subscribe &amp; Share</strong>
+<div id="sharing" class="block">  
+  <div class="headline">
+    <div class="heading">
+      <strong>Subscribe &amp; Share</strong>
+    </div>
   </div>
-</div>
-<div id="sharing">  
-  <div id="subscribed"></div>
-  <r:snippet name="mailchimp_embed" />
-    
-  <ul>
-    <li><a href="/news.atom">News</a></li>
-  </ul>
-  
-  <%= yield :extra_share %>
-  
-  <%= auto_discovery_link_tag(:atom, feed_url(:action => 'dashboard', :format => :atom), 
-    :title => "#{@site.name} : Dashboard") %>
-  <%= auto_discovery_link_tag(:atom, '/news.atom', :title => "#{@site.name} : News") %>
-  <%= auto_discovery_link_tag(:atom, feed_url(:action => 'calendar', :format => :ics), 
-    :title => "#{@site.name} : Calendar") %>
-
-  <!-- AddThis Button BEGIN -->
-  <div class="addthis_toolbox addthis_default_style">
-  <a href="http://addthis.com/bookmark.php?v=250&amp;username=josephpma" class="addthis_button_compact">Share</a>
-  <span class="addthis_separator">|</span>
-  <a class="addthis_button_facebook"></a>
-  <a class="addthis_button_myspace"></a>
-  <a class="addthis_button_google"></a>
-  <a class="addthis_button_twitter"></a>
+  <div class="inner">
+    <r:snippet name="mailchimp_embed" />    
+    <ul class="feeds">
+      <li><a href="/news.atom">News</a></li>
+    </ul>
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style">
+    <a href="http://addthis.com/bookmark.php?v=250&amp;username=josephpma" class="addthis_button_compact">Share</a>
+    <span class="addthis_separator">|</span>
+    <a class="addthis_button_facebook"></a>
+    <a class="addthis_button_myspace"></a>
+    <a class="addthis_button_google"></a>
+    <a class="addthis_button_twitter"></a>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=josephpma"></script>
+    <!-- AddThis Button END -->
   </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=josephpma"></script>
-  <!-- AddThis Button END -->
 </div>

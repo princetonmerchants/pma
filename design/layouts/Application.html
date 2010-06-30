@@ -1,23 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-  <head>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'> 
+<html> 
+  <head> 
     <r:snippet name='meta' />
     <r:snippet name='stylesheets' />
     <link href="/feeds/news.atom" rel="alternate" title="News Feed" type="application/atom+xml">
-  </head>
-  <body class="<r:layout /> <r:slug /> <r:if_url matches="^/$">Home</r:if_url>">
-    <div id="wrapper">
-      <div id="header">
-        <r:snippet name="header" />
+  </head> 
+  <body class="<r:layout /> <r:if_url matches="^/$">Home</r:if_url> <r:unless_url matches="^/$"><r:slug /></r:unless_url>"> 
+    <div id='root'>
+      <div id='head-container'>
+        <div id='head'>
+          <r:snippet name="head" />
+        </div>
       </div>
-      <div id="nav">
-        <r:snippet name="nav" />
+      <div id='content-container'> 
+        <r:content_for_layout />
+      </div> 
+    </div> 
+    <div id='foot-container'> 
+      <div id='foot'>
+        <r:snippet name='foot' />
       </div>
-      <r:content_for_layout />
-      <div id="footer">
-        <r:snippet name="footer"
+      <div id='root-foot'> 
       </div>
-    </div>
-  </body>
-  <r:snippet name='javascripts' /> 
+    </div> 
+    <r:snippet name='javascripts' /> 
+  </body> 
 </html>

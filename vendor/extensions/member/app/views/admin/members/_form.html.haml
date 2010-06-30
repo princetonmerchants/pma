@@ -1,0 +1,27 @@
+%tr
+  %th
+    %label{:for => "member_name"} Name:
+  %td
+    = f.text_field :name
+%tr
+  %th
+    %label{:for => "member_email"} Email:
+  %td= f.text_field :email
+%tr
+  %th
+    %label{:for => "member_password"} Password:
+  %td= f.password_field :password
+%tr
+  %th
+    %label{:for => "member_password_confirmation"} Password again:
+  %td= f.password_field :password_confirmation
+%tr
+  %th
+    %label{:for => "member_company"} Company:
+  %td= text_field_with_auto_complete :member, :company
+%tr
+  %th &nbsp;
+  %td
+    = f.submit submit_label
+    or
+    = link_to 'Cancel', members_path

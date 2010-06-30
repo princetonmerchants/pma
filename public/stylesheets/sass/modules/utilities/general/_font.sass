@@ -1,0 +1,11 @@
+=font(!family, !size, !css3 = false, !weight = "normal", !style = "normal")
+  @if !css3
+    font:
+      family = "#{!family}-#{!weight}-#{!style}"
+      size = !size
+  @else
+    font:
+      family = !family
+      size = !size
+      weight = !weight
+      style = !style

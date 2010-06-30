@@ -4,7 +4,7 @@ class_name: ""
 slug: make-a-payment
 virtual: false
 title: Make a Payment
-updated_by_id: 
+updated_by_id: 1
 breadcrumb: Make a Payment
 page_factory: ""
 created_by_id: 1

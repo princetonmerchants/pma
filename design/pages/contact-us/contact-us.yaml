@@ -4,7 +4,7 @@ class_name: ""
 slug: contact-us
 virtual: false
 title: Contact Us
-updated_by_id: 
+updated_by_id: 1
 breadcrumb: Contact Us
 page_factory: ""
 created_by_id: 1

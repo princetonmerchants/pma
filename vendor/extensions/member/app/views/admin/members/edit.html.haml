@@ -1,0 +1,9 @@
+- body_classes << "reversed"
+
+%h1 Edit member
+
+%p.note If you leave the password field empty the user will not be activated. You will need to manually activate him.
+.member_form
+  - form_for :member, :url => member_path, :html => { :method => :put }  do |f|
+    %table.form
+      = render :partial => "form", :locals => {:f => f, :submit_label => "Update"}
