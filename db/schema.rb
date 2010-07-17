@@ -21,9 +21,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "updated_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "original_width"
-    t.integer  "original_height"
-    t.string   "original_extension"
   end
 
   create_table "comments", :force => true do |t|
@@ -52,6 +49,18 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
 
   add_index "config", ["key"], :name => "key", :unique => true
 
+  create_table "custom_fields", :force => true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "custom_fields", ["name", "page_id"], :name => "index_custom_fields_on_name_and_page_id"
+  add_index "custom_fields", ["name"], :name => "index_custom_fields_on_name"
+  add_index "custom_fields", ["value"], :name => "index_custom_fields_on_value"
+
   create_table "extension_meta", :force => true do |t|
     t.string  "name"
     t.integer "schema_version", :default => 0
@@ -59,14 +68,17 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   end
 
   create_table "layouts", :force => true do |t|
-    t.string   "name",          :limit => 100
+    t.string   "name",                         :limit => 100
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
-    t.string   "content_type",  :limit => 40
-    t.integer  "lock_version",                 :default => 0
+    t.string   "content_type",                 :limit => 40
+    t.integer  "lock_version",                                :default => 0
+    t.datetime "draft_promotion_scheduled_at"
+    t.datetime "draft_promoted_at"
+    t.text     "draft_content"
   end
 
   create_table "members", :force => true do |t|
@@ -89,6 +101,24 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
 
   add_index "meta_tags", ["name"], :name => "index_meta_tags_on_name", :unique => true
 
+  create_table "old_page_attachments", :force => true do |t|
+    t.string   "content_type"
+    t.string   "filename"
+    t.integer  "size"
+    t.integer  "parent_id"
+    t.string   "thumbnail"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.integer  "created_by"
+    t.datetime "updated_at"
+    t.integer  "updated_by"
+    t.integer  "page_id"
+    t.string   "title"
+    t.string   "description"
+    t.integer  "position"
+  end
+
   create_table "page_attachments", :force => true do |t|
     t.integer "asset_id"
     t.integer "page_id"
@@ -105,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.boolean  "boolean_content"
     t.integer  "integer_content"
     t.datetime "datetime_content"
+    t.text     "draft_content"
   end
 
   add_index "page_parts", ["boolean_content"], :name => "index_page_parts_on_boolean_content"
@@ -115,10 +146,10 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
 
   create_table "pages", :force => true do |t|
     t.string   "title"
-    t.string   "slug",            :limit => 100
-    t.string   "breadcrumb",      :limit => 160
-    t.string   "class_name",      :limit => 25
-    t.integer  "status_id",                      :default => 1,     :null => false
+    t.string   "slug",                         :limit => 100
+    t.string   "breadcrumb",                   :limit => 160
+    t.string   "class_name",                   :limit => 25
+    t.integer  "status_id",                                   :default => 1,     :null => false
     t.integer  "parent_id"
     t.integer  "layout_id"
     t.datetime "created_at"
@@ -126,14 +157,16 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.datetime "published_at"
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
-    t.boolean  "virtual",                        :default => false, :null => false
-    t.integer  "lock_version",                   :default => 0
+    t.boolean  "virtual",                                     :default => false, :null => false
+    t.integer  "lock_version",                                :default => 0
     t.string   "description"
     t.string   "keywords"
-    t.integer  "position",                       :default => 0
-    t.boolean  "enable_comments",                :default => false
-    t.integer  "comments_count",                 :default => 0
+    t.integer  "position",                                    :default => 0
+    t.boolean  "enable_comments",                             :default => false
+    t.integer  "comments_count",                              :default => 0
     t.string   "page_factory"
+    t.datetime "draft_promotion_scheduled_at"
+    t.datetime "draft_promoted_at"
   end
 
   add_index "pages", ["class_name"], :name => "pages_class_name"
@@ -151,14 +184,17 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "snippets", :force => true do |t|
-    t.string   "name",          :limit => 100, :default => "", :null => false
-    t.string   "filter_id",     :limit => 25
+    t.string   "name",                         :limit => 100, :default => "", :null => false
+    t.string   "filter_id",                    :limit => 25
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
-    t.integer  "lock_version",                 :default => 0
+    t.integer  "lock_version",                                :default => 0
+    t.datetime "draft_promotion_scheduled_at"
+    t.datetime "draft_promoted_at"
+    t.text     "draft_content"
   end
 
   add_index "snippets", ["name"], :name => "name", :unique => true
@@ -170,6 +206,17 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   end
 
   add_index "taggings", ["meta_tag_id", "taggable_id", "taggable_type"], :name => "index_taggings_on_meta_tag_id_and_taggable_id_and_taggable_type", :unique => true
+
+  create_table "text_assets", :force => true do |t|
+    t.string   "class_name",    :limit => 25
+    t.string   "filename",      :limit => 100
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.integer  "lock_version"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name",          :limit => 100
@@ -187,6 +234,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "salt"
     t.string   "session_token"
     t.string   "locale"
+    t.boolean  "publisher",                    :default => false
   end
 
   add_index "users", ["login"], :name => "login", :unique => true

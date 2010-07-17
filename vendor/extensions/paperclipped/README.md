@@ -1,39 +1,18 @@
 Paperclipped
 ---
 
-## 0.9 - Square Talent Edition
+## IMPORTANT!
 
-Unfortunately we can't use this with european buckets, but you can set your account to go US by default (I gave in and did this)
+This version of Paperclipped now requires Radiant 0.9.0 or higher. Just in case, the previous version is still around, on a branch marked Radiant-0.8 
 
-AWS-S3 literally just started working, I don't know what happened, but I put it down to dodgy configuration, which put me on a war path.
+Let me know if this works and if you run into any issues. 
 
-Based on the fact that storing assets on the local server is becoming obsolete and impossible (see: heroku). There have been some changes made which make the convention amazon s3.
-
-This has involved modifying the standard configuration, however I don't want to overwrite existing configuration, so this has meant a change to an existing migration
-
-Setting Changes
-
-* filesystem storage is default, but removing this setting allows s3 to take over
-* filesystem has a defined location of public/:class/:basename_:style.:extension (eg: public/assets/mypicture_small.png)
-* assets.s3.bucket defines both the bucket on alias url, you must use a cname reference for s3
-* assets.s3.path defines where in the bucket the files should be referenced
-
-Other changes
-
-* images moved to /public/images/admin/assets from /public/images/assets
-* removed a random haml file laying around under public
-* Paperclip has been abstracted to the latest gem
-* working on 0.9.0, interface has been brought completely in line
-
-TODO
-
-* Investigate moving away from the bucket style interface
 
 ###Installation
 
 To install paperclipped, just run 
  
-	rake production radiant:extensions:paperclipped:migrate
+	rake production db:migrate:extensions
 	rake production radiant:extensions:paperclipped:update
 
 This runs the database migrations and installs the javascripts, images and css.
@@ -42,7 +21,7 @@ This runs the database migrations and installs the javascripts, images and css.
 
 If you install the Settings Extension (highly recommended), you can also easily adjust both the sizes of any additional thumbnails and which thumbnails are displayed in the image edit view. The default is the original file, but any image size can be used by giving in the name of that size. 
 
-If you do install the Settings Extension you should be sure to add a config.exetensions line to your environment.rb file: 
+If you do install the Settings Extension you should be sure to add a config.extensions line to your environment.rb file: 
 
     config.extensions = [ :settings, :all ]
    
@@ -50,11 +29,11 @@ Also the Settings Extension migration should be run before Paperclipped's migrat
 
 The configuration settings also enable a list of the allowed file types, maximum file size and should you need it, the path to your installation of Image Magick (this should not be needed, but I sometimes had a problem when using mod_rails).
 
-### Using Paperclipped
+###Using Paperclipped
 
 Once installed, you get a new Tab with the entire assets library, a Bucket à la Mephisto (though only the concept is stolen) and a search. You can also easily attach assets to any page and directly upload them to a page.
 
-### Asset Tags
+###Asset Tags
 
 There are a veriety of new tags. The basic tag is the <code><r:assets /></code> tag, which can be used either alone or as a double tag. This tag requires the "title" attribute, which references the asset. If you use the drag and drop from the asset bucket, this title will be added for you. 
 
@@ -86,7 +65,8 @@ Another important tag is the <code><r:assets:each>...</r:assets:each></code>. If
 * `order` and `by` lets you control sorting;
 * `extensions` allows you to filter assets by file extensions; you can specify multiple extensions separated by `|`.
 
-    `<r:if_assets [min_count="0"]>` and `<r:unless_assets [min_count="0"]>` 
+<code><pre>`<r:if_assets [min_count="0"]>` and `<r:unless_assets [min_count="0"]>` 
+</code></pre>
   
 conditional tags let you optionally render content based on the existance of tags. They accept the same options as `<r:assets:each>`.
 
@@ -107,22 +87,25 @@ Also, for vertical centering of images, you have the handy `<r:assets:top_paddin
     </ul>
    
     
-### Amazon S3
+###Using Amazon s3
+Everything works as before, but now if you want to add S3 support, you simply set the storage setting to "s3". 
 
-Whilst this isn't assumed, simply remove the following setting to enable it
+<pre><code>Radiant::Config[assets.storage] = "s3"</code></pre>
+ 
+Then add 3 new settings with your Amazon credentials, either in the console or with the [Settings](http://github.com/Squeegy/radiant-settings/tree/master) extension:
 
-    Radiant::Config[assets.storage] = "filesystem"
+<pre><code>Radiant::Config[assets.s3.bucket] = "my_supercool_bucket"
+Radiant::Config[assets.s3.key] = "123456"
+Radiant::Config[assets.s3.secret] = "123456789ABCDEF"
+</code></pre>
 
-then configure the s3 specific settings
+and finally the path you want to use within your bucket, which uses the same notation as the Paperclip plugin.
 
-    Radiant::Config[assets.s3.bucket] = ":class/:basename_:style.:extension"
-    Radiant::Config[assets.s3.key] = ":class/:basename_:style.:extension"
-    Radiant::Config[assets.s3.secret] = ":class/:basename_:style.:extension"
-    Radiant::Config[assets.s3.path] = ":class/:basename_:style.:extension"
+<pre><code>Radiant::Config[assets.path] = :class/:id/:basename_:style.:extension 
+</code></pre>
 
-you will need to set up your sub domain to point to the amazon servers by creating a cname pointing to
+The path setting, along with a new <code>url</code> setting can be used with the file system to customize both the path and url of your assets.
 
-    mydomain.com.s3.amazonaws.com
 
 ### Migrating from the page_attachments extension
 
@@ -131,12 +114,15 @@ If you're moving from page_attachments to paperclipped, here's how to migrate sm
 First, remove or disable the page_attachments extension, and install the paperclipped extension.
 For example:
 
-    rake ray:dis name=page_attachments
-    rake ray:assets    
+<pre><code>rake ray:dis name=page_attachments
+rake ray:assets
+</code></pre>
+    
   
 The migration has now copied your original `page_attachments` table to `old_page_attachments`.
 
-    rake radiant:extensions:paperclipped:migrate_from_page_attachments
+<pre><code>rake radiant:extensions:paperclipped:migrate_from_page_attachments
+</code></pre>
   
 This rake task will create paperclipped-style attachments for all `OldPageAttachments`. It will also ask you if you want to clean up the old table and thumbnails in `/public/page_attachments`.
 

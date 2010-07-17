@@ -1,0 +1,24 @@
+%div{:id => "describe_#{@asset.id}"}
+  - remote_form_for @asset, :url => describe_asset_path(@asset), :update => "describe_#{@asset.id}", :html => {:id => "file_form_#{@asset.id}"} do |f|
+    = f.hidden_field :id
+    %table
+      %tbody
+        %tr
+          %td.thumbnail
+            = image_tag @asset.thumbnail(:icon)
+          %td
+            %label{ :for => "asset_title" } Title
+            = f.text_field :title, :class => 'textbox'
+          %td
+            %label{ :for => "asset_caption" } Caption
+            = f.text_field :caption, :class => 'textbox'
+          - if @asset.respond_to?(:copyright)
+            %td
+              %label{ :for => "asset_copyright" } Copyright
+              = f.text_field :copyright, :class => 'textbox'
+          - if @asset.respond_to?(:keywords)
+            %td
+              %label{ :for => "asset_keywords" } Tags
+              = f.text_field :keywords, :class => 'textbox keywords'
+          %td{:style => 'vertical-align: bottom; padding: 4px;'}
+            = f.submit "save", :onclick => "this.hide(); this.parentNode.insert(new Element('img', {src: '/images/admin/spinner_on_green.gif', 'class': 'waiter'}));"

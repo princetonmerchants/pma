@@ -1,8 +1,8 @@
 class Admin::AssetsController < Admin::ResourceController
   skip_before_filter :verify_authenticity_token, :only => :create
-    
-  def index 
-    @assets = Asset.search(params[:search], params[:filter])
+
+  def index
+    @assets = Asset.search(params[:search], params[:filter], params[:page])
     @page = Page.find(params[:asset_page]) if params[:asset_page]
 
     respond_to do |format|
@@ -10,55 +10,46 @@ class Admin::AssetsController < Admin::ResourceController
       format.js {
         @template_name = 'index'
         if !@page.nil?
-          render :partial => 'admin/bucket/search_results.html.haml', :layout => false
+          render :partial => 'admin/assets/search_results.html.haml', :layout => false
         else
           render :partial => 'admin/assets/asset_table.html.haml', :locals => { :assets => @assets }, :layout => false
         end
       }
     end
   end
-  
+
   def create
     @asset = Asset.new(params[:asset])
     if @asset.save
-      
-      # This feels stupid, but we need to recall the processors and styles
-      # We need to know the file type and this only happens after save
-      @asset = Asset.find(@asset.id)
-      @asset.update_attributes(params[:asset])
-      
       if params[:page]
         @page = Page.find(params[:page])
         @asset.pages << @page
       end
+
       respond_to do |format|
-        format.html { 
+        format.html {
           flash[:notice] = "Asset successfully uploaded."
-          redirect_to(@page ? edit_admin_page_path(@page) : (params[:continue] ? edit_admin_asset_path(@asset) : admin_assets_path)) 
+          redirect_to(@page ? edit_admin_page_path(@page) : (params[:continue] ? edit_admin_asset_path(@asset) : admin_assets_path))
         }
         format.js {
           responds_to_parent do
             render :update do |page|
               @attachment = PageAttachment.find(:first, :conditions => { :page_id => @page.id, :asset_id => @asset.id })
               page.call('Asset.ChooseTabByName', 'page-attachments')
-              page.insert_html :bottom, "attachments", :partial => 'admin/bucket/asset', :locals => {:attachment => @attachment } 
+              page.insert_html :bottom, "attachments", :partial => 'admin/assets/asset', :locals => {:attachment => @attachment }
               page.call('Asset.AddAsset', "attachment_#{@attachment.id}")  # we ought to reinitialise the sortable attachments too
-              page.visual_effect :highlight, "attachment_#{@attachment.id}" 
+              page.visual_effect :highlight, "attachment_#{@attachment.id}"
               page.call('Asset.ResetForm')
             end
           end
-        } 
-      end
-    else
-      respond_to do |format|
-        format.html { 
-          flash[:error] = "Sorry: asset could not be saved."
-          render :action => 'new'
         }
       end
+    else
+      render :action => 'new'
     end
   end
-  
+
+
   # Refreshes the paperclip thumbnails
   def refresh
     unless params[:id]
@@ -75,8 +66,8 @@ class Admin::AssetsController < Admin::ResourceController
       redirect_to edit_admin_asset_path(@asset)
     end
   end
-  
-  
+
+
   # Bucket related actions. These may need to be spun out into a seperate controller
   # update?
   def add_bucket
@@ -91,37 +82,37 @@ class Admin::AssetsController < Admin::ResourceController
       page[:bucket_list].replace_html "#{render :partial => 'bucket'}"
     end
   end
-  
+
   def clear_bucket
     session[:bucket] = nil
     render :update do |page|
       page[:bucket_list].replace_html '<li><p class="note"><em>Your bucket is empty.</em></p></li>'
     end
   end
-  
+
   # Attaches an asset to the current page
   def attach_asset
     @asset = Asset.find(params[:asset])
     @page = Page.find(params[:page])
     @page.assets << @asset unless @page.assets.include?(@asset)
     clear_model_cache
-    render :partial => 'admin/bucket/page_assets', :locals => { :page => @page }
+    render :partial => 'page_assets', :locals => { :page => @page }
     # render :update do |page|
     #   page[:attachments].replace_html "#{render :partial => 'page_assets', :locals => {:page => @page}}"
     # end
   end
-  
+
   # Removes asset from the current page
-  def remove_asset    
+  def remove_asset
     @asset = Asset.find(params[:asset])
     @page = Page.find(params[:page])
     @page.assets.delete(@asset)
     clear_model_cache
     render :nothing => true
   end
-  
+
   def reorder
-    params[:attachments].each_with_index do |id,idx| 
+    params[:attachments].each_with_index do |id,idx|
       page_attachment = PageAttachment.find(id)
       page_attachment.position = idx+1
       page_attachment.save
@@ -129,5 +120,5 @@ class Admin::AssetsController < Admin::ResourceController
     clear_model_cache
     render :nothing => true
   end
-  
+
 end

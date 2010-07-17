@@ -1,0 +1,70 @@
+#custom_fields_wrap {
+  width: 856px;
+  overflow: auto;
+  background-color: #FFF; }
+
+iframe {
+  border: none; }
+
+#custom_fields_content .flash {
+  padding: 5px 0 5px 25px;
+  margin: 0 50px 10px 50px;
+  font: #003300;
+  border: 2px solid #CCC; }
+  #custom_fields_content .flash.success {
+    background: #FFF url(/images/admin/accept.png) no-repeat 5px 50%; }
+  #custom_fields_content .flash.error {
+    background: #FFF url(/images/admin/exclamation.png) no-repeat 5px 50%; }
+  #custom_fields_content .flash.notice {
+    background: :#FFF url(/images/admin/warning.png) no-repeat 5px 50%; }
+#custom_fields_content .cf_box {
+  overflow: hidden;
+  display: inline-block;
+  width: 95%;
+  background-color: #F9F9F9;
+  border: 1px solid #DFDFDF;
+  margin: 5px auto; }
+  #custom_fields_content .cf_box {
+    display: block; }
+  #custom_fields_content .cf_box .top {
+    background-color: #F1F1F1;
+    overflow: hidden;
+    display: inline-block;
+    padding: 5px 10px; }
+    #custom_fields_content .cf_box .top {
+      display: block; }
+  #custom_fields_content .cf_box .content {
+    overflow: hidden;
+    display: inline-block; }
+    #custom_fields_content .cf_box .content {
+      display: block; }
+    #custom_fields_content .cf_box .content .name input, #custom_fields_content .cf_box .content .name select, #custom_fields_content .cf_box .content .name textarea, #custom_fields_content .cf_box .content .value input, #custom_fields_content .cf_box .content .value select, #custom_fields_content .cf_box .content .value textarea {
+      width: 100%; }
+    #custom_fields_content .cf_box .content .custom_field {
+      padding: 10px; }
+  #custom_fields_content .cf_box .name {
+    float: left;
+    width: 31%;
+    padding-right: 3%; }
+  #custom_fields_content .cf_box .value {
+    float: left;
+    width: 66%; }
+  #custom_fields_content .cf_box .actions {
+    clear: both; }
+#custom_fields_content a {
+  color: #0066CC;
+  text-decoration: none;
+  font-size: 13px; }
+#custom_fields_content textarea {
+  border: 1px inset threedface; }
+#custom_fields_content #add_cf {
+  overflow: hidden;
+  display: inline-block; }
+  #custom_fields_content #add_cf {
+    display: block; }
+  #custom_fields_content #add_cf #add_cf_link {
+    float: right;
+    color: #000;
+    margin-right: 25px;
+    padding: 2px 0 2px 15px;
+    background: transparent url(/images/admin/plus.png) no-repeat left center; }

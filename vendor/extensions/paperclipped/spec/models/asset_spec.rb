@@ -64,4 +64,5 @@ describe Asset do
       image.thumbnail('thumbnail').should == "/images/assets/pdf_thumbnail.png"
     end
   end
+
 end

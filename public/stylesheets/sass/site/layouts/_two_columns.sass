@@ -1,0 +1,23 @@
+body.TwoColumns
+    
+  #root
+    background: none
+              
+    #content-container
+      background: url(../../images/bg-main5.gif) repeat-y
+      
+      #content
+        +grid-container
+        +pie-clearfix
+        background: url(../../images/bg-main-holder4.gif) no-repeat
+      
+        #main
+          +grid(16.2)
+          +grid-push(8.024)
+          margin: 0
+          padding: 15px 0 30px 0
+          float: left
+          height: 100%
+          
+          .inner
+            padding: 0 15px 0 15px

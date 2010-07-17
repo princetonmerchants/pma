@@ -4,7 +4,7 @@ class_name: ""
 slug: about-us
 virtual: false
 title: About Us
-updated_by_id: 1
+updated_by_id: 
 breadcrumb: About Us
 page_factory: ""
 created_by_id: 1

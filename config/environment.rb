@@ -18,10 +18,10 @@ Radiant::Initializer.run do |config|
   # extensions in vendor/extensions are loaded, in alphabetical order. :all
   # can be used as a placeholder for all extensions not explicitly named.
   # config.extensions = [ :all ]
-  config.extensions = [:help, :textile_filter, :wym_editor_filter, :page_preview, 
-    :layouts, :settings, :redirect, :navigation, :import_export, :drag, :mailer, :paperclipped, 
-    :search, :tags, :page_factory, :bespin_editor, :comments, :archive, :file_system, 
-    :dashboard, :member, :pma]
+  config.extensions = [:help, :textile_filter, :wym_editor_filter, :fckeditor, :page_preview,
+    :layouts, :settings, :redirect, :navigation, :import_export, :drag, :mailer, 
+    :paperclipped, :paperclipped_uploader, :search, :tags, :custom_fields, :stereotype, :file_system, 
+    :comments, :archive, :dashboard]
   
   # By default, only English translations are loaded. Remove any of these from
   # the list below if you'd like to provide any of the supported languages
@@ -34,7 +34,7 @@ Radiant::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :key => '_pma_session',
-    :secret => '528f6a20c4e132ec46403847be5d08723a99a109'
+    :secret => 'e76f8749c40d12445b4c355dfce01d94d3b1f0ae'
   }
 
   # Comment out this line if you want to turn off all caching, or
@@ -85,8 +85,8 @@ Radiant::Initializer.run do |config|
   config.gem 'bluecloth', :source => 'http://gemcutter.org'
   config.gem 'sanitize', :source => 'http://gemcutter.org'
   config.gem 'fastercsv', :source => 'http://gemcutter.org'
-  config.gem 'exceptional'
-
+  config.gem 'exceptional', :source => 'http://gemcutter.org'
+  
   config.after_initialize do
     # Add new inflection rules using the following format:
     ActiveSupport::Inflector.inflections do |inflect|

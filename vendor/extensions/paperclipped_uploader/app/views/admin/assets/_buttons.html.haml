@@ -1,0 +1,6 @@
+- render_region :bottom do |bottom|
+  #actions
+    = pagination_for @assets
+    %ul
+      %li= link_to image('plus') + " " + "new asset", new_admin_asset_path
+      %li= link_to image('plus') + image('plus') + " " + "bulk uploader", upload_assets_path

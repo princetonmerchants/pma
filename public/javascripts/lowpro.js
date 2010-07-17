@@ -336,4 +336,3 @@ Observed = Behavior.create({
                                       new Form.Element.EventObserver(this.element, this.callback);
   }
 });
-
