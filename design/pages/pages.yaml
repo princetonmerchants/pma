@@ -1,17 +1,19 @@
 --- 
-layout_name: Normal
 class_name: ""
+draft_promotion_scheduled_at: 
+position: 0
 slug: /
-virtual: false
-title: Home
 updated_by_id: 
-breadcrumb: Home
-page_factory: ""
+layout_name: Normal
+title: Home
+virtual: false
 created_by_id: 1
+page_factory: ""
+breadcrumb: Home
 enable_comments: false
-description: ""
+draft_promoted_at: 
 comments_count: 0
+description: ""
 published_at: 2010-05-25 00:00:00 Z
 status_id: 100
-position: 0
 keywords: ""

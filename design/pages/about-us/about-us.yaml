@@ -1,17 +1,19 @@
 --- 
-layout_name: <inherit> [Normal]
 class_name: ""
+draft_promotion_scheduled_at: 
+position: 4
 slug: about-us
-virtual: false
-title: About Us
 updated_by_id: 
-breadcrumb: About Us
-page_factory: ""
+layout_name: <inherit> [Normal]
+title: About Us
+virtual: false
 created_by_id: 1
+page_factory: ""
+breadcrumb: About Us
 enable_comments: false
-description: ""
+draft_promoted_at: 
 comments_count: 0
+description: ""
 published_at: 2010-06-22 15:49:05.957132 Z
 status_id: 100
-position: 4
 keywords: ""

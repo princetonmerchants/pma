@@ -1,17 +1,19 @@
 --- 
-layout_name: <inherit> [Normal]
 class_name: ""
+draft_promotion_scheduled_at: 
+position: 4
 slug: make-a-payment
-virtual: false
-title: Make a Payment
 updated_by_id: 
-breadcrumb: Make a Payment
-page_factory: ""
+layout_name: <inherit> [Normal]
+title: Make a Payment
+virtual: false
 created_by_id: 1
+page_factory: ""
+breadcrumb: Make a Payment
 enable_comments: false
-description: ""
+draft_promoted_at: 
 comments_count: 0
+description: ""
 published_at: 2010-06-22 15:50:02.209592 Z
 status_id: 100
-position: 4
 keywords: ""

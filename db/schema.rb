@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "updated_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "upload_token"
   end
 
   create_table "comments", :force => true do |t|
@@ -79,20 +80,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.datetime "draft_promotion_scheduled_at"
     t.datetime "draft_promoted_at"
     t.text     "draft_content"
-  end
-
-  create_table "members", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "company"
-    t.string   "crypted_password"
-    t.string   "salt"
-    t.string   "remember_token",            :limit => 40
-    t.datetime "remember_token_expires_at"
-    t.datetime "emailed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "disabled_password"
   end
 
   create_table "meta_tags", :force => true do |t|

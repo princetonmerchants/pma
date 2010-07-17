@@ -1,17 +1,19 @@
 --- 
-layout_name: <inherit> [Normal]
-class_name: Page
-slug: benefits
-virtual: false
-title: Benefits
-updated_by_id: 
-breadcrumb: Benefits
-page_factory: ""
-created_by_id: 1
-enable_comments: false
-description: ""
-comments_count: 0
-published_at: 2010-06-23 11:36:00 Z
-status_id: 100
+class_name: ""
+draft_promotion_scheduled_at: 
 position: 1
+slug: benefits
+updated_by_id: 1
+layout_name: <inherit> [Normal]
+title: Benefits
+virtual: false
+created_by_id: 1
+page_factory: ""
+breadcrumb: Benefits
+enable_comments: false
+draft_promoted_at: 
+comments_count: 0
+description: ""
+published_at: 2010-06-23 00:00:00 Z
+status_id: 100
 keywords: ""

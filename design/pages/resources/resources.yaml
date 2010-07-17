@@ -1,17 +1,19 @@
 --- 
-layout_name: <inherit> [Normal]
 class_name: ""
+draft_promotion_scheduled_at: 
+position: 2
 slug: resources
-virtual: false
-title: Resources
 updated_by_id: 
-breadcrumb: Resources
-page_factory: ""
+layout_name: <inherit> [Normal]
+title: Resources
+virtual: false
 created_by_id: 1
+page_factory: ""
+breadcrumb: Resources
 enable_comments: false
-description: ""
+draft_promoted_at: 
 comments_count: 0
+description: ""
 published_at: 2010-06-22 15:49:45.317604 Z
 status_id: 100
-position: 2
 keywords: ""

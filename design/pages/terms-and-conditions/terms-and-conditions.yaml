@@ -1,17 +1,19 @@
 --- 
-layout_name: <inherit> [Normal]
 class_name: ""
+draft_promotion_scheduled_at: 
+position: 4
 slug: terms-and-conditions
-virtual: false
-title: Terms and Conditions
 updated_by_id: 
-breadcrumb: Terms and Conditions
-page_factory: ""
+layout_name: <inherit> [Normal]
+title: Terms and Conditions
+virtual: false
 created_by_id: 1
+page_factory: ""
+breadcrumb: Terms and Conditions
 enable_comments: false
-description: ""
+draft_promoted_at: 
 comments_count: 0
+description: ""
 published_at: 2010-06-22 15:51:05.321765 Z
 status_id: 100
-position: 4
 keywords: ""

@@ -1,17 +1,19 @@
 --- 
-layout_name: <inherit> [Normal]
 class_name: ""
-slug: events
-virtual: false
-title: Events
-updated_by_id: 
-breadcrumb: Events
-page_factory: ""
-created_by_id: 1
-enable_comments: false
-description: ""
-comments_count: 0
-published_at: 2010-06-22 15:48:45.091008 Z
-status_id: 100
+draft_promotion_scheduled_at: 
 position: 1
+slug: events
+updated_by_id: 1
+layout_name: Application
+title: Events
+virtual: false
+created_by_id: 1
+page_factory: ""
+breadcrumb: Events
+enable_comments: false
+draft_promoted_at: 
+comments_count: 0
+description: ""
+published_at: 2010-06-22 00:00:00 Z
+status_id: 100
 keywords: ""
