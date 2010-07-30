@@ -1,0 +1,29 @@
+body.TwoColumnsRight
+    
+  #root
+    background: url(../../images/bg-2-columns-right.gif) repeat-y
+              
+    #content-container
+      background: url(../../images/bg-2-columns-right-head.gif) no-repeat
+      
+      #content
+      
+        #main
+          +grid(24)
+          margin: 0 0 15px 0
+          padding: 15px 0 30px 0
+          float: left
+          height: 100%
+          
+          #inner-left
+            +grid(18)
+            float: left
+            padding: 0 10px 15px 10px
+            
+          #inner-right
+            +grid(4.9)
+            +omega
+            float: right
+            position: relative
+            top: -38px
+            padding: 0 0 15px 0

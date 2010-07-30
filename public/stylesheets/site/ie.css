@@ -1,2 +1,5 @@
 body #root #content_container #content #left #nav li:hover ul {
   top: 1px; }
+
+body.Landing #root #content-container #intro #slider .scroll {
+  position: relative /* fix for IE to respect overflow */; }

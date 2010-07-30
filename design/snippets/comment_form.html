@@ -17,7 +17,7 @@
 
       <p><label for="comment_content">Your Comment</label><br />
       <r:error on="content"><p style="color:red">Comment <r:message /></p></r:error>
-      <label for="comment_filter_id">Filter: <r:filter_box_tag name="filter_id" value="Textile" /></label><br />
+      <!--<label for="comment_filter_id">Filter: <r:filter_box_tag name="filter_id" value="Textile" /></label><br />-->
       <r:text_area_tag name="content" class="required" rows="9" cols="40" /></p>
 
       <r:if_comments_simple_spam_filter_enabled>

@@ -1,10 +1,10 @@
 --- 
 class_name: ""
 draft_promotion_scheduled_at: 
-position: 4
+position: 8
 slug: terms-and-conditions
-updated_by_id: 
-layout_name: <inherit> [Normal]
+updated_by_id: 1
+layout_name: ThreeColumns
 title: Terms and Conditions
 virtual: false
 created_by_id: 1
@@ -14,6 +14,6 @@ enable_comments: false
 draft_promoted_at: 
 comments_count: 0
 description: ""
-published_at: 2010-06-22 15:51:05.321765 Z
+published_at: 2010-06-22 00:00:00 Z
 status_id: 100
 keywords: ""

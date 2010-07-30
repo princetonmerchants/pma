@@ -13,6 +13,7 @@ body
           .heading
             height: 29px
             max-width: 400px
+            min-width: 100px
             float: left
             background: #9acccd url(../../images/bg-heading2.gif) repeat-y 100% 0
             margin: 1px 0 15px 0
@@ -31,14 +32,18 @@ body
             height: 31px
             text-indent: -9999px
             overflow: hidden
-            margin: 30px 25px 0 0
+            margin: 1px 25px 0 0
             display: inline
         
         .block
           margin: 0 0 20px 0
           
           .inner
-            padding: 0 5px 5px 27px
+            padding: 0 20px 5px 20px
+      
+            .more
+              text-align: right
+              margin: 15px 5px 0 0
 
         #left
           
@@ -51,7 +56,19 @@ body
                 background: #666 url(../../images/bg-heading.gif) no-repeat 100% 0
           
               .btn-rss
-                margin: 30px 25px 0 0
+                margin: 30px 25px 0 5px
+                
+          .feature
+
+            .block
+              background: url(../../images/bg-left-nav-light.gif) repeat-y
+              margin: 0 0 15px 0
+              padding: 0 0 15px 0
+          
+              .headline 
+    
+                .heading
+                  background: #666 url(../../images/bg-heading-white.gif) no-repeat 100% 0
       
         #main
             
@@ -70,3 +87,7 @@ body
               
                 .btn-rss
                   margin: 0 18px 0 0
+          
+              .inner
+                padding: 0 5px 5px 27px
+                

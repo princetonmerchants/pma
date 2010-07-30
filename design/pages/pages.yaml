@@ -3,8 +3,8 @@ class_name: ""
 draft_promotion_scheduled_at: 
 position: 0
 slug: /
-updated_by_id: 
-layout_name: Normal
+updated_by_id: 1
+layout_name: Landing
 title: Home
 virtual: false
 created_by_id: 1

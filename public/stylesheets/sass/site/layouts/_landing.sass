@@ -1,0 +1,106 @@
+body.Landing
+    
+  #root
+    background: url(../../images/bg-3-columns-home.gif) repeat-y
+    
+    #head-container
+      
+      #head
+              
+        h1#logo
+          text-align: center
+        
+          a
+          
+            img
+              margin: 0
+              padding: 0
+              
+    #content-container
+      background: url(../../images/bg-1-column-head.gif) repeat-x
+      
+      #intro
+        +grid-container
+        background: #fff url(../../images/bg-3-columns-home-head.gif) no-repeat left bottom
+        margin: 15px 0 0 0
+        padding: 0 0 30px 0
+        float: left     
+          
+        #slider 
+          width: 595px
+          position: relative
+          float: left
+          margin: 0 15px 0 15px
+        
+          .scroll 
+            height: 298px
+            overflow: auto
+            clear: left
+            border: 1px solid #efefef
+          
+            .scrollContainer 
+            
+              .panel 
+                padding: 10px
+                height: 276px
+                width: 573px
+                
+                h2
+                  margin: 0 0 10px 0
+
+        .scrollButtons 
+          position: absolute
+          bottom: 10px
+          right: 10px
+          padding: 1px 7px
+          cursor: pointer
+          border: 1px solid #c0c0c0
+          background: #efefef
+          z-index: 10000
+        
+        .scrollButtons.left 
+          right: 35px
+        
+        #blurb
+          width: 300px
+          height: 300px
+          overflow: hidden
+          padding: 0 10px
+          margin: 0
+          float: left 
+          background: #efefef
+      
+      #content
+
+        #left
+          +grid(8.25)
+          +grid-pull(15.95)
+          margin: 0
+          padding: 0
+          float: left
+          display: block
+      
+        #main
+          +grid(16.2)
+          +grid-push(7.645)
+          margin: 0 0 15px 0
+          padding: 0 0 30px 0
+          float: left
+          height: 100%
+          
+          #inner-left
+            +grid(8)
+            float: left
+            padding: 0 0 15px 10px
+        
+            .headline
+              
+              .heading
+                background: #4e0b36 url(../../images/bg-heading1.gif) repeat-y 100% 0
+            
+          #inner-right
+            +grid(7.75)
+            +omega
+            float: right
+            padding: 0 0 15px 0
+        

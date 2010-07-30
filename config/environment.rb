@@ -19,9 +19,9 @@ Radiant::Initializer.run do |config|
   # can be used as a placeholder for all extensions not explicitly named.
   # config.extensions = [ :all ]
   config.extensions = [:help, :textile_filter, :wym_editor_filter, :fckeditor, :page_preview,
-    :layouts, :settings, :redirect, :navigation, :import_export, :drag, :mailer, 
-    :paperclipped, :paperclipped_uploader, :search, :tags, :custom_fields, :stereotype, :file_system, 
-    :comments, :archive, :dashboard]
+    :layouts, :settings, :redirect, :navigation, :import_export, :drag, :mailer,
+    :paperclipped, :paperclipped_uploader, :search, :page_factory, :file_system, :tags,
+    :comments, :archive, :dashboard, :pma ]
   
   # By default, only English translations are loaded. Remove any of these from
   # the list below if you'd like to provide any of the supported languages
@@ -92,5 +92,29 @@ Radiant::Initializer.run do |config|
     ActiveSupport::Inflector.inflections do |inflect|
       inflect.uncountable 'config'
     end
+    
+    DATABASE_MAILER_COLUMNS = {
+      :first_name => :string,
+      :last_name => :string,
+      :company => :string,
+      :job_title => :string,
+      :industry => :string,
+      :email => :string,
+      :home_phone => :string,
+      :work_phone => :string,
+      :work_phone_ext => :string,
+      :mobile_phone => :string,
+      :address => :string,
+      :city => :string,
+      :state => :string,
+      :zip => :string,
+      :resident_since => :string,
+      :princeton_activities => :string,
+      :age_range => :string,
+      :household_count => :integer,
+      :gender => :string,
+      :message => :text,
+      :atatchment => :string
+    }
   end
 end

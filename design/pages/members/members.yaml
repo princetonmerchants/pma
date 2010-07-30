@@ -4,7 +4,7 @@ draft_promotion_scheduled_at:
 position: 3
 slug: members
 updated_by_id: 1
-layout_name: TwoColumns
+layout_name: TwoColumnsRight
 title: Members
 virtual: false
 created_by_id: 1

@@ -1,3 +1,0 @@
-= No Dev Cache
-
-It prevents the Radiant::Cache from caching pages in dev mode.

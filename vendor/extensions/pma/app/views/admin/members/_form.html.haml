@@ -1,0 +1,64 @@
+%fieldset
+  %legend 
+    Contact
+  %p
+    %label{:for => "member_name"} Name:
+    = f.text_field :name
+  %p
+    %label{:for => "member_phone"} Phone:
+    = f.text_field :phone
+  %p
+    %label{:for => "member_email"} Email:
+    = f.text_field :email
+  %p
+    %label{:for => "member_website"} Website:
+    = f.text_field :website
+  %p
+    %label{:for => "member_address_1"} Address 1:
+    = f.text_field :address_1
+  %p
+    %label{:for => "member_address_2"} Address 2:
+    = f.text_field :address_2
+  %p
+    %label{:for => "member_city"} City:
+    = f.text_field :city
+  %p
+    %label{:for => "member_state"} State:
+    = f.text_field :state
+  %p
+    %label{:for => "member_zip"} Zip:
+    = f.text_field :zip
+    
+%fieldset
+  %legend 
+    Profile    
+  %p
+    %label{:for => "member_logo"} Logo:
+    = file_field :member, :logo
+  %p
+    %label{:for => "member_tagline"} Tagline:
+    = f.text_field :tagline
+  %p
+    %label{:for => "member_bio"} Bio:
+    = f.text_area :bio
+
+%fieldset
+  %legend 
+    Account
+  %p
+    %label{:for => "member_billing_contact"} Billing Contact:
+    = f.text_field :billing_contact
+  %p
+    %label{:for => "member_billing_phone"} Billing Phone:
+    = f.text_field :phone
+  %p
+    %label{:for => "member_billing_email"} Billing Email:
+    = f.text_field :billing_email
+  %p
+    %label{:for => "member_password"} Password:
+    = f.text_field :password
+        
+%p.buttons
+  = f.submit submit_label
+  or
+  = link_to 'Cancel', members_path

@@ -1,9 +1,9 @@
 body
-  +font("Helvetica, Arial, sans-serif", !font_size)
+  +font("Helvetica, Arial, sans-serif", "14px")
   color: #666
   height: 100%
-  background: url(../../images/bg-body.jpg)
-  line-height = !line_height
+  background: url(../../images/bg-purple-body.gif)
+  line-height: 18px
   
   strong
     font-weight: bold
@@ -27,26 +27,49 @@ body
   h1 
     color = !purple
     font-size: 26px
+    line-height: 29px
+    
+    a
+      color = !purple
+      text-decoration: none
   
   h2 
     color = !teal
     font-size: 22px
+    line-height: 25px
+    
+    a
+      color = !teal
+      text-decoration: none
   
   h3 
     color = !grey
     font-size: 20px
+    line-height: 23px
+    
+    a
+      color = !grey
+      text-decoration: none
   
   h4 
     color = !grey
     font-size: 17px
     margin: 3px 0 3px 0
+    line-height: 21px
+    
+    a
+      color = !grey
+      text-decoration: none
     
   p
     margin: 10px 0 10px 0
+      
+    li
+      padding: 3px 0 3px 5px
+      list-style-type: none
     
   #root
     +grid-container
-    background: url(../../images/bg-main4.gif) repeat-y
     
     #head-container
       +clearfix
@@ -103,40 +126,14 @@ body
               margin: 20px 0 15px 23px
               
     #content-container
+      +grid-container
       +pie-clearfix
-      background: url(../../images/bg-main-holder2.gif) no-repeat
+      background: url(../../images/bg-3-columns-head.gif) no-repeat
       
       #content
         +grid-container
         +pie-clearfix
-
-        #left
-          +grid(8.25)
-          +grid-pull(15.95)
-          margin: 0
-          padding: 15px 0 0 0
-          float: left
-          display: block
-      
-        #main
-          +grid(16.2)
-          +grid-push(8.024)
-          margin: 0
-          padding: 15px 0 30px 0
-          float: left
-          height: 100%
-          
-          #inner-left
-            +grid(10.5)
-            float: left
-            padding: 0 10px 0 10px
             
-          #inner-right
-            +grid(4.9)
-            +omega
-            float: right
-            position: relative
-            top: -38px
       
   #foot-container
   

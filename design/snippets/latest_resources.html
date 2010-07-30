@@ -1,21 +1,19 @@
 <r:find url="/resources/">
-  <div id="resources" class="block">
-    <div class="headline">
-      <a href="/resources.atom" class="btn-rss">rss</a>
-      <div class="heading">
-        <strong>Resources</strong>
+  <r:if_children>
+    <div id="resources" class="block">
+      <div class="headline">
+        <div class="heading">
+          <strong>Resources</strong>
+        </div>
+      </div>
+      <div class="inner">
+        <ul>
+          <r:children:each limit="5" order="desc" by="published_at">
+            <li><h4><r:link /></h4></li>
+          </r:children:each>
+        </ul>
+        <a href="/resources" class="btn-more">MORE RESOURCES</a>
       </div>
     </div>
-    <div class="inner">
-      <ul>
-        <r:children:each limit="5" order="desc" by="published_at">
-          <li>
-            <span>NEW!</span>
-            <r:link />
-          </li>
-        </r:children:each>
-      </ul>
-      <a href="/resources" class="btn-more">MORE RESOURCES</a>
-    </div>
-  </div>
+  </r:if_children>
 </r:find> 

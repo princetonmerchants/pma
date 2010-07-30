@@ -2,8 +2,10 @@
 <html> 
   <head> 
     <r:snippet name='meta' />
+    <r:snippet name='javascripts_top' /> 
     <r:snippet name='stylesheets' />
-    <link href="/feeds/news.atom" rel="alternate" title="News Feed" type="application/atom+xml">
+    <link href="/feeds/news.atom" rel="alternate" title="PMA News" type="application/atom+xml">
+    <link href="http://www.google.com/calendar/ical/princetonmerchants.org_8v252833aorfjhjr82ij4mvqgg%40group.calendar.google.com/public/basic.ics" rel="alternate" title="PMA Events" type="application/atom+xml">
   </head> 
   <body class="<r:layout /> <r:if_url matches="^/$">Home</r:if_url> <r:unless_url matches="^/$"><r:slug /></r:unless_url>"> 
     <div id='root'>
@@ -23,6 +25,6 @@
       <div id='root-foot'> 
       </div>
     </div> 
-    <r:snippet name='javascripts' /> 
+    <r:snippet name='javascripts_bottom' /> 
   </body> 
 </html>
