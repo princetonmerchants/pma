@@ -6,4 +6,7 @@ ActionController::Routing::Routes.draw do |map|
       :activate => :post,
       :deactivate => :post
     }
+  map.resources :categories, 
+    :path_prefix => '/admin', 
+    :controller  => 'admin/categories'
 end

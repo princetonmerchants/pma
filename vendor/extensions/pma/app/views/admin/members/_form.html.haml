@@ -8,11 +8,11 @@
     %label{:for => "member_phone"} Phone:
     = f.text_field :phone
   %p
+    %label{:for => "member_fax"} Fax:
+    = f.text_field :fax
+  %p
     %label{:for => "member_email"} Email:
     = f.text_field :email
-  %p
-    %label{:for => "member_website"} Website:
-    = f.text_field :website
   %p
     %label{:for => "member_address_1"} Address 1:
     = f.text_field :address_1
@@ -31,20 +31,58 @@
     
 %fieldset
   %legend 
-    Profile    
+    Profile   
+  %p
+    %label{:for => "member_category"} Category:
+    = f.select :category_id, Category.all.collect {|c| [c.name, c.id]} , :include_blank => true 
+  %p
+    %div
+      = f.check_box :gifts
+      %label{:for => "member_gifts"} Gifts
+    %div
+      = f.check_box :ecommerce    
+      %label{:for => "member_ecommerce"} eCommerce
+  %p
+    %label{:for => "member_hours"} Hours:
+    = f.text_field :hours
   %p
     %label{:for => "member_logo"} Logo:
     = file_field :member, :logo
+  - unless @member.new_record?
+    %p
+      %div
+        %label{:for => "member_logo_delete"} Delete
+        = f.check_box :logo_delete
+      %div
+        %img{:src => @member.logo(:thumb)}
+  %p
+    %label{:for => "member_website"} Website:
+    = f.text_field :website
   %p
     %label{:for => "member_tagline"} Tagline:
     = f.text_field :tagline
   %p
     %label{:for => "member_bio"} Bio:
     = f.text_area :bio
+  %p
+    %label{:for => "member_news_feed"} News Feed:
+    = f.text_field :news_feed
+  %p
+    %label{:for => "member_events_feed"} Events Feed:
+    = f.text_field :events_feed
+  %p
+    %label{:for => "member_products_feed"} Products Feed:
+    = f.text_field :products_feed
+  %p
+    %label{:for => "member_keywords"} Keywords:
+    = f.text_area :keywords
 
 %fieldset
   %legend 
     Account
+  %p
+    %label{:for => "member_level"} Level:
+    = f.select :level, Radiant::Config['membership.levels'].to_s.split(',').collect {|l| [l, l]}
   %p
     %label{:for => "member_billing_contact"} Billing Contact:
     = f.text_field :billing_contact

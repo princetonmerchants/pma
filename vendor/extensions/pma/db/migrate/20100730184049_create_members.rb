@@ -10,17 +10,20 @@ class CreateMembers < ActiveRecord::Migration
       t.string :phone
       t.string :fax
       t.string :email
+      t.integer :category_id
       t.string :website
       t.string :tagline
       t.text :bio
-      t.string :keywords
+      t.text :keywords
       t.string :hours
       t.boolean :ecommerce
+      t.boolean :gifts
       t.string :news_feed
       t.string :events_feed
       t.string :products_feed
       t.date :member_since
       t.date :membership_expires_on
+      t.string :level
       t.string :billing_contact
       t.string :billing_phone
       t.string :billing_email

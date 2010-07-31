@@ -1,6 +1,5 @@
 class Member < ActiveRecord::Base
-  has_many :member_categories
-  has_many :categories, :through => :member_categories
+  belongs_to :category
 
   has_attached_file :logo, 
     :styles => { 
@@ -20,7 +19,7 @@ class Member < ActiveRecord::Base
     :url => Radiant::Config["assets.url"] ? Radiant::Config["assets.url"] : "/:class/:id/:basename:no_original_style.:extension", 
     :path => Radiant::Config["assets.path"] ? Radiant::Config["assets.path"] : ":rails_root/public/:class/:id/:basename:no_original_style.:extension"
 
-  cattr_accessor :email_name_regex, :domain_head_regex, :domain_tld_regex, :email_regex, :domain_regex
+  cattr_accessor :email_name_regex, :domain_head_regex, :domain_tld_regex, :email_regex, :domain_regex, :logo_delete
   
   self.email_name_regex = '[\w\.%\+\-]+'.freeze
   self.domain_head_regex = '(?:[A-Z0-9\-]+\.)+'.freeze
@@ -37,4 +36,19 @@ class Member < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
+  
+  validates_presence_of :category_id
+  
+  before_save :check_logo_delete
+  
+  def password 
+    chars = ("a".."z").collect + ("2".."9").collect + %w{ ! # $ % ^ , - = @ . }
+    Array.new(8, '').collect{chars[rand(chars.size)]}.join
+  end
+  
+  protected 
+  
+    def check_logo_delete
+      write_attribute :logo, nil 
+    end
 end

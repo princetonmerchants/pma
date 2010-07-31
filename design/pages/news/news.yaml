@@ -1,7 +1,7 @@
 --- 
 class_name: ""
 draft_promotion_scheduled_at: 
-position: 0
+position: 1
 slug: news
 updated_by_id: 1
 layout_name: ThreeColumns

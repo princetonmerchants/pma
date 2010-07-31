@@ -53,8 +53,4 @@ class Admin::MembersController < ApplicationController
     flash[:notice] = "Member #{@member.name} has been deactivated!"
     redirect_to members_path
   end
-  
-  def reset_password
-    @member = Member.find(params[:id])
-  end
 end

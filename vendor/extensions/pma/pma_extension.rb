@@ -16,8 +16,9 @@ class PmaExtension < Radiant::Extension
   # See your config/routes.rb file in this extension to define custom routes
   
   def activate
-    tab 'Settings' do
-       add_item "Members", "/admin/members", :after => 'Users'
+    tab 'Membership' do
+       add_item "Members", "/admin/members"
+       add_item "Categories", "/admin/categories"
     end
   end
 end

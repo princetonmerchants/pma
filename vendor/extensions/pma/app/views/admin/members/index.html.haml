@@ -4,20 +4,29 @@
       %tr
         %th Logo
         %th Name
+        %th Website
+        %th Category
         %th Billing Contact
-        %th Email
-        %th Phone
+        %th Billing Email
+        %th Billing Phone
+        %th Level
         %th Status
         %th.actions Actions
       %tbody
         - @members.each do |m|
           %tr
             %td
-              %img{:src => m.logo(:thumb)}
-            %td= h(m.name)
+              - if m.logo(:thumb).empty?
+                None
+              - else
+                %img{:src => m.logo(:thumb)}
+            %td= link_to h(m.name), edit_member_path(m.id)
+            %td= link_to(h(m.website))
+            %td= link_to(m.category.name, edit_category_path(m.category))
             %td= h(m.billing_contact)
-            %td= h(m.email || m.billing_email)
-            %td= h(m.phone || m.billing_phone)
+            %td= mail_to(h(m.billing_email || m.email))
+            %td= h(m.billing_phone || m.phone)
+            %td= h(m.level)
             %td= h(m.status)
             %td.actions
               = link_to image('page_edit') + ' Edit', edit_member_path(m.id)

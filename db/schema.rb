@@ -141,13 +141,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.text     "draft_content"
   end
 
-  create_table "member_categories", :force => true do |t|
-    t.integer  "member_id"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "members", :force => true do |t|
     t.string   "name"
     t.string   "address_1"
@@ -158,17 +151,20 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "phone"
     t.string   "fax"
     t.string   "email"
+    t.integer  "category_id"
     t.string   "website"
     t.string   "tagline"
     t.text     "bio"
-    t.string   "keywords"
+    t.text     "keywords"
     t.string   "hours"
     t.boolean  "ecommerce"
+    t.boolean  "gifts"
     t.string   "news_feed"
     t.string   "events_feed"
     t.string   "products_feed"
     t.date     "member_since"
     t.date     "membership_expires_on"
+    t.string   "level"
     t.string   "billing_contact"
     t.string   "billing_phone"
     t.string   "billing_email"
