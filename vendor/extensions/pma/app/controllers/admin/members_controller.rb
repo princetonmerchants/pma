@@ -25,6 +25,7 @@ class Admin::MembersController < ApplicationController
   def update
     @member = Member.find(params[:id])
     if @member.update_attributes(params[:member]) 
+      @member.update_attribute :logo, nil if @member.logo_delete.to_i == 1
       redirect_to members_path
       flash[:notice] = "Member edited."
     else

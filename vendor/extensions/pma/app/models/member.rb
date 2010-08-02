@@ -3,10 +3,10 @@ class Member < ActiveRecord::Base
 
   has_attached_file :logo, 
     :styles => { 
-      :large => "600x600>", 
-      :normal => "350x350>", 
+      :large => "350x350>", 
       :small => "250x250>", 
-      :thumb => "100x100#", 
+      :thumb2 => "100x100#", 
+      :thumb => "100x100>", 
       :tiny => "16x16#" 
     },
     :whiny => false,
@@ -27,9 +27,9 @@ class Member < ActiveRecord::Base
   self.email_regex = /\A#{email_name_regex}@#{domain_head_regex}#{domain_tld_regex}\z/i
   self.domain_regex = /\A#{domain_head_regex}#{domain_tld_regex}\z/i
   
-  validates_presence_of :email
-  validates_uniqueness_of :email
-  validates_format_of :email, :with => email_regex
+  #validates_presence_of :email
+  validates_uniqueness_of :email, :allow_blank => true
+  validates_format_of :email, :with => email_regex, :allow_blank => true
   
   validates_uniqueness_of :website, :allow_blank => true
   validates_format_of :website, :with => domain_regex, :allow_blank => true
@@ -39,16 +39,8 @@ class Member < ActiveRecord::Base
   
   validates_presence_of :category_id
   
-  before_save :check_logo_delete
-  
   def password 
     chars = ("a".."z").collect + ("2".."9").collect + %w{ ! # $ % ^ , - = @ . }
     Array.new(8, '').collect{chars[rand(chars.size)]}.join
   end
-  
-  protected 
-  
-    def check_logo_delete
-      write_attribute :logo, nil 
-    end
 end
