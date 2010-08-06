@@ -14,5 +14,7 @@ gem 'calendar_date_select'
 gem 'rack', '1.1.0'
 gem 'exceptional'
 gem 'radiant'
-gem 'spreadsheet'
+gem 'state_machine'
+gem 'pg'
+gem 'rails'
 
