@@ -1,0 +1,46 @@
+.outset
+  %table.index
+    %thead
+      %tr
+        %th Logo
+        %th Name
+        %th Website
+        %th Category
+        %th Billing Contact
+        %th Billing Email
+        %th Billing Phone
+        %th Level
+        %th Status
+        %th.actions Actions
+      %tbody
+        - @members.each do |m|
+          %tr
+            %td
+              - if m.logo(:thumb).empty?
+                None
+              - else
+                %img{:src => m.logo(:thumb)}
+            %td= link_to h(m.name), edit_admin_member_path(m.id)
+            %td= link_to(h(m.website))
+            %td= link_to(m.category.name, edit_admin_category_path(m.category))
+            %td= h(m.billing_contact)
+            %td= mail_to(h(m.billing_email || m.email))
+            %td= h(m.billing_phone || m.phone)
+            %td= h(m.level)
+            %td= m.status.to_s.titleize
+            %td.actions
+              = link_to image('page_edit') + ' Edit', edit_admin_member_path(m.id)
+              - if m.active?
+                = link_to image('minus') + ' Deactivate', deactivate_admin_member_path(m.id), :method => :post, :confirm => "Really deactivate #{m.name}?"
+              - else
+                = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
+              = link_to image('page_delete') + ' Delete', admin_member_path(m.id), :method => :delete, :confirm => "Really delete #{m.name}?"
+    %tfoot
+      %tr
+        %td{:colspan => 3}= page_entries_info @members, :entry_name => "result"
+        %td{:colspan => 3}= will_paginate @members, :inner_window => 1, :outer_window => 1
+        
+#actions
+  %ul
+    %li
+      = link_to image('plus') + ' New member', new_admin_member_path

@@ -62,71 +62,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.boolean "enabled",        :default => true
   end
 
-  create_table "form_data_assets", :force => true do |t|
-    t.integer  "form_data_id"
-    t.string   "field_name"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "form_data_assets", ["form_data_id"], :name => "index_form_data_assets_on_form_data_id"
-
-  create_table "form_datas", :force => true do |t|
-    t.string   "url"
-    t.text     "blob"
-    t.datetime "exported"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "work_phone_ext"
-    t.string   "age_range"
-    t.string   "company"
-    t.string   "mobile_phone"
-    t.string   "last_name"
-    t.text     "message"
-    t.integer  "household_count"
-    t.string   "job_title"
-    t.string   "zip"
-    t.string   "address"
-    t.string   "gender"
-    t.string   "industry"
-    t.string   "state"
-    t.string   "city"
-    t.string   "atatchment"
-    t.string   "home_phone"
-    t.string   "resident_since"
-    t.string   "email"
-    t.string   "work_phone"
-    t.string   "princeton_activities"
-    t.string   "first_name"
-  end
-
-  add_index "form_datas", ["address"], :name => "index_form_datas_on_address"
-  add_index "form_datas", ["age_range"], :name => "index_form_datas_on_age_range"
-  add_index "form_datas", ["atatchment"], :name => "index_form_datas_on_atatchment"
-  add_index "form_datas", ["city"], :name => "index_form_datas_on_city"
-  add_index "form_datas", ["company"], :name => "index_form_datas_on_company"
-  add_index "form_datas", ["email"], :name => "index_form_datas_on_email"
-  add_index "form_datas", ["first_name"], :name => "index_form_datas_on_first_name"
-  add_index "form_datas", ["gender"], :name => "index_form_datas_on_gender"
-  add_index "form_datas", ["home_phone"], :name => "index_form_datas_on_home_phone"
-  add_index "form_datas", ["household_count"], :name => "index_form_datas_on_household_count"
-  add_index "form_datas", ["industry"], :name => "index_form_datas_on_industry"
-  add_index "form_datas", ["job_title"], :name => "index_form_datas_on_job_title"
-  add_index "form_datas", ["last_name"], :name => "index_form_datas_on_last_name"
-  add_index "form_datas", ["message"], :name => "index_form_datas_on_message"
-  add_index "form_datas", ["mobile_phone"], :name => "index_form_datas_on_mobile_phone"
-  add_index "form_datas", ["princeton_activities"], :name => "index_form_datas_on_princeton_activities"
-  add_index "form_datas", ["resident_since"], :name => "index_form_datas_on_resident_since"
-  add_index "form_datas", ["state"], :name => "index_form_datas_on_state"
-  add_index "form_datas", ["url"], :name => "index_form_datas_on_url"
-  add_index "form_datas", ["work_phone"], :name => "index_form_datas_on_work_phone"
-  add_index "form_datas", ["work_phone_ext"], :name => "index_form_datas_on_work_phone_ext"
-  add_index "form_datas", ["zip"], :name => "index_form_datas_on_zip"
-
   create_table "layouts", :force => true do |t|
     t.string   "name",                         :limit => 100
     t.text     "content"
@@ -258,18 +193,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   add_index "pages", ["parent_id"], :name => "pages_parent_id"
   add_index "pages", ["slug", "parent_id"], :name => "pages_child_slug"
   add_index "pages", ["virtual", "status_id"], :name => "pages_published"
-
-  create_table "roles", :force => true do |t|
-    t.string "role_name", :limit => 64, :default => "New Role"
-  end
-
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id", :null => false
-    t.integer "user_id", :null => false
-  end
-
-  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
-  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id"

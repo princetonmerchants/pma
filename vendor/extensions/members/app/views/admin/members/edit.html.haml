@@ -1,0 +1,4 @@
+%h1 Edit member
+
+- form_for :member, :url => admin_member_path, :html => { :method => :put, :multipart => 'true' }  do |f|
+  = render :partial => "form", :locals => {:f => f, :submit_label => "Update"}
