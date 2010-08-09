@@ -1,0 +1,36 @@
+= render :partial => 'common'
+
+= content_for :custom do
+
+  %h1 Members
+  
+  #index
+    %a{:name => 'index'}
+    - per_page = (Category.non_empty.count / 3).ceil
+    - (1..3).each do |page|
+      %ol
+        - Category.non_empty.paginate(:page => page, :per_page => per_page).each do |category|
+          %li
+            = link_to "#{category.name} (#{category.members.count})", :anchor => category
+  
+  %ol#members.reset
+    - Category.non_empty.each do |category|
+      %li
+        %a{:name => category.to_param}
+        %h2
+          = category.name
+        %ol.reset
+          - category.members.each do |member|
+            %li
+              %h3
+                = link_to h(member.name), member
+              .bio.short
+                = h(truncate(member.bio, 200))
+              %p.info
+                = link_to 'Read More', member 
+                |
+                = link_to 'Visit Website &raquo;', "http://#{h(member.website)}" 
+                |
+                = link_to 'Back to Index', :anchor => 'index'
+          
+

@@ -1,0 +1,15 @@
+= render :partial => 'common'
+
+= content_for :custom do
+
+  .profile
+
+    %h1
+      = h(@member.name)
+    - unless @member.logo(:small).blank?
+      %p.logo
+        = link_to image_tag(@member.logo(:small)), "http://#{h(@member.website)}" 
+    .bio
+      = simple_format(h(@member.bio))
+    %p.info
+      = link_to 'Visit Website &raquo;', "http://#{h(@member.website)}" 

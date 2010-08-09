@@ -6,9 +6,9 @@
         %th Name
         %th Website
         %th Category
-        %th Billing Contact
-        %th Billing Email
-        %th Billing Phone
+        %th Admin Name
+        %th Admin Email
+        %th Admin Phone
         %th Level
         %th Status
         %th.actions Actions
@@ -21,19 +21,22 @@
               - else
                 %img{:src => m.logo(:thumb)}
             %td= link_to h(m.name), edit_admin_member_path(m.id)
-            %td= link_to(h(m.website))
+            %td= link_to(h(m.website), "http://#{h(m.website)}")
             %td= link_to(m.category.name, edit_admin_category_path(m.category))
-            %td= h(m.billing_contact)
-            %td= mail_to(h(m.billing_email || m.email))
-            %td= h(m.billing_phone || m.phone)
+            %td= h(m.admin_name)
+            %td= mail_to(h(m.admin_email))
+            %td= h(m.admin_phone)
             %td= h(m.level)
             %td= m.status.to_s.titleize
             %td.actions
               = link_to image('page_edit') + ' Edit', edit_admin_member_path(m.id)
               - if m.active?
-                = link_to image('minus') + ' Deactivate', deactivate_admin_member_path(m.id), :method => :post, :confirm => "Really deactivate #{m.name}?"
-              - else
+                = link_to image('minus_disabled') + ' Deactivate', deactivate_admin_member_path(m.id), :method => :post, :confirm => "Really deactivate #{m.name}?"
+              - elsif m.inactive?
                 = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
+              - elsif m.pending?
+                = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
+                = link_to image('minus') + ' Deny', deny_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
               = link_to image('page_delete') + ' Delete', admin_member_path(m.id), :method => :delete, :confirm => "Really delete #{m.name}?"
     %tfoot
       %tr

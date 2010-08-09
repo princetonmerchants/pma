@@ -1,0 +1,18 @@
+- content_for :breadcrumbs do
+  %a{:href => '/'}
+    Home 
+  &nbsp;&gt;&nbsp;
+  - if @title and @title != 'Members'
+    %a{:href => '/membership/members'}
+      Members
+    &nbsp;&gt;&nbsp;
+    = @title
+  - else
+    Members
+
+- content_for :left do
+  <r:snippet name="membership_left" />
+  
+%h1
+  = @title
+  

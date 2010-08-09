@@ -1,0 +1,10 @@
+= render :partial => 'common'
+
+.inner
+
+  - form_for :member, :url => member_path, :html => { :method => :put, :multipart => 'true' }  do |f|
+    = render :partial => "form", :locals => {:f => f, :submit_label => "Update"}
+    %p.buttons
+      = f.submit 'Update'
+      or
+      = link_to 'Cancel', @member

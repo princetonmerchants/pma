@@ -1,34 +1,34 @@
 namespace :radiant do
   namespace :extensions do
-    namespace :pma do
+    namespace :members do
       
-      desc "Runs the migration of the Pma extension"
+      desc "Runs the migration of the Members extension"
       task :migrate => :environment do
         require 'radiant/extension_migrator'
         if ENV["VERSION"]
-          PmaExtension.migrator.migrate(ENV["VERSION"].to_i)
+          MembersExtension.migrator.migrate(ENV["VERSION"].to_i)
           Rake::Task['db:schema:dump'].invoke
         else
-          PmaExtension.migrator.migrate
+          MembersExtension.migrator.migrate
           Rake::Task['db:schema:dump'].invoke
         end
       end
       
-      desc "Copies public assets of the Pma to the instance public/ directory."
+      desc "Copies public assets of the Members to the instance public/ directory."
       task :update => :environment do
         is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
-        puts "Copying assets from PmaExtension"
-        Dir[PmaExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
-          path = file.sub(PmaExtension.root, '')
+        puts "Copying assets from MembersExtension"
+        Dir[MembersExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
+          path = file.sub(MembersExtension.root, '')
           directory = File.dirname(path)
           mkdir_p RAILS_ROOT + directory, :verbose => false
           cp file, RAILS_ROOT + path, :verbose => false
         end
-        unless PmaExtension.root.starts_with? RAILS_ROOT # don't need to copy vendored tasks
-          puts "Copying rake tasks from PmaExtension"
+        unless MembersExtension.root.starts_with? RAILS_ROOT # don't need to copy vendored tasks
+          puts "Copying rake tasks from MembersExtension"
           local_tasks_path = File.join(RAILS_ROOT, %w(lib tasks))
           mkdir_p local_tasks_path, :verbose => false
-          Dir[File.join PmaExtension.root, %w(lib tasks *.rake)].each do |file|
+          Dir[File.join MembersExtension.root, %w(lib tasks *.rake)].each do |file|
             cp file, local_tasks_path, :verbose => false
           end
         end
@@ -37,7 +37,7 @@ namespace :radiant do
       desc "Syncs all available translations for this ext to the English ext master"
       task :sync => :environment do
         # The main translation root, basically where English is kept
-        language_root = PmaExtension.root + "/config/locales"
+        language_root = MembersExtension.root + "/config/locales"
         words = TranslationSupport.get_translation_keys(language_root)
         
         Dir["#{language_root}/*.yml"].each do |filename|

@@ -1,8 +1,8 @@
-input[type=text], textarea
-  width: 250px
+input[type=text], input[type=password], textarea
+  width: 325px
   height: 18px
   padding-top: 4px
-  font-size: 16px  
+  +font("Helvetica, Arial, sans-serif", "14px")
   border: 1px solid #ccc
     
   &:active, &:focus
@@ -10,9 +10,16 @@ input[type=text], textarea
       color: = "#{!grey-#222}"
       
 textarea
-  width: 400px
+  width: 420px
   height: 150px
   
+.error-with-field
+
+  input, select, textarea
+    background-color = !lightest_purple
+  
+  .error
+    color = !purple
     
-#form_contact
-  margin: 20px 0 0 10px
+.buttons
+  padding: 15px 0

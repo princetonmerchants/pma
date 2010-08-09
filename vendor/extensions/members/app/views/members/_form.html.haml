@@ -1,0 +1,169 @@
+= f.error_messages :header_message => "Invalid Registration", :message => "Please fix the following fields:", :header_tag => :h4  
+
+%p
+  %label{:for => "member_admin_name"} Your Name
+  %br
+  = f.text_field :admin_name
+
+%p
+  %label{:for => "member_admin_phone"} Your Phone
+  %br
+  = f.text_field :admin_phone
+
+%p
+  %label{:for => "member_admin_email"} Your Email
+  %br
+  = f.text_field :admin_email
+
+%p
+  %label{:for => "member_admin_password"} Your Password
+  %br
+  = f.password_field :admin_password
+
+%p
+  %label{:for => "member_admin_password_confirmation"} Your Password Again
+  %br
+  = f.password_field :admin_password_confirmation
+  
+%h2 Account
+  
+%p
+  %label{:for => "member_level"} Level
+  %br
+  = f.select :level, Radiant::Config['membership.levels'].to_s.split(',').collect {|l| [l.strip, l.strip]}
+  
+%p
+  %label{:for => "member_parent_property_id"} Parent Property
+  %br
+  = f.select :parent_property_id, Member.properties.collect {|m| [m.name, m.id]}, :include_blank => true
+
+%h2 Billing  
+
+%p
+  %label{:for => "member_billing_name"} Name
+  %br
+  = f.text_field :billing_name
+%p
+  %label{:for => "member_billing_phone"} Phone
+  %br
+  = f.text_field :billing_phone
+%p
+  %label{:for => "member_billing_email"} Email
+  %br
+  = f.text_field :billing_email
+  
+  
+%h2 Company
+
+%p
+  %label{:for => "member_name"} Name
+  %br
+  = f.text_field :name
+%p
+  %label{:for => "member_phone"} Phone
+  %br
+  = f.text_field :phone
+%p
+  %label{:for => "member_fax"} Fax
+  %br
+  = f.text_field :fax
+%p
+  %label{:for => "member_email"} Email
+  %br
+  = f.text_field :email
+%p
+  %label{:for => "member_address_1"} Address 1
+  %br
+  = f.text_field :address_1
+%p
+  %label{:for => "member_address_2"} Address 2
+  %br
+  = f.text_field :address_2
+%p
+  %label{:for => "member_city"} City
+  %br
+  = f.text_field :city
+%p
+  %label{:for => "member_state"} State
+  %br
+  = f.text_field :state
+%p
+  %label{:for => "member_zip"} Zip
+  %br
+  = f.text_field :zip
+  
+%h2 Profile 
+
+%p
+  %label{:for => "member_category"} Category
+  %br
+  = f.select :category_id, Category.all.collect {|c| [c.name, c.id]} + [['Other','']], :include_blank => true 
+    
+%p
+  %label{:for => "member_category_other"} Category Other
+  %br
+  = f.text_field :category_other
+  
+%p
+  %div
+    = f.check_box :gifts
+    %label{:for => "member_gifts"} Gifts
+  %div
+    = f.check_box :ecommerce    
+    %label{:for => "member_ecommerce"} eCommerce
+    
+%p
+  %label{:for => "member_hours"} Hours
+  %br
+  = f.text_field :hours
+  
+%p
+  %label{:for => "member_logo"} Logo
+  %br
+  = file_field :member, :logo
+- unless @member.new_record?
+  %p
+    %div
+      %label{:for => "member_logo_delete"} Delete
+      = f.check_box :logo_delete
+    %div
+      %img{:src => @member.logo(:thumb)}
+      
+%p
+  %label{:for => "member_website"} Website
+  %br
+  http://
+  = f.text_field :website
+  
+%p
+  %label{:for => "member_tagline"} Tagline
+  %br
+  = f.text_field :tagline
+  
+%p
+  %label{:for => "member_bio"} Bio
+  %br
+  = f.text_area :bio
+  
+%p
+  %label{:for => "member_news_feed"} News Feed (Atom or RSS)
+  %br
+  http://
+  = f.text_field :news_feed
+  
+%p
+  %label{:for => "member_events_feed"} Events Feed (iCal)
+  %br
+  http://
+  = f.text_field :events_feed
+  
+%p
+  %label{:for => "member_products_feed"} Products Feed (Atom or RSS)
+  %br
+  http://
+  = f.text_field :products_feed
+  
+%p
+  %label{:for => "member_keywords"} Keywords (not displayed, used only for searches)
+  %br
+  = f.text_area :keywords

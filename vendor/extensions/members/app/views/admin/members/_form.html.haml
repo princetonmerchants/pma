@@ -1,40 +1,116 @@
 %fieldset
   %legend 
+    Administrator
+    
+  %p
+    %label{:for => "member_admin_name"} Name:
+    = f.text_field :admin_name
+  
+  %p
+    %label{:for => "member_admin_phone"} Phone:
+    = f.text_field :admin_phone
+  
+  %p
+    %label{:for => "member_admin_email"} Email:
+    = f.text_field :admin_email
+  
+  - if @member.new_record?
+  
+    %p
+      %label{:for => "member_admin_password"} Password:
+      = f.password_field :admin_password, :value => ''
+    
+    %p
+      %label{:for => "member_admin_password_confirmation"} Password Again:
+      = f.password_field :admin_password_confirmation, :value => ''
+      
+  - else
+  
+    %p
+      %label{:for => "member_admin_password"} Password:
+      ******
+      = link_to 'Edit', edit_password_admin_member_path(@member.id)
+
+%fieldset
+  %legend 
+    Account
+  
+  %p
+    %label{:for => "member_level"} Level:
+    = f.select :level, Radiant::Config['membership.levels'].to_s.split(',').collect {|l| [l.strip, l.strip]}
+    
+  %p
+    %label{:for => "member_parent_property_id"} Parent Property:
+    = f.select :parent_property_id, Member.properties.collect {|m| [m.name, m.id]}, :include_blank => true
+    
+%fieldset
+  %legend 
+    Billing
+    
+  %p
+    %label{:for => "member_billing_name"} Name:
+    = f.text_field :billing_name
+    
+  %p
+    %label{:for => "member_billing_phone"} Phone:
+    = f.text_field :billing_phone
+    
+  %p
+    %label{:for => "member_billing_email"} Email:
+    = f.text_field :billing_email
+    
+%fieldset
+  %legend 
     Company
+    
   %p
     %label{:for => "member_name"} Name:
     = f.text_field :name
+    
   %p
     %label{:for => "member_phone"} Phone:
     = f.text_field :phone
+    
   %p
     %label{:for => "member_fax"} Fax:
     = f.text_field :fax
+    
   %p
     %label{:for => "member_email"} Email:
     = f.text_field :email
+    
   %p
     %label{:for => "member_address_1"} Address 1:
     = f.text_field :address_1
+    
   %p
     %label{:for => "member_address_2"} Address 2:
     = f.text_field :address_2
+    
   %p
     %label{:for => "member_city"} City:
     = f.text_field :city
+    
   %p
     %label{:for => "member_state"} State:
     = f.text_field :state
+    
   %p
     %label{:for => "member_zip"} Zip:
     = f.text_field :zip
     
 %fieldset
   %legend 
-    Profile   
+    Profile
+      
   %p
     %label{:for => "member_category"} Category:
-    = f.select :category_id, Category.all.collect {|c| [c.name, c.id]} , :include_blank => true 
+    = f.select :category_id, Category.all.collect {|c| [c.name, c.id]} + [['Other','']], :include_blank => true 
+    
+  %p
+    %label{:for => "member_category_other"} Category Other:
+    = f.text_field :category_other
+    
   %p
     %div
       = f.check_box :gifts
@@ -42,9 +118,11 @@
     %div
       = f.check_box :ecommerce    
       %label{:for => "member_ecommerce"} eCommerce
+      
   %p
     %label{:for => "member_hours"} Hours:
     = f.text_field :hours
+    
   %p
     %label{:for => "member_logo"} Logo:
     = file_field :member, :logo
@@ -55,46 +133,35 @@
         = f.check_box :logo_delete
       %div
         %img{:src => @member.logo(:thumb)}
+        
   %p
     %label{:for => "member_website"} Website:
     = f.text_field :website
+    
   %p
     %label{:for => "member_tagline"} Tagline:
     = f.text_field :tagline
+    
   %p
     %label{:for => "member_bio"} Bio:
     = f.text_area :bio
+    
   %p
     %label{:for => "member_news_feed"} News Feed:
     = f.text_field :news_feed
+    
   %p
     %label{:for => "member_events_feed"} Events Feed:
     = f.text_field :events_feed
+    
   %p
     %label{:for => "member_products_feed"} Products Feed:
     = f.text_field :products_feed
+    
   %p
     %label{:for => "member_keywords"} Keywords:
     = f.text_area :keywords
-
-%fieldset
-  %legend 
-    Account
-  %p
-    %label{:for => "member_level"} Level:
-    = f.select :level, Radiant::Config['membership.levels'].to_s.split(',').collect {|l| [l, l]}
-  %p
-    %label{:for => "member_billing_contact"} Billing Contact:
-    = f.text_field :billing_contact
-  %p
-    %label{:for => "member_billing_phone"} Billing Phone:
-    = f.text_field :phone
-  %p
-    %label{:for => "member_billing_email"} Billing Email:
-    = f.text_field :billing_email
-  %p
-    %label{:for => "member_password"} Password:
-    = f.text_field :password
+    
         
 %p.buttons
   = f.submit submit_label

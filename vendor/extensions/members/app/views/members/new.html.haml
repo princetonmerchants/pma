@@ -1,0 +1,12 @@
+= render :partial => 'common'
+
+= content_for :custom do
+  
+  %h1 New Member Registeration
+  
+  - form_for :member, :url => members_path, :html => { :multipart => 'true' } do |f|
+    = render :partial => "form", :locals => {:f => f, :submit_label => "Submit"}
+    %p.buttons
+      = f.submit 'Submit'
+      or
+      = link_to 'Cancel', members_path

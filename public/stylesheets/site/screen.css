@@ -357,21 +357,29 @@ body #root #content_container #content #left ol.tag_cloud {
   margin-bottom: 10px;
   text-align: left; }
 
-input[type=text], textarea {
-  width: 250px;
+input[type=text], input[type=password], textarea {
+  width: 325px;
   height: 18px;
   padding-top: 4px;
-  font-size: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
   border: 1px solid #ccc; }
-  input[type=text]:active, input[type=text]:focus, textarea:active, textarea:focus {
+  input[type=text]:active, input[type=text]:focus, input[type=password]:active, input[type=password]:focus, textarea:active, textarea:focus {
     border-color: = "#111111"; }
 
 textarea {
-  width: 400px;
+  width: 420px;
   height: 150px; }
 
-#form_contact {
-  margin: 20px 0 0 10px; }
+.error-with-field input, .error-with-field select, .error-with-field textarea {
+  background-color: #fde5fd; }
+.error-with-field .error {
+  color: #63284e; }
+
+.buttons {
+  padding: 15px 0; }
 
 body #root #head-container #head #nav {
   overflow: hidden;
@@ -462,6 +470,29 @@ body #root #content-container #content #left #nav-sub {
         line-height: 22px;
         font-weight: normal;
         text-decoration: none; }
+
+body #root #content-container #content #main #index {
+  background-color: #f7f7f7;
+  padding: 10px;
+  margin: 0 0 15px 0;
+  float: left;
+  clear: both; }
+  body #root #content-container #content #main #index a {
+    text-decoration: none; }
+  body #root #content-container #content #main #index ol {
+    float: left;
+    width: 185px;
+    margin: 0;
+    padding: 0 10px 0 0;
+    left: 0; }
+    body #root #content-container #content #main #index ol li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      left: 0; }
+body #root #content-container #content #main .profile img {
+  float: right;
+  margin: 10px; }
 
 #sharing {
   margin-top: 0;
