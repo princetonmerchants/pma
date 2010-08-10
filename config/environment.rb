@@ -19,9 +19,9 @@ Radiant::Initializer.run do |config|
   # can be used as a placeholder for all extensions not explicitly named.
   # config.extensions = [ :all ]
   config.extensions = [ :help, :textile_filter, :markdown_filter, :smarty_pants_filter, 
-    :page_preview, :layouts, :redirect, :import_export, :drag, :mailer,
+    :page_preview, :layouts, :redirect, :import_export, :drag, :mailer, 
     :paperclipped, :paperclipped_uploader, :search, :file_system, :tags,
-    :comments, :archive, :dashboard, :members, :settings ]
+    :comments, :archive, :dashboard, :members, :settings, :fragment_cacher ]
   
   # By default, only English translations are loaded. Remove any of these from
   # the list below if you'd like to provide any of the supported languages
