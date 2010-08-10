@@ -56,36 +56,11 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
 
   add_index "config", ["key"], :name => "key", :unique => true
 
-  create_table "custom_fields", :force => true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.integer  "page_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "custom_fields", ["name", "page_id"], :name => "index_custom_fields_on_name_and_page_id"
-  add_index "custom_fields", ["name"], :name => "index_custom_fields_on_name"
-  add_index "custom_fields", ["value"], :name => "index_custom_fields_on_value"
-
   create_table "extension_meta", :force => true do |t|
     t.string  "name"
     t.integer "schema_version", :default => 0
     t.boolean "enabled",        :default => true
   end
-
-  create_table "form_data_assets", :force => true do |t|
-    t.integer  "form_data_id"
-    t.string   "field_name"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "form_data_assets", ["form_data_id"], :name => "index_form_data_assets_on_form_data_id"
 
   create_table "form_datas", :force => true do |t|
     t.string   "url"
@@ -327,17 +302,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   end
 
   add_index "taggings", ["meta_tag_id", "taggable_id", "taggable_type"], :name => "index_taggings_on_meta_tag_id_and_taggable_id_and_taggable_type", :unique => true
-
-  create_table "text_assets", :force => true do |t|
-    t.string   "class_name",    :limit => 25
-    t.string   "filename",      :limit => 100
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "created_by_id"
-    t.integer  "updated_by_id"
-    t.integer  "lock_version"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "name",          :limit => 100

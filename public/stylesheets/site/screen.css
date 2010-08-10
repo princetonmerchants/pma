@@ -369,6 +369,11 @@ input[type=text], input[type=password], textarea {
   input[type=text]:active, input[type=text]:focus, input[type=password]:active, input[type=password]:focus, textarea:active, textarea:focus {
     border-color: = "#111111"; }
 
+#left input[type=text], #left input[type=password], #left textarea {
+  width: 90%; }
+#left textarea {
+  height: 100px; }
+
 textarea {
   width: 420px;
   height: 150px; }
