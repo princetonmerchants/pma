@@ -3,12 +3,12 @@
     %thead
       %tr
         %th Logo
-        %th Name
+        %th Company
         %th Website
         %th Category
-        %th Admin Name
-        %th Admin Email
-        %th Admin Phone
+        %th Name
+        %th Email
+        %th Phone
         %th Level
         %th Status
         %th.actions Actions
@@ -20,28 +20,32 @@
                 None
               - else
                 %img{:src => m.logo(:thumb)}
-            %td= link_to h(m.name), edit_admin_member_path(m.id)
+            %td= link_to h(m.company_name), edit_admin_member_path(m.id)
             %td= link_to(h(m.website), "http://#{h(m.website)}")
-            %td= link_to(m.category.name, edit_admin_category_path(m.category))
-            %td= h(m.admin_name)
-            %td= mail_to(h(m.admin_email))
-            %td= h(m.admin_phone)
+            %td
+              - if m.category
+                = link_to(m.category.name, edit_admin_category_path(m.category))
+            %td= h(m.name)
+            %td= mail_to(h(m.email))
+            %td= h(m.phone)
             %td= h(m.level)
             %td= m.status.to_s.titleize
             %td.actions
               = link_to image('page_edit') + ' Edit', edit_admin_member_path(m.id)
-              - if m.active?
-                = link_to image('minus_disabled') + ' Deactivate', deactivate_admin_member_path(m.id), :method => :post, :confirm => "Really deactivate #{m.name}?"
-              - elsif m.inactive?
-                = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
-              - elsif m.pending?
-                = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
-                = link_to image('minus') + ' Deny', deny_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
+              = link_to image('page_edit') + ' Change Password', edit_password_admin_member_path(m.id)
+              - if m.valid?
+                - if m.active?
+                  = link_to image('minus_disabled') + ' Deactivate', deactivate_admin_member_path(m.id), :method => :post, :confirm => "Really deactivate #{m.name}?"
+                - elsif m.inactive?
+                  = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
+                - elsif m.pending?
+                  = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
+                  = link_to image('minus') + ' Deny', deny_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
               = link_to image('page_delete') + ' Delete', admin_member_path(m.id), :method => :delete, :confirm => "Really delete #{m.name}?"
     %tfoot
       %tr
-        %td{:colspan => 3}= page_entries_info @members, :entry_name => "result"
-        %td{:colspan => 3}= will_paginate @members, :inner_window => 1, :outer_window => 1
+        %td{:colspan => 9}= page_entries_info @members, :entry_name => "result"
+        %td{:colspan => 9}= will_paginate @members, :inner_window => 1, :outer_window => 1
         
 #actions
   %ul

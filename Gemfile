@@ -17,4 +17,5 @@ gem 'radiant'
 gem 'state_machine'
 gem 'pg'
 gem 'rails'
+gem 'authlogic'
 

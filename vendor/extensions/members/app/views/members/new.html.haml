@@ -1,8 +1,8 @@
-= render :partial => 'common'
+= render :partial => 'shared/public'
 
 = content_for :custom do
-  
-  %h1 New Member Registeration
+
+  = render :partial => 'shared/top'
   
   - form_for :member, :url => members_path, :html => { :multipart => 'true' } do |f|
     = render :partial => "form", :locals => {:f => f, :submit_label => "Submit"}

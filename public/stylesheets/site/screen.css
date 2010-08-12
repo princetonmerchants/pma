@@ -234,11 +234,12 @@ body #root #content-container #content .headline {
   overflow: hidden; }
   body #root #content-container #content .headline .heading {
     height: 29px;
-    max-width: 400px;
-    min-width: 100px;
+    max-width: 90%;
+    min-width: 150px;
     float: left;
     background: #9acccd url(../../images/bg-heading2.gif) repeat-y 100% 0;
-    margin: 1px 0 15px 0; }
+    margin: 1px 0 15px 0;
+    padding-right: 25px; }
     body #root #content-container #content .headline .heading strong {
       color: #fff;
       display: block;
@@ -262,18 +263,17 @@ body #root #content-container #content .block {
       text-align: right;
       margin: 15px 5px 0 0; }
 body #root #content-container #content #left .block .headline .heading {
-  width: 238px;
   background: #666 url(../../images/bg-heading.gif) no-repeat 100% 0; }
 body #root #content-container #content #left .block .headline .btn-rss {
   margin: 30px 25px 0 5px; }
-body #root #content-container #content #left .feature .block {
+body #root #content-container #content #left .block.feature {
   background: url(../../images/bg-left-nav-light.gif) repeat-y;
   margin: 0 0 15px 0;
   padding: 0 0 15px 0; }
-  body #root #content-container #content #left .feature .block .headline .heading {
+  body #root #content-container #content #left .block.feature .headline .heading {
     background: #666 url(../../images/bg-heading-white.gif) no-repeat 100% 0; }
 body #root #content-container #content #main #inner-right .block .headline .heading {
-  width: 170px;
+  min-width: 125px;
   background: #9acccd url(../../images/bg-heading2.gif) no-repeat 100% 0; }
   body #root #content-container #content #main #inner-right .block .headline .heading strong {
     color: #333; }
@@ -304,9 +304,6 @@ body #root #content-container #content #main #inner-right .block .inner {
         line-height: 22px;
         font-weight: normal;
         text-decoration: none; }
-
-body #root #content-container #content #left #upcoming-events {
-  margin: 15px 0 15px 0; }
 
 body #root #content_container #content #content_main .body ol.tag_cloud {
   margin: 0;
@@ -397,7 +394,7 @@ body #root #head-container #head #nav {
     line-height: 22px; }
     body #root #head-container #head #nav ul li {
       float: left;
-      padding: 0 0 0 40px;
+      padding: 0 0 0 35px;
       font-size: 11px;
       text-transform: uppercase; }
       body #root #head-container #head #nav ul li a {
@@ -495,6 +492,14 @@ body #root #content-container #content #main #index {
       margin: 0;
       padding: 0;
       left: 0; }
+body #root #content-container #content #main #members li {
+  float: left;
+  clear: both;
+  margin: 0 0 15px 0;
+  width: 100%; }
+  body #root #content-container #content #main #members li img {
+    float: right;
+    margin: 0 10px 10px 10px; }
 body #root #content-container #content #main .profile img {
   float: right;
   margin: 10px; }
@@ -574,6 +579,9 @@ body ul.bullets {
   list-style-type: disc; }
 body ol.bullets {
   list-style-type: decimal; }
+body #root #content-container #content #left .block ul.bullets, body #root #content-container #content #left .block ol.bullets, body #root #content-container #content #inner-right .block ul.bullets, body #root #content-container #content #inner-right .block ol.bullets {
+  margin: 0 0 10px 15px;
+  padding: 0; }
 body #root #content-container #content #main ul, body #root #content-container #content #main ol {
   margin: 10px 5px 10px 25px; }
   body #root #content-container #content #main ul li, body #root #content-container #content #main ol li {

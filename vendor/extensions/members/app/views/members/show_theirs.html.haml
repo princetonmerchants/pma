@@ -1,0 +1,12 @@
+= render :partial => 'shared/parts_theirs'
+
+= content_for :custom do
+
+  = render :partial => 'shared/top'
+  
+  %p.tabs
+    = link_to_unless_current 'Public Profile', @member  
+    |
+    = link_to_unless_current 'Members-Only Wall', members_only_profile_path(@member)
+
+  = render :partial => 'members/wall'

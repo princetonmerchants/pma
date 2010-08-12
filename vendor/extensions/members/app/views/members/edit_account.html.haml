@@ -1,0 +1,12 @@
+= render :partial => 'shared/parts_mine'
+
+= content_for :custom do
+
+  = render :partial => 'shared/top'
+
+  - form_for :member, :url => update_account_path, :html => { :method => :put, :multipart => 'true' }  do |f|
+    = render :partial => "form", :locals => {:f => f, :submit_label => "Update"}
+    %p.buttons
+      = f.submit 'Update'
+      or
+      = link_to 'Cancel', @member

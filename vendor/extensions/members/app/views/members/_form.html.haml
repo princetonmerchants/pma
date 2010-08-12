@@ -1,29 +1,39 @@
-= f.error_messages :header_message => "Invalid Registration", :message => "Please fix the following fields:", :header_tag => :h4  
+= f.error_messages :header_message => nil, :message => "Please fix the following fields:", :header_tag => :h4  
 
 %p
-  %label{:for => "member_admin_name"} Your Name
+  %label{:for => "member_name"} Your Name
   %br
-  = f.text_field :admin_name
+  = f.text_field :name
 
 %p
-  %label{:for => "member_admin_phone"} Your Phone
+  %label{:for => "member_phone"} Your Phone
   %br
-  = f.text_field :admin_phone
+  = f.text_field :phone
 
 %p
-  %label{:for => "member_admin_email"} Your Email
+  %label{:for => "member_email"} Your Email
   %br
-  = f.text_field :admin_email
+  = f.text_field :email
+  
+- if @member.crypted_password.blank? or @member.new_record?
 
-%p
-  %label{:for => "member_admin_password"} Your Password
-  %br
-  = f.password_field :admin_password
+  %p
+    %label{:for => "member_password"} Your Password
+    %br
+    = f.password_field :password
+  
+  %p
+    %label{:for => "member_password_confirmation"} Your Password Again
+    %br
+    = f.password_field :password_confirmation
 
-%p
-  %label{:for => "member_admin_password_confirmation"} Your Password Again
-  %br
-  = f.password_field :admin_password_confirmation
+- else
+  
+  %p
+    %label Password
+    %br
+    ****** 
+    = link_to 'Change', edit_password_reset_path(@member.persistence_token)
   
 %h2 Account
   
@@ -35,7 +45,7 @@
 %p
   %label{:for => "member_parent_property_id"} Parent Property
   %br
-  = f.select :parent_property_id, Member.properties.collect {|m| [m.name, m.id]}, :include_blank => true
+  = f.select :parent_property_id, Member.properties.collect {|m| [m.company_name, m.id]}, :include_blank => true
 
 %h2 Billing  
 
@@ -56,41 +66,41 @@
 %h2 Company
 
 %p
-  %label{:for => "member_name"} Name
+  %label{:for => "member_company_name"} Name
   %br
-  = f.text_field :name
+  = f.text_field :company_name
 %p
-  %label{:for => "member_phone"} Phone
+  %label{:for => "member_company_phone"} Phone
   %br
-  = f.text_field :phone
+  = f.text_field :company_phone
 %p
-  %label{:for => "member_fax"} Fax
+  %label{:for => "member_company_fax"} Fax
   %br
-  = f.text_field :fax
+  = f.text_field :company_fax
 %p
-  %label{:for => "member_email"} Email
+  %label{:for => "member_company_email"} Email
   %br
-  = f.text_field :email
+  = f.text_field :company_email
 %p
-  %label{:for => "member_address_1"} Address 1
+  %label{:for => "member_company_address_1"} Address 1
   %br
-  = f.text_field :address_1
+  = f.text_field :company_address_1
 %p
-  %label{:for => "member_address_2"} Address 2
+  %label{:for => "member_company_address_2"} Address 2
   %br
-  = f.text_field :address_2
+  = f.text_field :company_address_2
 %p
-  %label{:for => "member_city"} City
+  %label{:for => "member_company_city"} City
   %br
-  = f.text_field :city
+  = f.text_field :company_city
 %p
-  %label{:for => "member_state"} State
+  %label{:for => "member_company_state"} State
   %br
-  = f.text_field :state
+  = f.text_field :company_state
 %p
-  %label{:for => "member_zip"} Zip
+  %label{:for => "member_company_zip"} Zip
   %br
-  = f.text_field :zip
+  = f.text_field :company_zip
   
 %h2 Profile 
 

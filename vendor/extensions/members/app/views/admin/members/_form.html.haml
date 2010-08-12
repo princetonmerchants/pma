@@ -3,31 +3,31 @@
     Administrator
     
   %p
-    %label{:for => "member_admin_name"} Name:
-    = f.text_field :admin_name
+    %label{:for => "member_name"} Name:
+    = f.text_field :name
   
   %p
-    %label{:for => "member_admin_phone"} Phone:
-    = f.text_field :admin_phone
+    %label{:for => "member_phone"} Phone:
+    = f.text_field :phone
   
   %p
-    %label{:for => "member_admin_email"} Email:
-    = f.text_field :admin_email
+    %label{:for => "member_email"} Email:
+    = f.text_field :email
   
-  - if @member.new_record?
+  - if @member.new_record? or @member.crypted_password.blank?
   
     %p
-      %label{:for => "member_admin_password"} Password:
-      = f.password_field :admin_password, :value => ''
+      %label{:for => "member_password"} Password:
+      = f.password_field :password, :value => ''
     
     %p
-      %label{:for => "member_admin_password_confirmation"} Password Again:
-      = f.password_field :admin_password_confirmation, :value => ''
+      %label{:for => "member_password_confirmation"} Password Again:
+      = f.password_field :password_confirmation, :value => ''
       
   - else
   
     %p
-      %label{:for => "member_admin_password"} Password:
+      %label{:for => "member_password"} Password:
       ******
       = link_to 'Edit', edit_password_admin_member_path(@member.id)
 
@@ -41,7 +41,7 @@
     
   %p
     %label{:for => "member_parent_property_id"} Parent Property:
-    = f.select :parent_property_id, Member.properties.collect {|m| [m.name, m.id]}, :include_blank => true
+    = f.select :parent_property_id, Member.properties.collect {|m| [m.company_name, m.id]}, :include_blank => true
     
 %fieldset
   %legend 
@@ -64,40 +64,40 @@
     Company
     
   %p
-    %label{:for => "member_name"} Name:
-    = f.text_field :name
+    %label{:for => "member_company_name"} Name:
+    = f.text_field :company_name
     
   %p
-    %label{:for => "member_phone"} Phone:
-    = f.text_field :phone
+    %label{:for => "member_company_phone"} Phone:
+    = f.text_field :company_phone
     
   %p
-    %label{:for => "member_fax"} Fax:
-    = f.text_field :fax
+    %label{:for => "member_company_fax"} Fax:
+    = f.text_field :company_fax
     
   %p
-    %label{:for => "member_email"} Email:
-    = f.text_field :email
+    %label{:for => "member_company_email"} Email:
+    = f.text_field :company_email
     
   %p
-    %label{:for => "member_address_1"} Address 1:
-    = f.text_field :address_1
+    %label{:for => "member_company_address_1"} Address 1:
+    = f.text_field :company_address_1
     
   %p
-    %label{:for => "member_address_2"} Address 2:
-    = f.text_field :address_2
+    %label{:for => "member_company_address_2"} Address 2:
+    = f.text_field :company_address_2
     
   %p
-    %label{:for => "member_city"} City:
-    = f.text_field :city
+    %label{:for => "member_company_city"} City:
+    = f.text_field :company_city
     
   %p
-    %label{:for => "member_state"} State:
-    = f.text_field :state
+    %label{:for => "member_company_state"} State:
+    = f.text_field :company_state
     
   %p
-    %label{:for => "member_zip"} Zip:
-    = f.text_field :zip
+    %label{:for => "member_company_zip"} Zip:
+    = f.text_field :company_zip
     
 %fieldset
   %legend 

@@ -1,60 +1,71 @@
-class MembersController < SiteController
-  radiant_layout Radiant::Config['membership.layout']
+class MembersController < BaseController
+  radiant_layout Proc.new { |c| 
+    if %w{ show_members_only show account }.include?(c.action_name)
+      'ThreeColumns' 
+    else 
+      Radiant::Config['membership.layout']
+    end
+  }
   no_login_required
+  before_filter :require_no_member, :only => [:new, :create]
+  before_filter :require_member, :only => [:show_members_only, :account, :edit_account, :update_account]
   
   def index
+    @member = current_member
     @members = Member.paginate :page => params[:p], :per_page => 20
     @title = 'Members'
   end
 
   def show
     @member = Member.find(params[:id])
-    @title = @member.name
+    @title = @member.company_name
+    render :action => 'show_public'
+  end
+
+  def show_members_only
+    @member = Member.find(params[:id])
+    @title = @member.company_name
+    #if current_member_page?      
+    #  render :action => 'show_mine'
+    #else
+      render :action => 'show_theirs'
+    #end
   end
 
   def new
     @member = Member.new
-    @title = 'New Member Registration'
+    @title = 'Register'
   end
  
   def create
     @member = Member.new(params[:member])
     if @member.save
-      redirect_to '/membership/after-member-regristration'
+      redirect_to '/membership/registration-successful'
     else
-      @title = 'New Member Registration'
+      @title = 'Register'
       render :action => 'new'
     end
   end
   
-  def edit
-    @member = Member.find(params[:id])
+  def account
+    @member = current_member
+    @title = "News Feed"
+  end
+  
+  def edit_account
+    @member = current_member
     @title = 'Edit account and profile'
   end
   
-  def update
-    @member = Member.find(params[:id])
+  def update_account
+    @member = current_member
     if @member.update_attributes(params[:member]) 
       @member.update_attribute :logo, nil if @member.logo_delete.to_i == 1
-      redirect_to @member
+      flash[:notice] = 'Account and profile successfully updated'
+      redirect_to account_url
     else
       @title = 'Edit account and profile'
-      render :action => 'edit'
-    end
-  end
-  
-  def edit_password
-    @member = Member.find(params[:id])
-  end
-  
-  def update_password
-    @member = Member.find(params[:id])
-    if @member.update_attributes(params[:member]) 
-      redirect_to edit_admin_member_path(@member.id)
-      flash[:notice] = "Member password edited."
-    else
-      flash[:error]  = "Member password not edited."
-      render :action => 'edit_password'
+      render :action => 'edit_account'
     end
   end
 end

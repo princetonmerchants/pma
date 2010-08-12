@@ -1,0 +1,84 @@
+- content_for :breadcrumbs do
+  %a{:href => '/'}
+    Home 
+  &nbsp;&gt;&nbsp;
+  - if @title and @title != 'Members'
+    %a{:href => '/members'}
+      Members
+    &nbsp;&gt;&nbsp;
+    = @title
+  - else
+    Members
+
+= content_for :custom do
+
+  = render :partial => 'shared/top'
+  
+  - if current_member
+    %p.tabs
+      = link_to_unless_current 'Public Profile', @member  
+      |
+      = link_to_unless_current 'Members-Only Wall', members_only_profile_path(@member)
+  
+  #info.important
+    %ul.reset
+      - if @member.category 
+        %li
+          Category:
+          = link_to h(@member.category.name), :controller => '/members', :anchor => @member.category.to_param
+          - if @member.gifts?
+            | Gifts
+          - if @member.ecommerce?
+            | eCommerce
+      - unless @member.company_phone.blank?
+        %li
+          Phone:
+          = h(@member.company_phone)
+      - unless @member.company_fax.blank?
+        %li
+          Fax: 
+          = h(@member.company_fax)
+      - unless @member.company_email.blank?
+        %li
+          Email:
+          = link_to h(@member.company_email), "mailto:#{h(@member.company_email)}" 
+      - unless @member.company_address.blank?
+        %li
+          Address: 
+          = h(@member.company_address)
+      - unless @member.hours.blank?
+        %li
+          Hours:
+          = h(@member.hours)
+      - unless @member.website.blank?
+        %li
+          Website:
+          = link_to h(@member.website), "http://#{h(@member.website)}" 
+  #bio-short
+    = simple_format(truncate(h(@member.bio), 300))
+    - if h(@member.bio).length > 300
+      %a{:href => '#', :onclick => "$('#bio-short').hide(); $('#bio-full').show(); return false;"} Read More
+  #bio-full{:style => 'display:none'}
+    = simple_format(h(@member.bio))
+  - unless @member.company_address.blank?
+    %p#map
+      = render :partial => 'shared/map', :locals => {:address => @member.company_address}  
+
+- content_for :left do
+  - if @member
+    .block
+      .inner
+        - unless @member.logo(:small).blank?
+          .logo 
+            = link_to(image_tag(@member.logo(:small)), @member) 
+        %h3
+          = @member.company_name 
+    <r:snippet name="upcoming_events" />
+  - else
+    <r:snippet name="membership_left" />
+  
+= content_for :right do 
+  <r:snippet name="help_us" />
+  <r:snippet name="sharing" />
+  <r:snippet name="facebook_embed_small" />
+  

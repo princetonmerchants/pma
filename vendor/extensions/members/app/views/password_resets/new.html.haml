@@ -1,0 +1,17 @@
+= render :partial => 'shared/parts_public'
+
+= content_for :custom do
+
+  = render :partial => 'shared/top'
+  
+  %p
+    Fill out the form below and instructions to reset your password will be emailed to you:
+    
+  - form_tag password_resets_path do 
+    %p
+      %label{:for => 'email'} Email:
+      %br
+      = text_field_tag :email
+      
+    %p.buttons
+      = submit_tag 'Reset my password'

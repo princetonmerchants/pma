@@ -1,12 +1,12 @@
-= render :partial => 'common'
+= render :partial => 'shared/parts_public'
 
 = content_for :custom do
 
-  %h1 Members
+  = render :partial => 'shared/top'
   
   #index
     %a{:name => 'index'}
-    - per_page = (Category.non_empty.count / 3).ceil
+    - per_page = (Category.non_empty.count / 3) + 1
     - (1..3).each do |page|
       %ol
         - Category.non_empty.paginate(:page => page, :per_page => per_page).each do |category|
@@ -23,9 +23,12 @@
           - category.members.each do |member|
             %li
               %h3
-                = link_to h(member.name), member
+                = link_to h(member.company_name), member
+              - unless member.logo(:small).blank?
+                %p.logo
+                  = link_to image_tag(member.logo(:small)), "http://#{h(member.website)}" 
               .bio.short
-                = h(truncate(member.bio, 200))
+                = simple_format(h(truncate(member.bio, 200)))
               %p.info
                 = link_to 'Read More', member 
                 |
