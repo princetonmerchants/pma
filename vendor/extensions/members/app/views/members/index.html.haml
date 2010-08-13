@@ -26,11 +26,11 @@
                 = link_to h(member.company_name), member
               - unless member.logo(:small).blank?
                 %p.logo
-                  = link_to image_tag(member.logo(:small)), "http://#{h(member.website)}" 
+                  = link_to image_tag(member.logo(:small)), member 
               .bio.short
                 = simple_format(h(truncate(member.bio, 200)))
               %p.info
-                = link_to 'Read More', member 
+                = link_to 'View Profile', member 
                 |
                 = link_to 'Visit Website &raquo;', "http://#{h(member.website)}" 
                 |

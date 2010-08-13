@@ -1,6 +1,6 @@
 class PasswordResetsController < BaseController
   before_filter :load_member_using_persistence_token, :only => [:edit, :update]
-  before_filter :require_no_member, :except => [:edit, :update]
+  before_filter :require_no_member
   
   def new
     @title = 'Password Reset Request'

@@ -54,15 +54,8 @@
         %li
           Website:
           = link_to h(@member.website), "http://#{h(@member.website)}" 
-  #bio-short
-    = simple_format(truncate(h(@member.bio), 300))
-    - if h(@member.bio).length > 300
-      %a{:href => '#', :onclick => "$('#bio-short').hide(); $('#bio-full').show(); return false;"} Read More
-  #bio-full{:style => 'display:none'}
-    = simple_format(h(@member.bio))
-  - unless @member.company_address.blank?
-    %p#map
-      = render :partial => 'shared/map', :locals => {:address => @member.company_address}  
+  #bio
+    = simple_format(h(@member.bio))  
 
 - content_for :left do
   - if @member
@@ -73,6 +66,9 @@
             = link_to(image_tag(@member.logo(:small)), @member) 
         %h3
           = @member.company_name 
+        - unless @member.company_address.blank?
+          %p#map
+            = render :partial => 'shared/map_static', :locals => {:address => @member.company_address, :name => @member.company_name}
     <r:snippet name="upcoming_events" />
   - else
     <r:snippet name="membership_left" />

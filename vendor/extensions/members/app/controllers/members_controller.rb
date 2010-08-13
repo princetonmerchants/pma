@@ -8,7 +8,8 @@ class MembersController < BaseController
   }
   no_login_required
   before_filter :require_no_member, :only => [:new, :create]
-  before_filter :require_member, :only => [:show_members_only, :account, :edit_account, :update_account]
+  before_filter :require_member, 
+    :only => [:show_members_only, :account, :edit_account, :update_account, :edit_password, :update_password]
   
   def index
     @member = current_member
@@ -25,11 +26,7 @@ class MembersController < BaseController
   def show_members_only
     @member = Member.find(params[:id])
     @title = @member.company_name
-    #if current_member_page?      
-    #  render :action => 'show_mine'
-    #else
-      render :action => 'show_theirs'
-    #end
+    render :action => 'show_theirs'
   end
 
   def new
@@ -54,7 +51,7 @@ class MembersController < BaseController
   
   def edit_account
     @member = current_member
-    @title = 'Edit account and profile'
+    @title = 'Edit Account and Profile'
   end
   
   def update_account
@@ -64,8 +61,24 @@ class MembersController < BaseController
       flash[:notice] = 'Account and profile successfully updated'
       redirect_to account_url
     else
-      @title = 'Edit account and profile'
+      @title = 'Edit Account and Profile'
       render :action => 'edit_account'
+    end
+  end
+  
+  def change_password
+    @member = current_member
+    @title = 'Change Password'
+  end
+  
+  def update_password
+    @member = current_member
+    if @member.update_attributes(params[:member]) 
+      flash[:notice] = "Password successfully changed"
+      redirect_to account_url
+    else
+      @title = 'Change Password'
+      render :action => 'change_password'
     end
   end
 end

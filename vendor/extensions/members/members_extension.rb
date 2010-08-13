@@ -3,8 +3,8 @@
 
 class MembersExtension < Radiant::Extension
   version "1.0"
-  description "Members for PMA"
-  url "http://comsoft155.com/"
+  description "Members with registration, profiles, and members-only walls"
+  url "http://www.comsoft155.com/"
   
   extension_config do |config|
     config.gem 'authlogic'

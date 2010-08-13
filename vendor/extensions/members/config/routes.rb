@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   map.account '/account', :controller => '/members', :action => 'account'
   map.edit_account '/account/edit', :controller => '/members', :action => 'edit_account'
   map.update_account '/account/update', :controller => '/members', :action => 'update_account'
+  map.change_password '/account/change_password', :controller => '/members', :action => 'change_password'
+  map.update_password '/account/update_password', :controller => '/members', :action => 'update_password'
   map.member_register '/register', :controller => '/members', :action => 'new'
   map.members_only_profile '/members-only/:id', :controller => 'members', :action => 'show_members_only'
   

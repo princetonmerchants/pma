@@ -22,6 +22,9 @@
         = link_to 'Public Profile', @member  
         |
         = link_to 'Members-Only Profile', members_only_profile_path(@member) 
+      - unless @member.company_address.blank?
+        %p#map
+          = render :partial => 'shared/map_static', :locals => {:address => @member.company_address, :name => @member.company_name}
   - unless controller.action_name == 'show'
     #nav-sub.block
       %ul
@@ -30,7 +33,7 @@
         %li 
           = link_to 'Edit Account and Profile', edit_account_path
         %li 
-          = link_to 'Change Password', edit_password_reset_path(@member.persistence_token)
+          = link_to 'Change Password', change_password_path
         %li 
           %a{:href => '/membership/make-a-payment'} Make a Payment
         %li 
