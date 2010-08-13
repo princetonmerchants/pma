@@ -20,11 +20,7 @@ class MemberSessionsController < BaseController
   
   def destroy
     current_member_session.destroy
-    if session[:return_to].include('/logout-first') 
-      redirect_back_or_default root_url
-    else
-      redirect_to :back
-    end
+    redirect_back_or_default root_url
   rescue 
     redirect_back_or_default member_login_url
   end

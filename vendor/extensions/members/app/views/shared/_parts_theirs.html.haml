@@ -18,10 +18,11 @@
         - unless @member.company_address.blank?
           %p#map
             = render :partial => 'shared/map_static', :locals => {:address => @member.company_address, :name => @member.company_name}
-
-    
   <r:snippet name="upcoming_events" />
   <r:snippet name="latest_resources" />
+  
+- content_for :right do 
+  <r:snippet name="help_us" />
   <r:snippet name="sharing" />
-  <r:snippet name="facebook_embed_large" />
+  <r:snippet name="facebook_embed_small" />
   

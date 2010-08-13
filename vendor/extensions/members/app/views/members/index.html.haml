@@ -1,11 +1,11 @@
 = render :partial => 'shared/parts_public'
 
-= content_for :custom do
+- content_for :custom do
 
+  %a{:name => 'index'}
   = render :partial => 'shared/top'
   
-  #index
-    %a{:name => 'index'}
+  #index.important
     - per_page = (Category.non_empty.count / 3) + 1
     - (1..3).each do |page|
       %ol

@@ -57,8 +57,12 @@ class MembersExtension < Radiant::Extension
           session[:return_to] = request.request_uri
         end
         
-        def redirect_back_or_default(default)
-          redirect_to(session[:return_to] || default)
+        def redirect_back_or_default(default)          
+          if %w{ logout-first login logout }.include?(session[:return_to].to_s.split('/').last)
+            redirect_to root_url
+          else
+            redirect_to(session[:return_to] || default)
+          end
           session[:return_to] = nil
         end
         

@@ -1,9 +1,9 @@
 = render :partial => 'shared/parts_public'
 
-= content_for :custom do
+- content_for :custom do
 
   = render :partial => 'shared/top'
 
   %p
-    = "You must #{link_to('logout', member_logout_path)} before visiting this page."
+    = "You must #{link_to('logout', member_logout_path)} before visiting \"#{session[:return_to]}\"."
       
