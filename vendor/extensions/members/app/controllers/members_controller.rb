@@ -9,7 +9,7 @@ class MembersController < BaseController
   no_login_required
   before_filter :require_no_member, :only => [:new, :create]
   before_filter :require_member, 
-    :only => [:show_members_only, :account, :edit_account, :update_account, :edit_password, :update_password]
+    :only => [:show_members_only, :edit_account, :update_account, :edit_password, :update_password]
   
   def index
     @member = current_member
@@ -25,7 +25,8 @@ class MembersController < BaseController
 
   def show_members_only
     @member = Member.find(params[:id])
-    @title = @member.company_name
+    @messages = Message.wall(@member.id).paginate :page => params[:page], :per_page => 20
+    @title = @member.profile_name
     render :action => 'show_theirs'
   end
 
@@ -45,8 +46,13 @@ class MembersController < BaseController
   end
   
   def account
-    @member = current_member
-    @title = "News Feed"
+    if current_member
+      @member = current_member
+      @messages = Message.recent.paginate :page => params[:page], :per_page => 20
+      @title = "News Feed"
+    else
+      redirect_to '/home' 
+    end 
   end
   
   def edit_account

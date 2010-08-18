@@ -1,29 +1,29 @@
 = f.error_messages :header_message => nil, :message => "Please fix the following fields:", :header_tag => :h4  
 
 %p
-  %label{:for => "member_name"} Your Name
+  %label{:for => "member_name"} Your Name *
   %br
   = f.text_field :name
 
 %p
-  %label{:for => "member_phone"} Your Phone
+  %label{:for => "member_phone"} Your Phone *
   %br
   = f.text_field :phone
 
 %p
-  %label{:for => "member_email"} Your Email
+  %label{:for => "member_email"} Your Email *
   %br
   = f.text_field :email
   
 - if @member.crypted_password.blank? or @member.new_record?
 
   %p
-    %label{:for => "member_password"} Your Password
+    %label{:for => "member_password"} Your Password *
     %br
     = f.password_field :password
   
   %p
-    %label{:for => "member_password_confirmation"} Your Password Again
+    %label{:for => "member_password_confirmation"} Your Password Again *
     %br
     = f.password_field :password_confirmation
 
@@ -38,7 +38,7 @@
 %h2 Account
   
 %p
-  %label{:for => "member_level"} Level
+  %label{:for => "member_level"} Level *
   %br
   = f.select :level, Radiant::Config['membership.levels'].to_s.split(',').collect {|l| [l.strip, l.strip]}
   
@@ -66,7 +66,7 @@
 %h2 Company
 
 %p
-  %label{:for => "member_company_name"} Name
+  %label{:for => "member_company_name"} Name *
   %br
   = f.text_field :company_name
 %p
@@ -82,7 +82,7 @@
   %br
   = f.text_field :company_email
 %p
-  %label{:for => "member_company_address_1"} Address 1
+  %label{:for => "member_company_address_1"} Address 1 *
   %br
   = f.text_field :company_address_1
 %p
@@ -90,22 +90,27 @@
   %br
   = f.text_field :company_address_2
 %p
-  %label{:for => "member_company_city"} City
+  %label{:for => "member_company_city"} City *
   %br
   = f.text_field :company_city
 %p
-  %label{:for => "member_company_state"} State
+  %label{:for => "member_company_state"} State *
   %br
   = f.text_field :company_state
 %p
-  %label{:for => "member_company_zip"} Zip
+  %label{:for => "member_company_zip"} Zip *
   %br
   = f.text_field :company_zip
   
 %h2 Profile 
 
 %p
-  %label{:for => "member_category"} Category
+  %label{:for => "member_profile_name"} Name (alphanumeric only and no spaces) *
+  %br
+  = f.text_field :profile_name
+  
+%p
+  %label{:for => "member_category"} Category *
   %br
   = f.select :category_id, Category.all.collect {|c| [c.name, c.id]} + [['Other','']], :include_blank => true 
     

@@ -1,0 +1,40 @@
+%li[message]
+  
+  - if message.member.logo.blank?
+    .logo.missing
+  - else
+    .logo
+      = link_to(image_tag(message.member.logo(:thumb)), members_only_profile_path(message.member))
+      
+  .inner-message
+  
+    %h5
+      = link_to message.member.company_name, members_only_profile_path(message.member)  
+      - unless message.at_members.empty?  
+        = image_tag 'arrow-right-gray.gif'
+        = message.at_members.collect {|m| link_to(m.company_name, members_only_profile_path(m))}.join(', ')
+    
+    %small 
+      %abbr{:title => message.created_at.strftime('%A, %B %d, %Y at %I:%m %p')}
+        = time_ago_in_words(message.created_at)
+        ago
+      |
+      %a{:href => "#new-response-#{message.id}", :class => 'comment'} Comment
+      - if current_member == message.member
+        = link_to_remote 'Remove', {:url => message_path(message), :method => :delete, :success => "$('#message_#{message.id}').fadeOut().remove()"}, :class => 'remove'
+  
+    .body.expandable
+      = simple_format h(message.body)
+      
+    %ol.responses.reset
+      - message.responses.each do |message_response|
+        = render :partial => 'message_responses/show', :locals => {:message_response => message_response}
+      
+      %li.new{:style => 'display:none'}
+        %a{:name => "new-response-#{message.id}"}
+        - form_for :message_response, :url => message_responses_path, :html => { :class => 'new-response' }  do |f|
+          = f.hidden_field :message_id, :value => message.id
+          = image_tag current_member.logo(:small_thumb)
+          = f.text_area :body
+          %p.buttons.share
+            = f.submit 'Comment'

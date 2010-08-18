@@ -1,4 +1,11 @@
-= render :partial => 'shared/parts_theirs'
+- content_for :breadcrumbs do
+  %a{:href => '/'}
+    Home 
+  &nbsp;&gt;&nbsp;
+  %a{:href => '/members'}
+    Members Only
+  &nbsp;&gt;&nbsp;
+  = @title
 
 - content_for :custom do
 
@@ -8,5 +15,28 @@
     = link_to_unless_current 'Public Profile', @member  
     |
     = link_to_unless_current 'Members-Only Wall', members_only_profile_path(@member)
+    
+  .wall#theirs
+    
+    = render :partial => 'members/wall'
 
-  = render :partial => 'members/wall'
+- content_for :left do
+  .feature
+    .block
+      .inner
+        - unless @member.logo(:small).blank?
+          .logo
+            = link_to(image_tag(@member.logo(:small)), @member)
+        %h3
+          = link_to @member.company_name, @member
+        - unless @member.company_address.blank?
+          %p#map
+            = render :partial => 'shared/map_static', :locals => {:address => @member.company_address, :name => @member.company_name}
+  <r:snippet name="upcoming_events" />
+  <r:snippet name="latest_resources" />
+  
+- content_for :right do 
+  <r:snippet name="help_us" />
+  <r:snippet name="sharing" />
+  <r:snippet name="facebook_embed_small" />
+  

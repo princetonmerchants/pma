@@ -58,7 +58,7 @@ class MembersExtension < Radiant::Extension
         end
         
         def redirect_back_or_default(default)          
-          if %w{ logout-first login logout }.include?(session[:return_to].to_s.split('/').last)
+          if %w{ logout-first login logout home }.include?(session[:return_to].to_s.split('/').last)
             redirect_to root_url
           else
             redirect_to(session[:return_to] || default)

@@ -133,11 +133,34 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.datetime "current_login_at"
     t.string   "last_login_ip"
     t.string   "current_login_ip"
+    t.string   "profile_name"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email"
   add_index "members", ["last_request_at"], :name => "index_members_on_last_request_at"
   add_index "members", ["persistence_token"], :name => "index_members_on_persistence_token"
+
+  create_table "message_members", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "message_responses", :force => true do |t|
+    t.text     "body"
+    t.integer  "member_id"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "body"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "meta_tags", :force => true do |t|
     t.string "name", :null => false

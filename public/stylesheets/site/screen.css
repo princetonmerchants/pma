@@ -117,6 +117,11 @@ body {
     body p li {
       padding: 3px 0 3px 5px;
       list-style-type: none; }
+  body span.read-more {
+    margin-bottom: 10px;
+    display: block; }
+  body small {
+    font-size: 12px; }
   body #root {
     margin-left: auto;
     margin-right: auto;
@@ -368,12 +373,10 @@ input[type=text], input[type=password], textarea {
 
 #left input[type=text], #left input[type=password], #left textarea {
   width: 90%; }
-#left textarea {
-  height: 100px; }
 
 textarea {
   width: 420px;
-  height: 150px; }
+  height: 20px; }
 
 .error-with-field input, .error-with-field select, .error-with-field textarea {
   background-color: #fde5fd; }
@@ -499,9 +502,66 @@ body #root #content-container #content #main #members li {
   body #root #content-container #content #main #members li img {
     float: right;
     margin: 0 10px 10px 10px; }
-body #root #content-container #content #main .profile img {
+body #root #content-container #content #main .wall #message_body {
+  height: 20px; }
+body #root #content-container #content #main .wall .buttons {
   float: right;
-  margin: 10px; }
+  padding: 2px;
+  margin: 0; }
+body #root #content-container #content #main .wall ol.reset {
+  margin: 30px 0 0 0;
+  width: 100%; }
+  body #root #content-container #content #main .wall ol.reset li {
+    float: left;
+    clear: both;
+    margin: 5px 0 5px 0;
+    border-bottom: 1px solid #efefef;
+    width: 100%; }
+    body #root #content-container #content #main .wall ol.reset li .logo {
+      float: left;
+      width: 50px;
+      height: 50px;
+      margin: 0 7px 7px 0; }
+    body #root #content-container #content #main .wall ol.reset li .inner-message {
+      float: right;
+      width: 353px; }
+      body #root #content-container #content #main .wall ol.reset li .inner-message h5 img {
+        position: relative;
+        top: 2px; }
+      body #root #content-container #content #main .wall ol.reset li .inner-message .remove {
+        display: none; }
+      body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset {
+        margin: 0 0 10px 0;
+        padding: 0;
+        float: left; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li {
+          float: left;
+          clear: both;
+          margin: 0 0 1px 0;
+          padding: 5px;
+          border-bottom: 1px solid #e0e0e0;
+          background: #efefef; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li .logo {
+            width: 35px;
+            height: 35px; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new .logo {
+          width: 35px;
+          float: left; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new textarea {
+          width: 305px;
+          float: right; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li:hover .remove {
+          background-color: #fff;
+          display: inline; }
+  body #root #content-container #content #main .wall ol.reset li:hover .inner-message .remove {
+    display: inline;
+    float: right;
+    background-color: #efefef;
+    padding: 2px; }
+  body #root #content-container #content #main .wall ol.reset li:hover .inner-message li .remove {
+    display: none; }
+  body #root #content-container #content #main .wall ol.reset li:last-child {
+    border-bottom: none; }
 
 #sharing {
   margin-top: 0;

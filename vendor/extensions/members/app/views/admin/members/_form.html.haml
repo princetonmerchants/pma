@@ -102,6 +102,11 @@
 %fieldset
   %legend 
     Profile
+    
+  %p
+    %label{:for => "member_profile_name"} Name (alphanumeric only and no spaces) *
+    %br
+    = f.text_field :profile_name
       
   %p
     %label{:for => "member_category"} Category:

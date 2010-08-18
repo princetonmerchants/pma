@@ -1,5 +1,9 @@
 class Member < ActiveRecord::Base
   belongs_to :category
+  has_many :messages, :class_name => 'Message'
+  has_many :message_members
+  has_many :messages_at, :class_name => 'Message', :source => :message, :through => :message_members
+  has_many :responses, :class_name => 'MessageResponse', :foreign_key => 'member_id'
   
   default_scope :order => 'name asc'
   named_scope :properties, :conditions => "level = 'Property'"
@@ -7,9 +11,9 @@ class Member < ActiveRecord::Base
   has_attached_file :logo, 
     :styles => { 
       :large => "350x350>", 
-      :small => "250x250>", 
-      :thumb2 => "100x100#", 
-      :thumb => "100x100>", 
+      :small => "275x150>", 
+      :thumb => "50x50#", 
+      :small_thumb => "35x35#",  
       :tiny => "16x16#" 
     },
     :whiny => false,
@@ -38,6 +42,10 @@ class Member < ActiveRecord::Base
   validates_format_of :website, :with => domain_regex, :allow_blank => true
   
   validates_presence_of :category_id, :if => Proc.new {|m| m.category_other.blank?}
+  
+  validates_format_of :profile_name, :with => /[a-z]+[a-z0-9]*/
+  validates_length_of :profile_name, :minimum => 3
+  validates_uniqueness_of :profile_name
   
   acts_as_authentic do |c|
     c.login_field = 'email'

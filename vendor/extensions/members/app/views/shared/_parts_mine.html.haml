@@ -2,13 +2,7 @@
   %a{:href => '/'}
     Home 
   &nbsp;&gt;&nbsp;
-  - if @title and @title != 'Account'
-    %a{:href => '/account'}
-      Account
-    &nbsp;&gt;&nbsp;
-    = @title
-  - else
-    Account
+  = @title
 
 - content_for :left do
   .block
@@ -22,9 +16,6 @@
         = link_to 'Public Profile', @member  
         |
         = link_to 'Members-Only Profile', members_only_profile_path(@member) 
-      - unless @member.company_address.blank?
-        %p#map
-          = render :partial => 'shared/map_static', :locals => {:address => @member.company_address, :name => @member.company_name}
   - unless controller.action_name == 'show'
     #nav-sub.block
       %ul
@@ -38,11 +29,12 @@
           %a{:href => '/membership/make-a-payment'} Make a Payment
         %li 
           %a{:href => '/members'} Members
-  <r:snippet name="upcoming_events" />
+  <r:snippet name="latest_news" />
   <r:snippet name="latest_resources" />
 
 - content_for :right do
   <r:snippet name="help_us" />
+  <r:snippet name="upcoming_events" />
   <r:snippet name="sharing" />
   <r:snippet name="facebook_embed_small" />
   
