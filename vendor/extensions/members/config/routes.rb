@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :categories
   end
   
+  map.connect '/members_auto_complete_data', :controller => '/members', :action => 'auto_complete_data'
   map.resources :members, :only => [:index, :show, :new, :create]
   map.account '/', :controller => '/members', :action => 'account'
   map.edit_account '/edit-account', :controller => '/members', :action => 'edit_account'

@@ -10,7 +10,7 @@
     = "#{@category.members.count} Members"
   %ul
     - @category.members.each do |c|
-      %li= link_to c.name, edit_admin_member_path(c)
+      %li= link_to c.company_name, edit_admin_member_path(c)
         
 %p.buttons
   = f.submit submit_label

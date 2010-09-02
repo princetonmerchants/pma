@@ -12,6 +12,8 @@ class MembersExtension < Radiant::Extension
   end
   
   def activate
+    Page.send :include, MemberTags
+  
     tab 'Membership' do
       add_item "Members", "/admin/members"
       add_item "Categories", "/admin/categories"

@@ -1,6 +1,6 @@
 class Admin::CategoriesController < ApplicationController  
   def index
-    @categories = Category.paginate :page => params[:page], :per_page => 20
+    @categories = Category.find :all, :order => 'name asc'
   end
 
   def new

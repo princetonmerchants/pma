@@ -1,6 +1,6 @@
 class Admin::MembersController < ApplicationController  
   def index
-    @members = Member.paginate :page => params[:p], :per_page => 20
+    @members = Member.find :all, :order => 'company_name asc'
   end
 
   def new

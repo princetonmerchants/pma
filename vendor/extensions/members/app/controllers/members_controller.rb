@@ -87,4 +87,10 @@ class MembersController < BaseController
       render :action => 'change_password'
     end
   end
+  
+  def auto_complete_data
+    render :text => Member.active.find(:all, :order => 'name asc').collect { |m| 
+      {:label => m.company_name, :value => "/members/#{m.to_param}"}
+    }.to_json
+  end
 end
