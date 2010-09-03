@@ -22,6 +22,8 @@ class MembersExtension < Radiant::Extension
     ApplicationController.class_eval do
       helper_method :current_member_session, :current_member, :current_member_page?
       filter_parameter_logging :password, :password_confirmation
+      
+      include ActionView::Helpers::TextHelper
     
       private
         def current_member_session

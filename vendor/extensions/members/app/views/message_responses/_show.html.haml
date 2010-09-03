@@ -16,7 +16,7 @@
         = time_ago_in_words(message_response.created_at)
         ago
       - if current_member == message_response.member
-        = link_to_remote 'Remove', {:url => message_response_path(message_response), :method => :delete, :success => "$('#message_response_#{message_response.id}').fadeOut().remove()"}, :class => 'remove'
+        = link_to_remote 'Remove', {:url => message_response_path(message_response), :method => :delete, :success => "$('#message_response_#{message_response.id}').hide('blind').remove()"}, :class => 'remove'
   
     .body.expandable
       = simple_format h(message_response.body)

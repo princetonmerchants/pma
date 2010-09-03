@@ -12,12 +12,14 @@ class MembersController < BaseController
     :only => [:show_members_only, :edit_account, :update_account, :edit_password, :update_password]
   
   def index
+    expires_in 5.minutes, :public => true, :private => false
     @member = current_member
     @members = Member.paginate :page => params[:p], :per_page => 20
     @title = 'Members'
   end
 
   def show
+    expires_in 5.minutes, :public => true, :private => false
     @member = Member.find(params[:id])
     @title = @member.company_name
     render :action => 'show_public'
@@ -89,8 +91,14 @@ class MembersController < BaseController
   end
   
   def auto_complete_data
+    expires_in 5.minutes, :public => true, :private => false
     render :text => Member.active.find(:all, :order => 'name asc').collect { |m| 
-      {:label => m.company_name, :value => "/members/#{m.to_param}"}
-    }.to_json
+      {
+        :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
+        :logo => %{<img src="#{m.logo(:small_thumb)}" />},
+        :description => h(m.tagline), 
+        :value => "/members/#{m.to_param}"
+      }
+    }.sort {|a,b| a[:label] <=> b[:label]}.to_json
   end
 end

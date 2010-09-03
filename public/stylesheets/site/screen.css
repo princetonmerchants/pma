@@ -162,18 +162,6 @@ body {
               line-height: 15px; }
             body #root #head-container #head .top ul li:first-child {
               background: none; }
-          body #root #head-container #head .top .search-frm {
-            float: right;
-            margin: 0 10px 0 0;
-            display: inline; }
-            body #root #head-container #head .top .search-frm .text {
-              float: left;
-              width: 175px;
-              height: 16px;
-              padding: 1px 5px; }
-            body #root #head-container #head .top .search-frm .btn {
-              float: left;
-              margin: 0 0 0 4px; }
         body #root #head-container #head h1#logo a img {
           margin: 20px 0 15px 23px; }
     body #root #content-container {
@@ -476,6 +464,8 @@ body #root #content-container #content #left #nav-sub {
         font-weight: normal;
         text-decoration: none; }
 
+body #root #content-container #content #main #qs {
+  margin: 0 0 10px 0; }
 body #root #content-container #content #main #index {
   padding: 10px;
   margin: 0 0 15px 0;
@@ -661,6 +651,43 @@ body #root #content-container #content #main ul.reset, body #root #content-conta
 body #root #content-container #content #main .important {
   padding: 5px;
   margin: 5px 0 5px 0; }
+
+body #root #head-container #head .top .search-frm {
+  float: right;
+  margin: 0 10px 0 0;
+  display: inline; }
+  body #root #head-container #head .top .search-frm .text {
+    float: left;
+    width: 175px;
+    height: 16px;
+    padding: 1px 5px; }
+  body #root #head-container #head .top .search-frm .btn {
+    float: left;
+    margin: 0 0 0 4px; }
+body .ui-autocomplete {
+  max-height: 500px;
+  min-width: 250px;
+  overflow-y: auto; }
+  body .ui-autocomplete li {
+    margin: 0 0 10px 0;
+    float: left;
+    clear: both; }
+    body .ui-autocomplete li img {
+      float: left;
+      margin: 0 7px 7px 0;
+      height: 40px; }
+    body .ui-autocomplete li div {
+      float: left;
+      width: 200px; }
+      body .ui-autocomplete li div h4 {
+        margin: 0 0 3px 0;
+        padding: 0;
+        font-size: 12px;
+        color: #333; }
+      body .ui-autocomplete li div small {
+        color: #808080;
+        display: block;
+        float: left; }
 
 body.ThreeColumns #root {
   background: url(../../images/bg-3-columns.gif) repeat-y; }

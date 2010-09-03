@@ -21,7 +21,7 @@
       |
       %a{:href => "#new-response-#{message.id}", :class => 'comment'} Comment
       - if current_member == message.member
-        = link_to_remote 'Remove', {:url => message_path(message), :method => :delete, :success => "$('#message_#{message.id}').fadeOut().remove()"}, :class => 'remove'
+        = link_to_remote 'Remove', {:url => message_path(message), :method => :delete, :success => "$('#message_#{message.id}').hide('blind').remove()"}, :class => 'remove'
   
     .body.expandable
       = simple_format h(message.body)

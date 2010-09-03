@@ -2,8 +2,14 @@
 
 - content_for :custom do
 
-  %a{:name => 'index'}
   = render :partial => 'shared/top'
+  
+  %p
+    %input#qs{:value => 'Search by name or keyword...', :type => 'text'}
+    %a{:style => 'display:none', :id => 'clear'} Clear
+  
+    #no-results{:style => 'display:none'}
+      No Results
   
   #index.important
     - per_page = (Category.non_empty.count / 3) + 1
@@ -24,16 +30,20 @@
             %li
               %h3
                 = link_to h(member.company_name), member
-              - unless member.logo(:small).blank?
+              - if member.logo?
                 %p.logo
                   = link_to image_tag(member.logo(:small)), member 
               .bio.short
-                = simple_format(h(truncate(member.bio, 200)))
+                = simple_format(h(truncate(member.bio, :length => 200)))
+              .meta{:style => 'display:none'}
+                = member.category.name
+                = member.category_other
+                = member.keywords
               %p.info
                 = link_to 'View Profile', member 
                 |
                 = link_to 'Visit Website &raquo;', "http://#{h(member.website)}" 
                 |
-                = link_to 'Back to Index', :anchor => 'index'
+                = link_to 'Back to Top', :anchor => 'top'
           
 
