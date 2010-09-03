@@ -1,5 +1,6 @@
 class MessageResponsesController < ApplicationController
   before_filter :require_member
+  no_login_required
   
   def show
     @message_response = MessageResponse.find(params[:id]) 

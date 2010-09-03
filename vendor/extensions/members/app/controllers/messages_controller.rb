@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_filter :require_member
+  no_login_required
   
   def show
     @message = Message.find(params[:id]) 
