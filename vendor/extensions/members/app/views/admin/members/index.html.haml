@@ -34,18 +34,23 @@
               - unless m.last_request_at.blank?
                 = m.last_request_at.strftime('%m/%d/%Y')
             %td= m.status.to_s.titleize
-            %td.actions
-              = link_to image('page_edit') + ' Edit', edit_admin_member_path(m.id)
-              = link_to image('page_edit') + ' Change Password', edit_password_admin_member_path(m.id)
-              - if m.valid?
-                - if m.active?
-                  = link_to image('minus_disabled') + ' Deactivate', deactivate_admin_member_path(m.id), :method => :post, :confirm => "Really deactivate #{m.name}?"
-                - elsif m.inactive?
-                  = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
-                - elsif m.pending?
-                  = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
-                  = link_to image('minus') + ' Deny', deny_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
-              = link_to image('page_delete') + ' Delete', admin_member_path(m.id), :method => :delete, :confirm => "Really delete #{m.name}?"
+            %td.actions{:style => 'white-space:nowrap'}
+              %ul
+                %li
+                  = link_to image('page_edit') + ' Edit', edit_admin_member_path(m.id)
+                %li
+                  = link_to image('page_edit') + ' Change Password', edit_password_admin_member_path(m.id)
+                - if m.valid?
+                  %li
+                    - if m.active?
+                      = link_to image('minus_disabled') + ' Deactivate', deactivate_admin_member_path(m.id), :method => :post, :confirm => "Really deactivate #{m.name}?"
+                    - elsif m.inactive?
+                      = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
+                    - elsif m.pending?
+                      = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
+                      = link_to image('minus') + ' Deny', deny_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
+                %li
+                  = link_to image('page_delete') + ' Delete', admin_member_path(m.id), :method => :delete, :confirm => "Really delete #{m.name}?"
         
 #actions
   %ul
