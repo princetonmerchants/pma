@@ -492,8 +492,6 @@ body #root #content-container #content #main #members li {
   body #root #content-container #content #main #members li img {
     float: right;
     margin: 0 10px 10px 10px; }
-body #root #content-container #content #main .wall #message_body {
-  height: 20px; }
 body #root #content-container #content #main .wall .buttons {
   float: right;
   padding: 2px;
@@ -515,11 +513,15 @@ body #root #content-container #content #main .wall ol.reset {
     body #root #content-container #content #main .wall ol.reset li .inner-message {
       float: right;
       width: 353px; }
-      body #root #content-container #content #main .wall ol.reset li .inner-message h5 img {
-        position: relative;
-        top: 2px; }
       body #root #content-container #content #main .wall ol.reset li .inner-message .remove {
         display: none; }
+      body #root #content-container #content #main .wall ol.reset li .inner-message strong.from {
+        font-weight: 550; }
+      body #root #content-container #content #main .wall ol.reset li .inner-message strong.to {
+        font-weight: 500; }
+      body #root #content-container #content #main .wall ol.reset li .inner-message .info {
+        margin: 0 0 5px 0;
+        font-size: 12px; }
       body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset {
         margin: 0 0 10px 0;
         padding: 0;
@@ -530,7 +532,7 @@ body #root #content-container #content #main .wall ol.reset {
           margin: 0 0 1px 0;
           padding: 5px;
           border-bottom: 1px solid #e0e0e0;
-          background: #efefef; }
+          background: #f6f6f6; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li .logo {
             width: 35px;
             height: 35px; }
@@ -541,13 +543,11 @@ body #root #content-container #content #main .wall ol.reset {
           width: 305px;
           float: right; }
         body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li:hover .remove {
-          background-color: #fff;
           display: inline; }
   body #root #content-container #content #main .wall ol.reset li:hover .inner-message .remove {
     display: inline;
     float: right;
-    background-color: #efefef;
-    padding: 2px; }
+    font-size: 9px; }
   body #root #content-container #content #main .wall ol.reset li:hover .inner-message li .remove {
     display: none; }
   body #root #content-container #content #main .wall ol.reset li:last-child {

@@ -46,9 +46,6 @@ body
                 margin: 0 10px 10px 10px
                 
           .wall
-            
-            #message_body
-              height: 20px
               
             .buttons
               float: right
@@ -74,18 +71,20 @@ body
                 
                 .inner-message
                   float: right
-                  width: 353px
-                  
-                  h5   
-                    
-                    img
-                      position: relative
-                      top: 2px   
+                  width: 353px 
                 
                   .remove
-                    display: none         
+                    display: none  
+                  
+                  strong.from
+                    font-weight: 550  
+                  
+                  strong.to
+                    font-weight: 500 
                     
-                  .body
+                  .info
+                    margin: 0 0 5px 0 
+                    font-size: 12px  
                   
                   ol.reset
                     margin: 0 0 10px 0
@@ -98,7 +97,7 @@ body
                       margin: 0 0 1px 0
                       padding: 5px
                       border-bottom: 1px solid #e0e0e0
-                      background = !light_grey
+                      background: #f6f6f6
                       
                       .logo
                         width: 35px
@@ -117,7 +116,6 @@ body
                     li:hover
                     
                       .remove
-                        background-color: #fff
                         display: inline
               
               li:hover
@@ -127,8 +125,7 @@ body
                   .remove
                     display: inline
                     float: right
-                    background-color: #efefef
-                    padding: 2px
+                    font-size: 9px
                   
                   li
                     

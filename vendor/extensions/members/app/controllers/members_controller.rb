@@ -34,7 +34,7 @@ class MembersController < BaseController
 
   def new
     @member = Member.new
-    @title = 'Register'
+    @title = 'Register Your Company'
   end
  
   def create
@@ -42,7 +42,7 @@ class MembersController < BaseController
     if @member.save
       redirect_to '/membership/registration-successful'
     else
-      @title = 'Register'
+      @title = 'Register Your Company'
       render :action => 'new'
     end
   end
@@ -59,7 +59,7 @@ class MembersController < BaseController
   
   def edit_account
     @member = current_member
-    @title = 'Edit Account and Profile'
+    @title = 'Edit Account'
   end
   
   def update_account
@@ -69,7 +69,7 @@ class MembersController < BaseController
       flash[:notice] = 'Account and profile successfully updated'
       redirect_to account_url
     else
-      @title = 'Edit Account and Profile'
+      @title = 'Edit Account'
       render :action => 'edit_account'
     end
   end
@@ -90,15 +90,37 @@ class MembersController < BaseController
     end
   end
   
-  def auto_complete_data
+  def search_auto_complete_data
     expires_in 5.minutes, :public => true, :private => false
     render :text => Member.active.find(:all, :order => 'name asc').collect { |m| 
       {
         :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
         :logo => %{<img src="#{m.logo(:small_thumb)}" />},
         :description => h(m.tagline), 
-        :value => "/members/#{m.to_param}"
+        :value => member_link(m)
       }
     }.sort {|a,b| a[:label] <=> b[:label]}.to_json
   end
+  
+  def at_auto_complete_data
+    expires_in 5.minutes, :public => true, :private => false
+    render :text => Member.active.find(:all, :order => 'name asc').collect { |m| 
+      {
+        :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
+        :logo => %{<img src="#{m.logo(:small_thumb)}" />},
+        :description => h(m.tagline), 
+        :value => "@#{h(m.profile_name)}"
+      }
+    }.sort {|a,b| a[:label] <=> b[:label]}.to_json
+  end
+  
+  private 
+    
+    def member_link(member)
+      if current_member
+        "/members-only/members/#{member.to_param}"
+      else
+        "/members/#{member.to_param}"
+      end
+    end
 end

@@ -70,26 +70,95 @@ function init_wall() {
     success: 
       function(responseText, statusText, xhr, $form)  { 
         $(responseText).prependTo('#messages').hide().show("blind");
+        $('a.button').button();
+        init_responses();
       },
   });
   
-  $('.message a.comment').live('click', function() {
-    $('li.new').hide();
-    $(this).parentsUntil('.message').find('li.new').show().find('textarea').focus().autogrow();
+  init_responses();
+  function init_responses() {  
+    $('.message a.comment').live('click', function() {
+      $('li.new').hide();
+      $(this).parentsUntil('.message').find('li.new').show().find('textarea').focus().autogrow();
+    });
+  
+    $('.new-response').ajaxForm({ 
+      target: null,
+      resetForm: true,
+      beforeSubmit: 
+        function() {
+          if($(this).find('#message_response_body').val() == "") {
+            return false;
+          }
+        },
+      success: 
+        function(responseText, statusText, xhr, $form) { 
+          $(responseText).insertBefore($form.parentsUntil('.message').find('.responses .new')).hide().show("blind");
+          $('a.button').button();
+        },
+    });
+  }
+  
+  function extractCurrent() {
+    var start = $("#message_body").caret().start;
+    for(i=start; i >= 0; i--) {
+      if($("#message_body").val()[i] == '@') {
+        return $("#message_body").val().substr(i+1, start-i-1);
+      }
+    }
+    return false;
+  }
+  
+  function extractCurrentStart() {
+    var start = $("#message_body").caret().start;
+    for(i=start; i >= 0; i--) {
+      if($("#message_body").val()[i] == '@') {
+        return i;
+      } 
+    }
+    return false;
+  }
+  
+  
+  $("#message_body").keydown(function(event) {
+    var isOpen = $(this).autocomplete("widget").is(":visible");
+    var keyCode = $.ui.keyCode;
+    if(!isOpen && (event.keyCode == keyCode.UP || event.keyCode == keyCode.DOWN)) {
+      event.stopImmediatePropagation();
+    }
   });
-
-  $('.new-response').ajaxForm({ 
-    target: null,
-    resetForm: true,
-    beforeSubmit: 
-      function() {
-        if($(this).find('#message_response_body').val() == "") {
-          return false;
-        }
-      },
-    success: 
-      function(responseText, statusText, xhr, $form) { 
-        $(responseText).insertBefore($form.parentsUntil('.message').find('.responses .new')).hide().show("blind");
-      },
+  
+  $.ajax({
+  	url: "/members_at_auto_complete_data",
+  	dataType: "json",
+  	cache: true,
+  	success: function(data) {
+  	  $("#message_body").autocomplete({
+      	dataType: "json",
+      	source: function(request, response) {
+  				response($.ui.autocomplete.filter(data, extractCurrent()));
+  			},
+      	search: function(event, ui) {
+      	 return extractCurrent();
+      	},
+      	focus: function(item) {
+      	 return false;
+        },
+        select: function(event, ui) {
+          $(this).val(
+            $(this).val().substr(0, extractCurrentStart()) + 
+            ui.item.value +
+            $(this).val().substr($(this).caret().start)
+          );
+  				return false;
+  			}
+      })
+      .data("autocomplete")._renderItem = function(ul, item) {
+  			return $("<li></li>")
+  				.data("item.autocomplete", item)
+  				.append('<a>' + item.logo + '<h4>' + item.label + '</h4><small>' + item.description + '</small></a>')
+  				.appendTo( ul );
+  		};
+  	}
   });
 }

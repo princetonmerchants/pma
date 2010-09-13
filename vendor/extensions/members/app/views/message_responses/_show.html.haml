@@ -7,16 +7,18 @@
       = link_to(image_tag(message_response.member.logo(:small_thumb)), members_only_profile_path(message_response.member))
       
   .inner-response
+
+    - if current_member == message_response.member
+      = link_to_remote 'Remove', {:url => message_response_path(message_response), :method => :delete, :success => "$('#message_response_#{message_response.id}').hide('blind').remove()"}, :class => 'remove button'
   
-    %h6
+    %strong.from
       = link_to message_response.member.company_name, members_only_profile_path(message_response.member) 
+      
+    .expandable
+      :textile
+        #{message_response.body}
     
-    %small 
+    .info 
       %abbr{:title => message_response.created_at.strftime('%A, %B %d, %Y at %I:%m %p')}
         = time_ago_in_words(message_response.created_at)
         ago
-      - if current_member == message_response.member
-        = link_to_remote 'Remove', {:url => message_response_path(message_response), :method => :delete, :success => "$('#message_response_#{message_response.id}').hide('blind').remove()"}, :class => 'remove'
-  
-    .body.expandable
-      = simple_format h(message_response.body)

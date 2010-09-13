@@ -1,5 +1,5 @@
 $.ajax({
-	url: "/members_auto_complete_data",
+	url: "/members_search_auto_complete_data",
 	dataType: "json",
 	cache: true,
 	success: function(data) {

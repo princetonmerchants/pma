@@ -15,7 +15,7 @@
   = render :partial => 'shared/top'
   
   - if current_member
-    %p.tabs
+    %p
       = link_to_unless_current 'Public Profile', @member  
       |
       = link_to_unless_current 'Members-Only Wall', members_only_profile_path(@member)
@@ -55,7 +55,8 @@
           Website:
           = link_to h(@member.website), "http://#{h(@member.website)}" 
   #bio
-    = simple_format(h(@member.bio))  
+    :textile
+      #{@member.bio}
   
 
 - content_for :left do

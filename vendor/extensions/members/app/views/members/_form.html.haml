@@ -1,184 +1,214 @@
 = f.error_messages :header_message => nil, :message => "Please fix the following fields:", :header_tag => :h4  
 
-%p
-  %label{:for => "member_name"} Your Name *
-  %br
-  = f.text_field :name
+.accordion
 
-%p
-  %label{:for => "member_phone"} Your Phone *
-  %br
-  = f.text_field :phone
-
-%p
-  %label{:for => "member_email"} Your Email *
-  %br
-  = f.text_field :email
-  
-- if @member.crypted_password.blank? or @member.new_record?
-
-  %p
-    %label{:for => "member_password"} Your Password *
-    %br
-    = f.password_field :password
-  
-  %p
-    %label{:for => "member_password_confirmation"} Your Password Again *
-    %br
-    = f.password_field :password_confirmation
-
-- else
-  
-  %p
-    %label Password
-    %br
-    ****** 
-    = link_to 'Change', edit_password_reset_path(@member.persistence_token)
-  
-%h2 Account
-  
-%p
-  %label{:for => "member_level"} Level *
-  %br
-  = f.select :level, Radiant::Config['membership.levels'].to_s.split(',').collect {|l| [l.strip, l.strip]}
-  
-%p
-  %label{:for => "member_parent_property_id"} Parent Property
-  %br
-  = f.select :parent_property_id, Member.properties.collect {|m| [m.company_name, m.id]}, :include_blank => true
-
-%h2 Billing  
-
-%p
-  %label{:for => "member_billing_name"} Name
-  %br
-  = f.text_field :billing_name
-%p
-  %label{:for => "member_billing_phone"} Phone
-  %br
-  = f.text_field :billing_phone
-%p
-  %label{:for => "member_billing_email"} Email
-  %br
-  = f.text_field :billing_email
-  
-  
-%h2 Company
-
-%p
-  %label{:for => "member_company_name"} Name *
-  %br
-  = f.text_field :company_name
-%p
-  %label{:for => "member_company_phone"} Phone
-  %br
-  = f.text_field :company_phone
-%p
-  %label{:for => "member_company_fax"} Fax
-  %br
-  = f.text_field :company_fax
-%p
-  %label{:for => "member_company_email"} Email
-  %br
-  = f.text_field :company_email
-%p
-  %label{:for => "member_company_address_1"} Address 1 *
-  %br
-  = f.text_field :company_address_1
-%p
-  %label{:for => "member_company_address_2"} Address 2
-  %br
-  = f.text_field :company_address_2
-%p
-  %label{:for => "member_company_city"} City *
-  %br
-  = f.text_field :company_city
-%p
-  %label{:for => "member_company_state"} State *
-  %br
-  = f.text_field :company_state
-%p
-  %label{:for => "member_company_zip"} Zip *
-  %br
-  = f.text_field :company_zip
-  
-%h2 Profile 
-
-%p
-  %label{:for => "member_profile_name"} Name (alphanumeric only and no spaces) *
-  %br
-  = f.text_field :profile_name
-  
-%p
-  %label{:for => "member_category"} Category *
-  %br
-  = f.select :category_id, Category.all.collect {|c| [c.name, c.id]} + [['Other','']], :include_blank => true 
+  %h2 
+    %a{:href => '#account'} Account *
     
-%p
-  %label{:for => "member_category_other"} Category Other
-  %br
-  = f.text_field :category_other
+  %div
   
-%p
-  %div
-    = f.check_box :gifts
-    %label{:for => "member_gifts"} Gifts
-  %div
-    = f.check_box :ecommerce    
-    %label{:for => "member_ecommerce"} eCommerce
+    %p
+      %label{:for => "member_name"} Your Name *
+      %br
+      = f.text_field :name
     
-%p
-  %label{:for => "member_hours"} Hours
-  %br
-  = f.text_field :hours
-  
-%p
-  %label{:for => "member_logo"} Logo
-  %br
-  = file_field :member, :logo
-- unless @member.new_record?
-  %p
-    %div
-      %label{:for => "member_logo_delete"} Delete
-      = f.check_box :logo_delete
-    %div
-      %img{:src => @member.logo(:thumb)}
+    %p
+      %label{:for => "member_phone"} Your Phone *
+      %br
+      = f.text_field :phone
+    
+    %p
+      %label{:for => "member_email"} Your Email *
+      %br
+      = f.text_field :email
       
-%p
-  %label{:for => "member_website"} Website
-  %br
-  http://
-  = f.text_field :website
+    - if @member.crypted_password.blank? or @member.new_record?
+    
+      %p
+        %label{:for => "member_password"} Your Password *
+        %br
+        = f.password_field :password
+      
+      %p
+        %label{:for => "member_password_confirmation"} Your Password Again *
+        %br
+        = f.password_field :password_confirmation
+    
+    - else
+      
+      %p
+        %label Your Password
+        %br
+        ****** 
+        = link_to 'Change', change_password_path
+    
+    %p
+      %label{:for => "member_level"} Level *
+      %br
+      = f.select :level, Radiant::Config['membership.levels'].to_s.split(',').collect {|l| [l.strip, l.strip]}
+      
+    %p
+      %label{:for => "member_parent_property_id"} Parent Property
+      %br
+      = f.select :parent_property_id, Member.properties.collect {|m| [m.company_name, m.id]}, :include_blank => true
+    
+  %h2 
+    %a{:href => '#billing'} Billing  
+    
+  %div
+    
+    %p
+      %label{:for => "member_billing_name"} Name
+      %br
+      = f.text_field :billing_name
+    %p
+      %label{:for => "member_billing_phone"} Phone
+      %br
+      = f.text_field :billing_phone
+    %p
+      %label{:for => "member_billing_email"} Email
+      %br
+      = f.text_field :billing_email
+    
+    
+  %h2 
+    %a{:href => '#company'} Company *
+    
+  %div
   
-%p
-  %label{:for => "member_tagline"} Tagline
-  %br
-  = f.text_field :tagline
+    %p
+      %label{:for => "member_company_name"} Name *
+      %br
+      = f.text_field :company_name
+    %p
+      %label{:for => "member_company_phone"} Phone
+      %br
+      = f.text_field :company_phone
+    %p
+      %label{:for => "member_company_fax"} Fax
+      %br
+      = f.text_field :company_fax
+    %p
+      %label{:for => "member_company_email"} Email
+      %br
+      = f.text_field :company_email
+    %p
+      %label{:for => "member_company_address_1"} Address 1 *
+      %br
+      = f.text_field :company_address_1
+    %p
+      %label{:for => "member_company_address_2"} Address 2
+      %br
+      = f.text_field :company_address_2
+    %p
+      %label{:for => "member_company_city"} City *
+      %br
+      = f.text_field :company_city
+    %p
+      %label{:for => "member_company_state"} State *
+      %br
+      = f.text_field :company_state
+    %p
+      %label{:for => "member_company_zip"} Zip *
+      %br
+      = f.text_field :company_zip
+    
+  %h2 
+    %a{:href => '#profile'} Profile *
+    
+  %div
   
-%p
-  %label{:for => "member_bio"} Bio
-  %br
-  = f.text_area :bio
+    %p
+      %label{:for => "member_profile_name"} Name (alphanumeric only and no spaces) *
+      %br
+      = f.text_field :profile_name
+      
+    %p
+      %label{:for => "member_category"} Category *
+      %br
+      = f.select :category_id, Category.all.collect {|c| [c.name, c.id]} + [['Other','']], :include_blank => true 
+        
+    %p
+      %label{:for => "member_category_other"} Category Other
+      %br
+      = f.text_field :category_other
+      
+    %p
+      %div
+        = f.check_box :gifts
+        %label{:for => "member_gifts"} Gifts
+      %div
+        = f.check_box :ecommerce    
+        %label{:for => "member_ecommerce"} eCommerce
+        
+    %p
+      %label{:for => "member_hours"} Hours
+      %br
+      = f.text_field :hours
+      
+    %p
+      %label{:for => "member_logo"} Logo
+      %br
+      = file_field :member, :logo
+    - unless @member.new_record?
+      %p
+        %div
+          %label{:for => "member_logo_delete"} Delete
+          = f.check_box :logo_delete
+        %div
+          %img{:src => @member.logo(:thumb)}
+          
+    %p
+      %label{:for => "member_website"} Website
+      %br
+      http://
+      = f.text_field :website
+      
+    %p
+      %label{:for => "member_tagline"} Tagline
+      %br
+      = f.text_field :tagline
+      
+    %p
+      %label{:for => "member_bio"} Bio
+      %br
+      = f.text_area :bio
+      
+    %p
+      %label{:for => "member_news_feed"} News Feed (Atom or RSS)
+      %br
+      http://
+      = f.text_field :news_feed
+      
+    %p
+      %label{:for => "member_events_feed"} Events Feed (iCal)
+      %br
+      http://
+      = f.text_field :events_feed
+      
+    %p
+      %label{:for => "member_products_feed"} Products Feed (Atom or RSS)
+      %br
+      http://
+      = f.text_field :products_feed
+      
+    %p
+      %label{:for => "member_keywords"} Keywords (not displayed, used only for searches)
+      %br
+      = f.text_area :keywords
+    
+  %h2 
+    %a{:href => '#notifications'} Notifications
+    
+  %div
   
-%p
-  %label{:for => "member_news_feed"} News Feed (Atom or RSS)
-  %br
-  http://
-  = f.text_field :news_feed
-  
-%p
-  %label{:for => "member_events_feed"} Events Feed (iCal)
-  %br
-  http://
-  = f.text_field :events_feed
-  
-%p
-  %label{:for => "member_products_feed"} Products Feed (Atom or RSS)
-  %br
-  http://
-  = f.text_field :products_feed
-  
-%p
-  %label{:for => "member_keywords"} Keywords (not displayed, used only for searches)
-  %br
-  = f.text_area :keywords
+    %p
+      %div
+        = f.check_box :notify_me_when_others_post
+        %label{:for => "member_notify_me_when_others_post"} Notify me when others post
+      %div
+        = f.check_box :notify_me_when_others_post_on_my_wall
+        %label{:for => "member_notify_me_when_others_post_on_my_wall"} Notify me when others post on my wall only
+      %div
+        = f.check_box :notify_me_when_others_respond
+        %label{:for => "member_notify_me_when_others_respond"} Notify me when others respond to my posts or after my respones

@@ -127,13 +127,16 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.integer  "login_count",           :default => 0
+    t.integer  "login_count",                           :default => 0
     t.datetime "last_request_at"
     t.datetime "last_login_at"
     t.datetime "current_login_at"
     t.string   "last_login_ip"
     t.string   "current_login_ip"
     t.string   "profile_name"
+    t.boolean  "notify_me_when_others_post_on_my_wall"
+    t.boolean  "notify_me_when_others_post"
+    t.boolean  "notify_me_when_others_respond"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email"
@@ -167,6 +170,16 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   end
 
   add_index "meta_tags", ["name"], :name => "index_meta_tags_on_name", :unique => true
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "from_member_id"
+    t.integer  "to_member_id"
+    t.string   "message"
+    t.integer  "target_id"
+    t.boolean  "seen",           :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "old_page_attachments", :force => true do |t|
     t.string   "content_type"

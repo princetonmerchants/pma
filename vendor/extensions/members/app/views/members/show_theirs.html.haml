@@ -11,7 +11,7 @@
 
   = render :partial => 'shared/top'
   
-  %p.tabs
+  %p
     = link_to_unless_current 'Public Profile', @member  
     |
     = link_to_unless_current 'Members-Only Wall', members_only_profile_path(@member)
