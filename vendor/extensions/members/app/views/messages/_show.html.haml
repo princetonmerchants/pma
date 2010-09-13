@@ -9,7 +9,7 @@
   .inner-message
     
     - if current_member == message.member
-      = link_to_remote 'Remove', {:url => message_path(message), :method => :delete, :success => "$('#message_#{message.id}').hide('blind').remove()"}, :class => 'remove button'
+      = link_to_remote 'X', {:url => message_path(message), :method => :delete, :success => "$('#message_#{message.id}').hide('blind').remove()"}, :class => 'remove button'
   
     %strong.from
       = link_to message.member.company_name, members_only_profile_path(message.member)  

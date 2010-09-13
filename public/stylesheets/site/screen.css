@@ -75,9 +75,9 @@ body {
     font-style: italic; }
   body a {
     color: #999732;
-    text-decoration: underline; }
-  body a:hover {
     text-decoration: none; }
+  body a:hover {
+    text-decoration: underline; }
   body h1, body h2, body h3, body h4 {
     font-family: Tahoma;
     font-weight: 100;
@@ -547,7 +547,10 @@ body #root #content-container #content #main .wall ol.reset {
   body #root #content-container #content #main .wall ol.reset li:hover .inner-message .remove {
     display: inline;
     float: right;
-    font-size: 9px; }
+    font-size: 9px;
+    position: absolute;
+    left: 400px;
+    z-index: 10000; }
   body #root #content-container #content #main .wall ol.reset li:hover .inner-message li .remove {
     display: none; }
   body #root #content-container #content #main .wall ol.reset li:last-child {

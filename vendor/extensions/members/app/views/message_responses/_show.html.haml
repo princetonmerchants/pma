@@ -9,7 +9,7 @@
   .inner-response
 
     - if current_member == message_response.member
-      = link_to_remote 'Remove', {:url => message_response_path(message_response), :method => :delete, :success => "$('#message_response_#{message_response.id}').hide('blind').remove()"}, :class => 'remove button'
+      = link_to_remote 'X', {:url => message_response_path(message_response), :method => :delete, :success => "$('#message_response_#{message_response.id}').hide('blind').remove()"}, :class => 'remove button'
   
     %strong.from
       = link_to message_response.member.company_name, members_only_profile_path(message_response.member) 

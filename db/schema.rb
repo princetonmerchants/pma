@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "message_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   create_table "message_responses", :force => true do |t|
