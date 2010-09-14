@@ -2,6 +2,8 @@ class MembersController < BaseController
   radiant_layout Proc.new { |c| 
     if %w{ show_members_only show account }.include?(c.action_name)
       'ThreeColumns' 
+    elsif %w{ notifications }.include?(c.action_name)
+      'Blank' 
     else 
       Radiant::Config['membership.layout']
     end
@@ -28,7 +30,7 @@ class MembersController < BaseController
   def show_members_only
     @member = Member.find(params[:id])
     @messages = Message.wall(@member.id).paginate :page => params[:page], :per_page => 20
-    @title = @member.profile_name
+    @title = @member.company_name
     render :action => 'show_theirs'
   end
 
@@ -90,28 +92,88 @@ class MembersController < BaseController
     end
   end
   
-  def search_auto_complete_data
+  def current_member_json
+    if current_member
+      render :text => %{ 
+          $(document).ready(function () {  
+            current_member = { 
+                authenticated:true, 
+                name:'#{current_member.name}, #{current_member.company_name}',
+                profile_url:'#{member_url(current_member)}', 
+                logo_tiny:'#{current_member.logo(:tiny)}',
+                logo_thumb:'#{current_member.logo(:thumb)}',
+                logo_small:'#{current_member.logo(:small)}',
+                logo_normal:'#{current_member.logo(:normal)}',
+                logo_large:'#{current_member.logo(:large)}',
+                logo_original:'#{current_member.logo(:original)}'
+              }
+            var form_authenticity_token = '#{form_authenticity_token}';
+            $('.current-member-name').html(current_member['name']);
+            $('a.current-member-profile').attr('href', current_member['profile_url']);
+            $('a.current-member-profile').show();  
+            $('.current-member-logo').attr('title', current_member['name']);
+            $('.current-member-logo').attr('alt', current_member['name']);
+            $('.current-member-logo tiny').attr('src', current_member['logo_tiny']);
+            $('.current-member-logo thumb').attr('src', current_member['logo_thumb']);
+            $('.current-member-logo small').attr('src', current_member['logo_small']);
+            $('.current-member-logo normal').attr('src', current_member['logo_normal']);
+            $('.current-member-logo large').attr('src', current_member['logo_large']);
+            $('.current-member-logo original').attr('src', current_member['logo_original']);
+            $('.members-only').show(); 
+            $('.visitors-only').hide(); 
+          });
+        }
+    else
+      render :text => %{ 
+          $(document).ready(function () {   
+            current_member = { 
+                authenticated:false, 
+                name:'Visitor',
+                profile_url:'', 
+                logo_tiny:'',
+                logo_thumb:'',
+                logo_small:'',
+                logo_normal:'',
+                logo_large:'',
+                logo_original:''
+              }
+            var form_authenticity_token = '#{form_authenticity_token}';
+            $('.current-member-name').html(current_member['name']);  
+            $('a.current-member-profile').hide();  
+            $('a.current-member-logo').hide(); 
+            $('.members-only').hide();
+            $('.visitors-only').show();
+          });
+        }
+    end
+  end  
+  
+  def notifications
+    @notifications = current_member.notifications.latest
+  end
+  
+  def search_auto_complete_json
     expires_in 5.minutes, :public => true, :private => false
-    render :text => Member.active.find(:all, :order => 'name asc').collect { |m| 
+    render :text => Member.active.collect { |m| 
       {
         :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
         :logo => %{<img src="#{m.logo(:small_thumb)}" />},
         :description => h(m.tagline), 
         :value => member_link(m)
       }
-    }.sort {|a,b| a[:label] <=> b[:label]}.to_json
+    }.to_json
   end
   
-  def at_auto_complete_data
+  def at_auto_complete_json
     expires_in 5.minutes, :public => true, :private => false
-    render :text => Member.active.find(:all, :order => 'name asc').collect { |m| 
+    render :text => Member.active.collect { |m| 
       {
         :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
         :logo => %{<img src="#{m.logo(:small_thumb)}" />},
         :description => h(m.tagline), 
         :value => "@#{h(m.profile_name)}"
       }
-    }.sort {|a,b| a[:label] <=> b[:label]}.to_json
+    }.to_json
   end
   
   private 

@@ -3,8 +3,8 @@ class MessageResponsesController < ApplicationController
   no_login_required
   
   def show
-    @message_response = MessageResponse.find(params[:id]) 
-    @member = @message_response.member
+    @message_response = MessageResponse.find(params[:id])
+    redirect_to @message_response.message
   end
  
   def create

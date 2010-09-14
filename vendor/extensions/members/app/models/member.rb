@@ -1,11 +1,12 @@
 class Member < ActiveRecord::Base
   belongs_to :category
-  has_many :messages, :class_name => 'Message'
+  has_many :messages, :class_name => 'Message', :dependent => :destroy
   has_many :message_members
   has_many :messages_at, :class_name => 'Message', :source => :message, :through => :message_members
-  has_many :responses, :class_name => 'MessageResponse', :foreign_key => 'member_id'
+  has_many :responses, :class_name => 'MessageResponse', :foreign_key => 'member_id', :dependent => :destroy
+  has_many :notifications, :foreign_key => 'to_member_id', :dependent => :destroy
   
-  default_scope :order => 'name asc'
+  default_scope :order => 'company_name asc'
   named_scope :properties, :conditions => "level = 'Property'"
   named_scope :pending, :conditions => "status = 'pending'"
   named_scope :active, :conditions => "status = 'active'"

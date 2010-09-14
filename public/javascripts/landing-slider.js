@@ -1,5 +1,10 @@
 $(document).ready(function () {
+  if($('#slider .scrollContainer > div').length > 0) {
+    init_slider();
+  }
+});
 
+function init_slider() {
   var $panels = $('#slider .scrollContainer > div');
   var $container = $('#slider .scrollContainer');
   
@@ -109,4 +114,4 @@ $(document).ready(function () {
   });  
   $('#slider').hover(function () {auto_slider.stopTime();});
   $('#slider').blur(function () {alert();});
-});
+}

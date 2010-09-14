@@ -10,8 +10,10 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :categories
   end
   
-  map.connect '/members_search_auto_complete_data', :controller => '/members', :action => 'search_auto_complete_data'
-  map.connect '/members_at_auto_complete_data', :controller => '/members', :action => 'at_auto_complete_data'
+  map.connect '/notifications', :controller => '/members', :action => 'notifications'
+  map.connect '/current_member_json', :controller => '/members', :action => 'current_member_json'
+  map.connect '/members_search_auto_complete_json', :controller => '/members', :action => 'search_auto_complete_json'
+  map.connect '/members_at_auto_complete_json', :controller => '/members', :action => 'at_auto_complete_json'
   map.resources :members, :only => [:index, :show, :new, :create]
   map.account '/', :controller => '/members', :action => 'account'
   map.edit_account '/edit-account', :controller => '/members', :action => 'edit_account'
@@ -25,7 +27,6 @@ ActionController::Routing::Routes.draw do |map|
   map.member_login '/login', :controller => '/member_sessions', :action => 'new'
   map.member_logout '/logout', :controller => '/member_sessions', :action => 'destroy'
   map.member_logout_first '/logout-first', :controller => '/member_sessions', :action => 'logout_first'
-  map.connect '/current-member.js', :controller => '/member_sessions', :action => 'current_member_js'
   
   map.resources :password_resets, :path_prefix => '/account'
   

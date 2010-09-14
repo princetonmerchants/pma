@@ -1,6 +1,20 @@
 $(document).ready(function () { 
   init_quicksearch();
-  init_wall();
+  if($('#message_body').length > 0) { 
+    init_wall();
+  }
+  $.localScroll();
+  $('.tabs').tabs();
+  $('.accordion').accordion({autoHeight:false, collapsible:true, navigation:true});
+  $('a.button').button();
+  $('abbr.timeago').timeago();
+  $('textarea[class!=manualgrow]').autogrow();  
+  $('.expandable').expander({
+    slicePoint: 200, 
+    expandText: 'Read More', 
+    collapseTimer: 0, 
+    userCollapseText: 'Read Less'
+  });
 });
 
 function init_quicksearch() {
@@ -71,6 +85,7 @@ function init_wall() {
       function(responseText, statusText, xhr, $form)  { 
         $(responseText).prependTo('#messages').hide().show("blind");
         $('a.button').button();
+        $('abbr.timeago').timeago();
         init_responses();
       },
   });
@@ -86,8 +101,8 @@ function init_wall() {
       target: null,
       resetForm: true,
       beforeSubmit: 
-        function() {
-          if($(this).find('#message_response_body').val() == "") {
+        function(arr, $form, options) {
+          if($form.find('#message_response_body').val() == "") {
             return false;
           }
         },
@@ -95,6 +110,7 @@ function init_wall() {
         function(responseText, statusText, xhr, $form) { 
           $(responseText).insertBefore($form.parentsUntil('.message').find('.responses .new')).hide().show("blind");
           $('a.button').button();
+          $('abbr.timeago').timeago();
         },
     });
   }
@@ -119,7 +135,6 @@ function init_wall() {
     return false;
   }
   
-  
   $("#message_body").keydown(function(event) {
     var isOpen = $(this).autocomplete("widget").is(":visible");
     var keyCode = $.ui.keyCode;
@@ -129,7 +144,7 @@ function init_wall() {
   });
   
   $.ajax({
-  	url: "/members_at_auto_complete_data",
+  	url: "/members_at_auto_complete_json",
   	dataType: "json",
   	cache: true,
   	success: function(data) {
@@ -159,6 +174,15 @@ function init_wall() {
   				.append('<a>' + item.logo + '<h4>' + item.label + '</h4><small>' + item.description + '</small></a>')
   				.appendTo( ul );
   		};
+  	}
+  });
+  
+  $.ajax({
+  	url: "/notifications",
+  	cache: false,
+  	success: function(data) {
+      $('#notifications').html(data);
+      $('#notifications abbr.timeago').timeago();
   	}
   });
 }

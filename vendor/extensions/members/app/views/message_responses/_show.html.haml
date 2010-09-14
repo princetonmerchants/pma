@@ -11,14 +11,14 @@
     - if current_member == message_response.member
       = link_to_remote 'X', {:url => message_response_path(message_response), :method => :delete, :success => "$('#message_response_#{message_response.id}').hide('blind').remove()"}, :class => 'remove button'
   
-    %strong.from
-      = link_to message_response.member.company_name, members_only_profile_path(message_response.member) 
+    .from-to
+      %strong.from
+        = link_to message_response.member.company_name, members_only_profile_path(message_response.member) 
       
     .expandable
       :textile
         #{message_response.body}
     
     .info 
-      %abbr{:title => message_response.created_at.strftime('%A, %B %d, %Y at %I:%m %p')}
-        = time_ago_in_words(message_response.created_at)
-        ago
+      %abbr.timeago{:title => message_response.created_at.iso8601}
+        = message_response.created_at.strftime('%A, %B %d, %Y at %I:%m %p')

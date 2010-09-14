@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "current_login_ip"
     t.string   "profile_name"
     t.boolean  "notify_me_when_others_post_on_my_wall"
-    t.boolean  "notify_me_when_others_post"
     t.boolean  "notify_me_when_others_respond"
   end
 
@@ -149,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.boolean  "at_wall",    :default => false
   end
 
   create_table "message_responses", :force => true do |t|
@@ -175,9 +175,9 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
   create_table "notifications", :force => true do |t|
     t.integer  "from_member_id"
     t.integer  "to_member_id"
-    t.string   "message"
-    t.integer  "target_id"
-    t.boolean  "seen",           :default => false
+    t.string   "notifiable_type"
+    t.integer  "notifiable_id"
+    t.boolean  "seen",            :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
