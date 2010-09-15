@@ -173,7 +173,19 @@ class MembersController < BaseController
         :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
         :logo => %{<img src="#{m.logo(:small_thumb)}" />},
         :description => h(m.tagline), 
-        :value => member_link(m)
+        :value => "/members/#{m.to_param}"
+      }
+    }.to_json
+  end
+  
+  def members_only_search_auto_complete_json
+    expires_in 5.minutes, :public => true, :private => false
+    render :text => Member.active.collect { |m| 
+      {
+        :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
+        :logo => %{<img src="#{m.logo(:small_thumb)}" />},
+        :description => h(m.tagline), 
+        :value => "/members-only/members/#{m.to_param}"
       }
     }.to_json
   end
@@ -189,14 +201,4 @@ class MembersController < BaseController
       }
     }.to_json
   end
-  
-  private 
-    
-    def member_link(member)
-      if current_member
-        "/members-only/members/#{member.to_param}"
-      else
-        "/members/#{member.to_param}"
-      end
-    end
 end

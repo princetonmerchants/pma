@@ -33,7 +33,11 @@ function load_notifications_quick_look() {
 
 function load_global_quick_search() {
   $.ajax({
-  	url: "/members_search_auto_complete_json",
+  	url: (
+    	 current_member['authenticated'] ? 
+    	   '/members_only_search_auto_complete_json' : 
+    	   '/members_search_auto_complete_json'
+  	 ),
   	dataType: "json",
   	cache: true,
   	success: function(data) {
