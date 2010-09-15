@@ -14,7 +14,7 @@
 
   = render :partial => 'shared/top'
   
-  - if current_member
+  .members-only
     %p
       = link_to_unless_current 'Public Profile', @member  
       |
