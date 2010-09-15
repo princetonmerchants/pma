@@ -15,6 +15,7 @@ $(document).ready(function () {
     collapseTimer: 0, 
     userCollapseText: 'Read Less'
   });
+  load_notifications();
 });
 
 function init_quicksearch() {
@@ -84,8 +85,9 @@ function init_wall() {
     success: 
       function(responseText, statusText, xhr, $form)  { 
         $(responseText).prependTo('#messages').hide().show("blind");
-        $('a.button').button();
-        $('abbr.timeago').timeago();
+        $('#message_body').css('height', '30px');
+        $('#messages a.button').button();
+        $('#messages abbr.timeago').timeago();
         init_responses();
       },
   });
@@ -109,6 +111,7 @@ function init_wall() {
       success: 
         function(responseText, statusText, xhr, $form) { 
           $(responseText).insertBefore($form.parentsUntil('.message').find('.responses .new')).hide().show("blind");
+          $form.find('#message_response_body').css('height', '20px');
           $('a.button').button();
           $('abbr.timeago').timeago();
         },
@@ -177,6 +180,40 @@ function init_wall() {
   	}
   });
   
+  auto_load_more_messages = true;
+  $(window).scroll(function(){
+    if(auto_load_more_messages && more_messages_exist &&
+    ($(window).scrollTop() >= $(document).height() - $(window).height() - 400) && 
+    ($(window).scrollTop() <= $(document).height() - $(window).height())) {
+      auto_load_more_messages = false; 
+      load_more_messages();
+    }
+  });
+  
+  $('#more-messages').click(function() {
+    load_more_messages();
+    return false;
+  });
+  
+  function load_more_messages() {
+    $('#more-messages').hide('blind');
+    $('#loading').show('blind');
+    page += 1;
+    $.ajax({
+    	url: (current_member['id'] == member_id ? "/account_more_messages" : "/others_more_messages"),
+    	cache: false,
+    	data: 'id=' + member_id + '&page=' + page,
+    	success: function(data) {
+        $('#messages').append(data);
+        $('#messages a.button').button();
+        $('#messages abbr.timeago').timeago();
+        init_responses();
+    	}
+    });
+  }
+}
+
+function load_notifications() {
   $.ajax({
   	url: "/notifications",
   	cache: false,

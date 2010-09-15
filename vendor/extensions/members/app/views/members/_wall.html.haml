@@ -1,5 +1,14 @@
 = render :partial => 'shared/wall_form'
 
+= javascript_tag "member_id = #{@member.id}; page = 1; more_messages_exist = #{@more_messages_exist}"
+
 %ol#messages.reset
   - @messages.each do |message|
     = render :partial => 'messages/show', :locals => {:message => message}
+
+- if @more_messages_exist
+  #loading.more{:style => 'display:hidden'}
+    = image_tag 'ajax-loader.gif'
+  #more-messages.more
+    %a{:href => '#'}
+      Older Posts

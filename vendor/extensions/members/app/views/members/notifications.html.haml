@@ -7,7 +7,7 @@
     - @notifications.each do |notification|
       %li 
         %a{:href => url_for(notification.notifiable), :class => (notification.seen? ? 'seen' : 'unseen')}     
-          = image_tag(notification.from_member.logo(:thumb))
+          = image_tag(notification.from_member.logo(:thumb)) if notification.from_member.logo?
           %h5
             = notification
           %abbr.timeago{:title => notification.created_at.iso8601}

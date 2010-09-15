@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/current_member_json', :controller => '/members', :action => 'current_member_json'
   map.connect '/members_search_auto_complete_json', :controller => '/members', :action => 'search_auto_complete_json'
   map.connect '/members_at_auto_complete_json', :controller => '/members', :action => 'at_auto_complete_json'
+  map.connect '/others_more_messages', :controller => '/members', :action => 'others_more_messages'
+  map.connect '/account_more_messages', :controller => '/members', :action => 'account_more_messages'
   map.resources :members, :only => [:index, :show, :new, :create]
   map.account '/', :controller => '/members', :action => 'account'
   map.edit_account '/edit-account', :controller => '/members', :action => 'edit_account'

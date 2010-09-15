@@ -125,6 +125,9 @@ body
                 margin: 0 10px 10px 10px
                 
           .wall
+            float: left
+            margin: 0
+            padding: 0
                         
             .buttons
               float: right
@@ -133,14 +136,16 @@ body
             
             .more
               text-align: center
-              padding: 10px
+              padding: 10px 0
+              margin: 10px 0
               float: left
               width: 100%
               display: block
-              margin-top: 15px
+              background-color: #efefef
               
             ol.reset
               margin: 30px 0 0 0
+              padding: 0
               width: 100%
               
               li
@@ -158,8 +163,8 @@ body
                   margin: 0 7px 7px 0
                 
                 .inner-message
-                  float: right
-                  width: 353px 
+                  float: left
+                  width: 369px
                   overflow-x: auto
                 
                   .remove
@@ -179,10 +184,19 @@ body
                     
                     p
                       margin: 0 0 1em 0
+
+                    span.read-more, span.re-collapse
+                      margin-bottom: 0
+                      display: block
+                      position: relative
+                      top: -10px
                     
                   .info
-                    margin: 0 0 10px 0
+                    margin: 0
                     padding: 0 
+                    position: relative
+                    top: -0.9em
+                    color: #909090
                     font-size: 12px  
                   
                   ol.reset
@@ -195,7 +209,7 @@ body
                       clear: both
                       margin: 0 0 1px 0
                       padding: 5px
-                      width: 340px
+                      width: 358px
                       border-bottom: 1px solid #e0e0e0
                       background: #f3f3f3
                       
@@ -210,7 +224,7 @@ body
                         float: left
                     
                       textarea
-                        width: 290px
+                        width: 310px
                         float: right
                         
                     li:hover
@@ -237,7 +251,5 @@ body
               
               li:last-child
                 border-bottom: none
-                  
-                  
-              
+
             

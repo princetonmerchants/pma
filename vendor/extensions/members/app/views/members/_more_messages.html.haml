@@ -1,0 +1,7 @@
+- @messages.each do |message|
+  = render :partial => 'messages/show', :locals => {:message => message}
+  
+= javascript_tag "$('#loading').hide('blind');"  
+
+- if @more_messages_exist
+  = javascript_tag "$('#more-messages').show('blind');"

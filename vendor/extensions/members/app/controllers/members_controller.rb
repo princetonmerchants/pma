@@ -2,7 +2,7 @@ class MembersController < BaseController
   radiant_layout Proc.new { |c| 
     if %w{ show_members_only show account }.include?(c.action_name)
       'ThreeColumns' 
-    elsif %w{ notifications }.include?(c.action_name)
+    elsif %w{ notifications others_more_messages account_more_messages }.include?(c.action_name)
       'Blank' 
     else 
       Radiant::Config['membership.layout']
@@ -29,9 +29,17 @@ class MembersController < BaseController
 
   def show_members_only
     @member = Member.find(params[:id])
-    @messages = Message.wall(@member.id).paginate :page => params[:page], :per_page => 20
+    @messages = Message.wall(@member.id).find(:all, :limit => 10)
+    @more_messages_exist = Message.wall(@member.id).count >= 11
     @title = @member.company_name
     render :action => 'show_theirs'
+  end  
+  
+  def others_more_messages
+    @member = Member.find(params[:id])
+    @messages = Message.wall(@member.id).paginate :page => params[:page], :per_page => 10
+    @more_messages_exist = (Message.wall(@member.id).count - ((10 * params[:page].to_i) - 10 + 1)) > 0
+    render :partial => 'more_messages'
   end
 
   def new
@@ -52,11 +60,19 @@ class MembersController < BaseController
   def account
     if current_member
       @member = current_member
-      @messages = Message.recent.paginate :page => params[:page], :per_page => 20
+      @messages = Message.recent.find(:all, :limit => 10)
+      @more_messages_exist = Message.recent.count >= 11
       @title = "News Feed"
     else
       redirect_to '/home' 
     end 
+  end
+  
+  def account_more_messages
+    @member = current_member
+    @messages = Message.recent.paginate :page => params[:page], :per_page => 10
+    @more_messages_exist = (Message.recent.count - ((10 * params[:page].to_i) - 10 + 1)) > 0
+    render :partial => 'more_messages'
   end
   
   def edit_account
@@ -98,6 +114,7 @@ class MembersController < BaseController
           $(document).ready(function () {  
             current_member = { 
                 authenticated:true, 
+                id:#{current_member.id},
                 name:'#{current_member.name}, #{current_member.company_name}',
                 profile_url:'#{member_url(current_member)}', 
                 logo_tiny:'#{current_member.logo(:tiny)}',
@@ -129,6 +146,7 @@ class MembersController < BaseController
             current_member = { 
                 authenticated:false, 
                 name:'Visitor',
+                id:-1,
                 profile_url:'', 
                 logo_tiny:'',
                 logo_thumb:'',
