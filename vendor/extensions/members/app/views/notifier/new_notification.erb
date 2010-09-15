@@ -1,0 +1,5 @@
+<%= @notification %> Use the URL below to view it:
+
+http://<%= Radiant::Config['site.url'] %><%= url_for(@notification.notifiable) %>
+
+If the above URL does not work try copying and pasting it into your browser. If you continue to have problem please feel free to contact us.

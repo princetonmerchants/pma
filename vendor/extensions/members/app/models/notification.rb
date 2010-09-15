@@ -7,6 +7,8 @@ class Notification < ActiveRecord::Base
   named_scope :seen, :conditions => 'seen = true'
   named_scope :unseen, :conditions => 'seen = false'
   named_scope :latest, :limit => 15
+  
+  after_create :deliver_emails!
     
   def to_s 
     s = []
@@ -30,4 +32,17 @@ class Notification < ActiveRecord::Base
     end
     s.join(' ')
   end
+  
+  def at_members
+    case notifiable_type 
+      when 'Message' then notifiable.at_members
+      when 'MessageResponse' then notifiable.message.responses.collect(&:member) << notifiable.message.member
+    end
+  end
+  
+  private 
+  
+    def deliver_emails!
+      Notifier.deliver_new_notification!(self) unless to_member.email.blank?
+    end
 end
