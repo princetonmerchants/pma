@@ -1,0 +1,7 @@
+- @notifications.each do |notification|
+  = render :partial => 'notifications/show', :locals => {:notification => notification}
+  
+= javascript_tag "$('#loading').hide('blind');"  
+
+- if @more_notifications_exist
+  = javascript_tag "$('#more-notifications').show('blind');"

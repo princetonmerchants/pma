@@ -440,204 +440,6 @@ body #root #content-container #content #left #nav-sub {
     body #root #content-container #content #left #nav-sub ul li.active a, body #root #content-container #content #left #nav-sub ul li a:hover {
       background-color: #fff; }
 
-#featured-member {
-  margin: 0 0 0 0;
-  padding: 0 0 15px 0; }
-  #featured-member .inner {
-    padding: 0;
-    margin: 0 auto;
-    width: 282px; }
-    #featured-member .inner .logo {
-      display: block;
-      background: url(../../images/bg-image-holder.jpg) no-repeat;
-      width: 271px;
-      height: 236px;
-      padding: 10px 0 0 11px;
-      margin: 0 auto;
-      overflow: hidden; }
-    #featured-member .inner h3 {
-      margin: 15px 0 15px 0; }
-      #featured-member .inner h3 a {
-        color: #339a99;
-        font-size: 18px;
-        line-height: 22px;
-        font-weight: normal;
-        text-decoration: none; }
-
-body #root #head-container #head .top ul li#notifications .inner {
-  display: none; }
-body #root #head-container #head .top ul li#notifications:hover a.t {
-  background-color: #c0c0c0;
-  border: 1px solid #c0c0c0;
-  border-bottom: none;
-  color: #fff; }
-body #root #head-container #head .top ul li#notifications:hover .inner {
-  display: block;
-  border: 1px solid #c0c0c0;
-  background-color: #fff;
-  z-index: 1000000;
-  position: absolute;
-  top: 23px; }
-  body #root #head-container #head .top ul li#notifications:hover .inner h4 {
-    padding: 0;
-    margin: 5px;
-    color: #666; }
-  body #root #head-container #head .top ul li#notifications:hover .inner ul {
-    border-top: 1px solid #e0e0e0; }
-    body #root #head-container #head .top ul li#notifications:hover .inner ul li {
-      display: block;
-      float: none;
-      overflow: hidden;
-      font-size: 15px;
-      padding: 0;
-      margin: 0; }
-      body #root #head-container #head .top ul li#notifications:hover .inner ul li a {
-        color: #666;
-        display: block;
-        height: 50px;
-        width: auto;
-        min-width: 300px;
-        max-width: 600px;
-        padding: 7px; }
-        body #root #head-container #head .top ul li#notifications:hover .inner ul li a img {
-          float: left;
-          margin: 0 5px 0 0;
-          background-color: #fff; }
-        body #root #head-container #head .top ul li#notifications:hover .inner ul li a abbr {
-          font-size: 10px; }
-        body #root #head-container #head .top ul li#notifications:hover .inner ul li a h5 {
-          font-weight: normal;
-          font-size: 14px;
-          padding: 0;
-          margin: 0; }
-      body #root #head-container #head .top ul li#notifications:hover .inner ul li a.unseen h5 {
-        font-weight: bold; }
-      body #root #head-container #head .top ul li#notifications:hover .inner ul li a:hover {
-        background-color: #63284e;
-        color: #fff;
-        text-decoration: none; }
-body #root #content-container #content #main #qs {
-  margin: 0 0 10px 0; }
-body #root #content-container #content #main #index {
-  padding: 10px;
-  margin: 0 0 15px 0;
-  float: left;
-  clear: both; }
-  body #root #content-container #content #main #index a {
-    text-decoration: none; }
-  body #root #content-container #content #main #index ol {
-    float: left;
-    width: 185px;
-    margin: 0;
-    padding: 0 10px 0 0;
-    left: 0; }
-    body #root #content-container #content #main #index ol li {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      left: 0; }
-body #root #content-container #content #main #members li {
-  float: left;
-  clear: both;
-  margin: 0 0 15px 0;
-  width: 100%; }
-  body #root #content-container #content #main #members li img {
-    float: right;
-    margin: 0 10px 10px 10px; }
-body #root #content-container #content #main .wall {
-  float: left;
-  margin: 0;
-  padding: 0; }
-  body #root #content-container #content #main .wall .buttons {
-    float: right;
-    padding: 2px;
-    margin: 0; }
-  body #root #content-container #content #main .wall .more {
-    text-align: center;
-    padding: 10px 0;
-    margin: 10px 0;
-    float: left;
-    width: 100%;
-    display: block;
-    background-color: #efefef; }
-  body #root #content-container #content #main .wall ol.reset {
-    margin: 30px 0 0 0;
-    padding: 0;
-    width: 100%; }
-    body #root #content-container #content #main .wall ol.reset li {
-      float: left;
-      clear: both;
-      margin: 0;
-      padding: 5px 0 5px 0;
-      border-bottom: 1px solid #efefef;
-      width: 100%; }
-      body #root #content-container #content #main .wall ol.reset li .logo {
-        float: left;
-        width: 50px;
-        height: 50px;
-        margin: 0 7px 7px 0; }
-      body #root #content-container #content #main .wall ol.reset li .inner-message {
-        float: left;
-        width: 369px;
-        overflow-x: auto; }
-        body #root #content-container #content #main .wall ol.reset li .inner-message .remove {
-          display: none; }
-        body #root #content-container #content #main .wall ol.reset li .inner-message .from-to {
-          float: left;
-          margin: 0 7px 0 0; }
-          body #root #content-container #content #main .wall ol.reset li .inner-message .from-to strong.from {
-            font-weight: 550; }
-          body #root #content-container #content #main .wall ol.reset li .inner-message .from-to strong.to {
-            font-weight: 500; }
-        body #root #content-container #content #main .wall ol.reset li .inner-message .expandable p {
-          margin: 0 0 1em 0; }
-        body #root #content-container #content #main .wall ol.reset li .inner-message .expandable span.read-more, body #root #content-container #content #main .wall ol.reset li .inner-message .expandable span.re-collapse {
-          margin-bottom: 0;
-          display: block;
-          position: relative;
-          top: -10px; }
-        body #root #content-container #content #main .wall ol.reset li .inner-message .info {
-          margin: 0;
-          padding: 0;
-          position: relative;
-          top: -0.9em;
-          color: #909090;
-          font-size: 12px; }
-        body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset {
-          margin: 0;
-          padding: 0;
-          float: left; }
-          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li {
-            float: left;
-            clear: both;
-            margin: 0 0 1px 0;
-            padding: 5px;
-            width: 358px;
-            border-bottom: 1px solid #e0e0e0;
-            background: #f3f3f3; }
-            body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li .logo {
-              width: 35px;
-              height: 35px; }
-          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new .logo {
-            width: 35px;
-            float: left; }
-          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new textarea {
-            width: 310px;
-            float: right; }
-          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li:hover .remove {
-            display: inline; }
-    body #root #content-container #content #main .wall ol.reset li:hover .inner-message .remove {
-      display: inline;
-      float: right;
-      font-size: 9px;
-      position: absolute;
-      left: 390px;
-      z-index: 10000; }
-    body #root #content-container #content #main .wall ol.reset li:hover .inner-message li .remove {
-      display: none; }
-    body #root #content-container #content #main .wall ol.reset li:last-child {
-      border-bottom: none; }
-
 #sharing {
   margin-top: 0;
   padding-top: 0;
@@ -749,6 +551,9 @@ body #root #head-container #head .top .search-frm {
   body #root #head-container #head .top .search-frm .btn {
     float: left;
     margin: 0 0 0 4px; }
+
+body #root #content-container #content #main #qs {
+  margin: 0 0 10px 0; }
 body .ui-autocomplete {
   max-height: 500px;
   min-width: 250px;
@@ -773,6 +578,213 @@ body .ui-autocomplete {
         color: #808080;
         display: block;
         float: left; }
+
+body #root #content-container #content #main #index {
+  padding: 10px;
+  margin: 0 0 15px 0;
+  float: left;
+  clear: both; }
+  body #root #content-container #content #main #index a {
+    text-decoration: none; }
+  body #root #content-container #content #main #index ol {
+    float: left;
+    width: 185px;
+    margin: 0;
+    padding: 0 10px 0 0;
+    left: 0; }
+    body #root #content-container #content #main #index ol li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      left: 0; }
+body #root #content-container #content #main #members li {
+  float: left;
+  clear: both;
+  margin: 0 0 15px 0;
+  width: 100%; }
+  body #root #content-container #content #main #members li img {
+    float: right;
+    margin: 0 10px 10px 10px; }
+
+body #root #head-container #head .top ul li#notifications-quick-look .inner {
+  display: none; }
+body #root #head-container #head .top ul li#notifications-quick-look:hover a.t {
+  background-color: #c0c0c0;
+  border: 1px solid #c0c0c0;
+  border-bottom: none;
+  color: #fff; }
+body #root #head-container #head .top ul li#notifications-quick-look:hover a.t:hover {
+  text-decoration: none; }
+body #root #head-container #head .top ul li#notifications-quick-look:hover .inner {
+  display: block;
+  border: 1px solid #c0c0c0;
+  background-color: #fff;
+  z-index: 1000000;
+  position: absolute;
+  top: 24px; }
+  body #root #head-container #head .top ul li#notifications-quick-look:hover .inner h4 {
+    padding: 0 0 2px 0;
+    margin: 3px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #c0c0c0; }
+  body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li.loading {
+    padding: 10px 0;
+    text-align: center; }
+  body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li {
+    display: block;
+    float: none;
+    overflow: hidden;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    background: none; }
+    body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li a.unseen h5 {
+      font-weight: bold; }
+    body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li a:hover {
+      background-color: #63284e;
+      color: #fff;
+      text-decoration: none; }
+  body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li:last-child a {
+    height: 18px;
+    text-align: center;
+    background-color: #e0e0e0; }
+  body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li:last-child a:hover {
+    background-color: #63284e; }
+body #root ul.notifications li {
+  display: block;
+  float: none;
+  overflow: hidden;
+  font-size: 15px;
+  padding: 0;
+  margin: 0; }
+  body #root ul.notifications li a {
+    color: #666;
+    display: block;
+    height: 50px;
+    width: auto;
+    min-width: 300px;
+    max-width: 600px;
+    padding: 7px; }
+    body #root ul.notifications li a img {
+      float: left;
+      margin: 0 5px 0 0;
+      background-color: #fff; }
+    body #root ul.notifications li a abbr {
+      font-size: 10px; }
+    body #root ul.notifications li a h5 {
+      font-weight: normal;
+      font-size: 14px;
+      padding: 0;
+      margin: 0; }
+  body #root ul.notifications li a.unseen h5 {
+    font-weight: bold; }
+  body #root ul.notifications li a:hover {
+    text-decoration: none; }
+body #root ul.notifications li:hover h5 {
+  text-decoration: underline; }
+body #root #more-notifications.more, body #root #loading.more {
+  text-align: center;
+  padding: 10px 0;
+  margin: 10px 0;
+  float: left;
+  width: 100%;
+  display: block;
+  background-color: #efefef; }
+
+body #root #content-container #content #main .wall {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  body #root #content-container #content #main .wall .buttons {
+    float: right;
+    padding: 2px;
+    margin: 0; }
+  body #root #content-container #content #main .wall .more {
+    text-align: center;
+    padding: 10px 0;
+    margin: 10px 0;
+    float: left;
+    width: 100%;
+    display: block;
+    background-color: #efefef; }
+  body #root #content-container #content #main .wall ol.reset {
+    margin: 30px 0 0 0;
+    padding: 0;
+    width: 100%; }
+    body #root #content-container #content #main .wall ol.reset li {
+      float: left;
+      clear: both;
+      margin: 0;
+      padding: 5px 0 5px 0;
+      border-bottom: 1px solid #efefef;
+      width: 100%; }
+      body #root #content-container #content #main .wall ol.reset li .logo {
+        float: left;
+        width: 50px;
+        height: 50px;
+        margin: 0 7px 7px 0; }
+      body #root #content-container #content #main .wall ol.reset li .inner-message {
+        float: left;
+        width: 369px;
+        overflow-x: auto; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message .remove {
+          display: none; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message .from-to {
+          float: left;
+          margin: 0 7px 0 0; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message .from-to strong.from {
+            font-weight: 550; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message .from-to strong.to {
+            font-weight: 500; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message .expandable p {
+          margin: 0 0 1em 0; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message .expandable span.read-more, body #root #content-container #content #main .wall ol.reset li .inner-message .expandable span.re-collapse {
+          margin-bottom: 0;
+          display: block;
+          position: relative;
+          top: -10px; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message .info {
+          margin: 0;
+          padding: 0;
+          position: relative;
+          top: -0.9em;
+          color: #909090;
+          font-size: 12px; }
+        body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset {
+          margin: 0;
+          padding: 0;
+          float: left; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li {
+            float: left;
+            clear: both;
+            margin: 0 0 1px 0;
+            padding: 5px;
+            width: 358px;
+            border-bottom: 1px solid #e0e0e0;
+            background: #f3f3f3; }
+            body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li .logo {
+              width: 35px;
+              height: 35px; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new .logo {
+            width: 35px;
+            float: left; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new textarea {
+            width: 310px;
+            float: right; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li:hover .remove {
+            display: inline; }
+    body #root #content-container #content #main .wall ol.reset li:hover .inner-message .remove {
+      display: inline;
+      float: right;
+      font-size: 9px;
+      position: absolute;
+      left: 410px;
+      z-index: 10000; }
+    body #root #content-container #content #main .wall ol.reset li:hover .inner-message li .remove {
+      display: none; }
+    body #root #content-container #content #main .wall ol.reset li:last-child {
+      border-bottom: none; }
 
 body.ThreeColumns #root {
   background: url(../../images/bg-3-columns.gif) repeat-y; }

@@ -1,8 +1,9 @@
 $(document).ready(function () { 
-  init_quicksearch();
-  if($('#message_body').length > 0) { 
-    init_wall();
-  }
+  load_notifications_quick_look();
+  load_global_quick_search();
+  init_local_quick_search();
+  init_wall();
+  init_notifications();
   $.localScroll();
   $('.tabs').tabs();
   $('.accordion').accordion({autoHeight:false, collapsible:true, navigation:true});
@@ -15,10 +16,51 @@ $(document).ready(function () {
     collapseTimer: 0, 
     userCollapseText: 'Read Less'
   });
-  load_notifications();
 });
 
-function init_quicksearch() {
+function load_notifications_quick_look() {
+  if(current_member['authenticated']) {
+    $.ajax({
+    	url: "/notifications/quick_look",
+    	cache: false,
+    	success: function(data) {
+        $('#notifications-quick-look').html(data);
+        $('#notifications-quick-look abbr.timeago').timeago();
+    	}
+    });
+  }
+}
+
+function load_global_quick_search() {
+  $.ajax({
+  	url: "/members_search_auto_complete_json",
+  	dataType: "json",
+  	cache: true,
+  	success: function(data) {
+  	 $("#q").autocomplete({
+        source: data,		
+      	dataType: "json",
+      	focus: function(item) {
+      	 return false;
+        },	
+        select: function(event, ui) {
+          location.href = ui.item.value;
+          return false;
+        }
+      })
+      .data("autocomplete")._renderItem = function(ul, item) {
+  			return $("<li></li>")
+  				.data("item.autocomplete", item)
+  				.append('<a>' + item.logo + '<h4>' + item.label + '</h4><small>' + item.description + '</small></a>')
+  				.appendTo( ul );
+  		};
+  	}
+  });
+  
+  $("#q").focus();
+}
+
+function init_local_quick_search() {
   init_qs_msg = $('#qs').val();
   
   $('#qs').focus(function() {
@@ -56,6 +98,10 @@ function init_quicksearch() {
 }
 
 function init_wall() {
+  if(!current_member['authenticated'] || $('#message_body').length == 0) {
+    return false;
+  }
+  
   $('#message_body').focus(function() {
     $('#message_body').autogrow();
     if($('#message_body').val() == "What's your company up to?" ||
@@ -64,7 +110,7 @@ function init_wall() {
       $('#message_body').val("");
     }
   });
-  
+
   $('#message_body').blur(function() {
     if($('#message_body').val() == "") {
       $('#message_body').val(init_wall_msg);
@@ -181,12 +227,19 @@ function init_wall() {
   });
   
   auto_load_more_messages = true;
+  auto_load_more_notifications = true;
   $(window).scroll(function(){
-    if(auto_load_more_messages && more_messages_exist &&
-    ($(window).scrollTop() >= $(document).height() - $(window).height() - 400) && 
+    if($('#more-messages').length > 0 && auto_load_more_messages && more_messages_exist &&
+    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.5)) && 
     ($(window).scrollTop() <= $(document).height() - $(window).height())) {
       auto_load_more_messages = false; 
       load_more_messages();
+    }
+    if($('#more-notifications').length > 0 && auto_load_more_notifications && more_notifications_exist &&
+    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.5)) && 
+    ($(window).scrollTop() <= $(document).height() - $(window).height())) {
+      auto_load_more_notifications = false; 
+      load_more_notifications();
     }
   });
   
@@ -211,15 +264,55 @@ function init_wall() {
     	}
     });
   }
+  
+  function load_more_notifications() {
+    $('#more-notifications').hide('blind');
+    $('#loading').show('blind');
+    page += 1;
+    $.ajax({
+    	url: "/notifications/more_notifications",
+    	cache: false,
+    	data: 'page=' + page,
+    	success: function(data) {
+        $('#notifications').append(data);
+        $('#notifications abbr.timeago').timeago();
+    	}
+    });
+  }
 }
 
-function load_notifications() {
-  $.ajax({
-  	url: "/notifications",
-  	cache: false,
-  	success: function(data) {
-      $('#notifications').html(data);
-      $('#notifications abbr.timeago').timeago();
-  	}
+function init_notifications() {
+  if(!current_member['authenticated'] || $('#notifications').length == 0) {
+    return false;
+  }
+  
+  auto_load_more_notifications = true;
+  $(window).scroll(function(){
+    if($('#more-notifications').length > 0 && auto_load_more_notifications && more_notifications_exist &&
+    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.5)) && 
+    ($(window).scrollTop() <= $(document).height() - $(window).height())) {
+      auto_load_more_notifications = false; 
+      load_more_notifications();
+    }
   });
+  
+  $('#more-notifications').click(function() {
+    load_more_notifications();
+    return false;
+  });
+  
+  function load_more_notifications() {
+    $('#more-notifications').hide('blind');
+    $('#loading').show('blind');
+    page += 1;
+    $.ajax({
+    	url: "/notifications/more",
+    	cache: false,
+    	data: 'page=' + page,
+    	success: function(data) {
+        $('#notifications').append(data);
+        $('#notifications abbr.timeago').timeago();
+    	}
+    });
+  }
 }

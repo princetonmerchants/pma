@@ -10,7 +10,6 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :categories
   end
   
-  map.connect '/notifications', :controller => '/members', :action => 'notifications'
   map.connect '/current_member_json', :controller => '/members', :action => 'current_member_json'
   map.connect '/members_search_auto_complete_json', :controller => '/members', :action => 'search_auto_complete_json'
   map.connect '/members_at_auto_complete_json', :controller => '/members', :action => 'at_auto_complete_json'
@@ -24,6 +23,10 @@ ActionController::Routing::Routes.draw do |map|
   map.update_password '/update-password', :controller => '/members', :action => 'update_password'
   map.member_register '/register', :controller => '/members', :action => 'new'
   map.members_only_profile '/members-only/members/:id', :controller => 'members', :action => 'show_members_only'
+  
+  map.notifications '/notifications', :controller => 'notifications'
+  map.more_notifications '/notifications/more', :controller => 'notifications', :action => 'more'
+  map.notifications_quick_look '/notifications/quick_look', :controller => 'notifications', :action => 'quick_look'
   
   map.resource :member_session
   map.member_login '/login', :controller => '/member_sessions', :action => 'new'

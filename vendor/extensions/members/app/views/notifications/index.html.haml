@@ -1,0 +1,18 @@
+= render :partial => 'shared/parts_mine'
+
+- content_for :custom do
+
+  = javascript_tag "page = 1; more_notifications_exist = #{@more_notifications_exist}"
+
+  = render :partial => 'shared/top'
+  
+  %ul#notifications.reset.notifications
+    - @notifications.each do |notification|
+      = render :partial => 'notifications/show', :locals => {:notification => notification}
+  
+  - if @more_notifications_exist
+    #loading.more{:style => 'display:hidden'}
+      = image_tag 'ajax-loader.gif'
+    #more-notifications.more
+      %a{:href => '#'}
+        Older Notifications

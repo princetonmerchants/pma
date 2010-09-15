@@ -2,7 +2,7 @@ class MembersController < BaseController
   radiant_layout Proc.new { |c| 
     if %w{ show_members_only show account }.include?(c.action_name)
       'ThreeColumns' 
-    elsif %w{ notifications others_more_messages account_more_messages }.include?(c.action_name)
+    elsif %w{ others_more_messages account_more_messages }.include?(c.action_name)
       'Blank' 
     else 
       Radiant::Config['membership.layout']
@@ -10,8 +10,8 @@ class MembersController < BaseController
   }
   no_login_required
   before_filter :require_no_member, :only => [:new, :create]
-  before_filter :require_member, 
-    :only => [:show_members_only, :edit_account, :update_account, :edit_password, :update_password]
+  before_filter :require_member, :only => [:show_members_only, :others_more_messages, 
+    :account, :account_more_messages, :edit_account, :update_account, :change_password, :update_password]
   
   def index
     expires_in 5.minutes, :public => true, :private => false
@@ -30,7 +30,7 @@ class MembersController < BaseController
   def show_members_only
     @member = Member.find(params[:id])
     @messages = Message.wall(@member.id).find(:all, :limit => 10)
-    @more_messages_exist = Message.wall(@member.id).count >= 11
+    @more_messages_exist = Message.wall(@member.id).count > 10
     @title = @member.company_name
     render :action => 'show_theirs'
   end  
@@ -61,7 +61,7 @@ class MembersController < BaseController
     if current_member
       @member = current_member
       @messages = Message.recent.find(:all, :limit => 10)
-      @more_messages_exist = Message.recent.count >= 11
+      @more_messages_exist = Message.recent.count > 10
       @title = "News Feed"
     else
       redirect_to '/home' 
@@ -111,7 +111,7 @@ class MembersController < BaseController
   def current_member_json
     if current_member
       render :text => %{ 
-          $(document).ready(function () {  
+          $(document).ready(function () {
             current_member = { 
                 authenticated:true, 
                 id:#{current_member.id},
@@ -165,10 +165,6 @@ class MembersController < BaseController
         }
     end
   end  
-  
-  def notifications
-    @notifications = current_member.notifications.latest
-  end
   
   def search_auto_complete_json
     expires_in 5.minutes, :public => true, :private => false

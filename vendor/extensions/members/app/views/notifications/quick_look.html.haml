@@ -1,0 +1,9 @@
+= link_to "Notifications (#{@notifications_unseen})", notifications_path, :class => 't'
+.inner
+  %h4 
+    = "Notifications (#{@notifications_unseen})"
+  %ul.notifications
+    - @notifications.each do |notification|
+      = render :partial => 'notifications/show', :locals => {:notification => notification}
+    %li
+      = link_to 'View All Notifications', notifications_path

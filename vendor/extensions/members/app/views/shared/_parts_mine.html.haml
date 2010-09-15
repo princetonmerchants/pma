@@ -22,13 +22,13 @@
         %li 
           = link_to 'News Feed', account_path
         %li 
+          = link_to 'Notifications', notifications_path
+        %li 
           = link_to 'Edit Account', edit_account_path
         %li 
           = link_to 'Change Password', change_password_path
         %li 
           %a{:href => '/membership/make-a-payment'} Make a Payment
-        %li 
-          %a{:href => '/members'} Members
   <r:snippet name="latest_news" />
   <r:snippet name="latest_resources" />
 
