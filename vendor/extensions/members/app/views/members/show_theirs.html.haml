@@ -16,9 +16,12 @@
     |
     = link_to_unless_current 'Members-Only Wall', members_only_profile_path(@member)
     
-  .wall#theirs
-    
-    = render :partial => 'members/wall'
+  - if @member.claimed?
+    .wall#theirs
+      = render :partial => 'members/wall'
+  - else
+    %p This member has yet to claim their page. 
+    %p Please encorage them to get invovled! :)
 
 - content_for :left do
   .feature
