@@ -11,7 +11,7 @@
       = render :partial => 'notifications/show', :locals => {:notification => notification}
   
   - if @more_notifications_exist
-    #loading.more{:style => 'display:hidden'}
+    #loading.more{:style => 'display:none'}
       = image_tag 'ajax-loader.gif'
     #more-notifications.more
       %a{:href => '#'}

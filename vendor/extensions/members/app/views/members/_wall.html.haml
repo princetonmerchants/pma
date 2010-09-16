@@ -7,7 +7,7 @@
     = render :partial => 'messages/show', :locals => {:message => message}
 
 - if @more_messages_exist
-  #loading.more{:style => 'display:hidden'}
+  #loading.more{:style => 'display:none'}
     = image_tag 'ajax-loader.gif'
   #more-messages.more
     %a{:href => '#'}

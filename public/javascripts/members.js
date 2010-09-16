@@ -10,12 +10,7 @@ $(document).ready(function () {
   $('a.button').button();
   $('abbr.timeago').timeago();
   $('textarea[class!=manualgrow]').autogrow();  
-  $('.expandable').expander({
-    slicePoint: 200, 
-    expandText: 'Read More', 
-    collapseTimer: 0, 
-    userCollapseText: 'Read Less'
-  });
+  init_expander();
 });
 
 function load_notifications_quick_look() {
@@ -231,19 +226,12 @@ function init_wall() {
   });
   
   auto_load_more_messages = true;
-  auto_load_more_notifications = true;
   $(window).scroll(function(){
     if($('#more-messages').length > 0 && auto_load_more_messages && more_messages_exist &&
-    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.5)) && 
+    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.7)) && 
     ($(window).scrollTop() <= $(document).height() - $(window).height())) {
       auto_load_more_messages = false; 
       load_more_messages();
-    }
-    if($('#more-notifications').length > 0 && auto_load_more_notifications && more_notifications_exist &&
-    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.5)) && 
-    ($(window).scrollTop() <= $(document).height() - $(window).height())) {
-      auto_load_more_notifications = false; 
-      load_more_notifications();
     }
   });
   
@@ -268,21 +256,6 @@ function init_wall() {
     	}
     });
   }
-  
-  function load_more_notifications() {
-    $('#more-notifications').hide('blind');
-    $('#loading').show('blind');
-    page += 1;
-    $.ajax({
-    	url: "/notifications/more_notifications",
-    	cache: false,
-    	data: 'page=' + page,
-    	success: function(data) {
-        $('#notifications').append(data);
-        $('#notifications abbr.timeago').timeago();
-    	}
-    });
-  }
 }
 
 function init_notifications() {
@@ -293,7 +266,7 @@ function init_notifications() {
   auto_load_more_notifications = true;
   $(window).scroll(function(){
     if($('#more-notifications').length > 0 && auto_load_more_notifications && more_notifications_exist &&
-    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.5)) && 
+    ($(window).scrollTop() >= $(document).height() - ($(window).height() * 1.7)) && 
     ($(window).scrollTop() <= $(document).height() - $(window).height())) {
       auto_load_more_notifications = false; 
       load_more_notifications();
@@ -316,7 +289,17 @@ function init_notifications() {
     	success: function(data) {
         $('#notifications').append(data);
         $('#notifications abbr.timeago').timeago();
+        init_expander();
     	}
     });
   }
+}
+
+function init_expander() {
+  $('.expandable').expander({
+    slicePoint: 200, 
+    expandText: 'Read More', 
+    collapseTimer: 0, 
+    userCollapseText: 'Read Less'
+  });
 }

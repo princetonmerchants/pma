@@ -640,11 +640,14 @@ body #root #head-container #head .top ul li#notifications-quick-look:hover .inne
     margin: 0;
     background: none; }
     body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li a.unseen h5 {
-      font-weight: bold; }
+      font-weight: bold;
+      text-decoration: none; }
     body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li a:hover {
       background-color: #63284e;
       color: #fff;
       text-decoration: none; }
+  body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li:hover h5 {
+    text-decoration: none; }
   body #root #head-container #head .top ul li#notifications-quick-look:hover .inner ul li:last-child a {
     height: 18px;
     text-align: center;
