@@ -20,8 +20,10 @@
     .wall#theirs
       = render :partial => 'members/wall'
   - else
-    %p This member has yet to claim their page. 
-    %p Please encorage them to get invovled! :)
+    .important
+      %p 
+        Sorry, you can't interact with this member until they have claimed their page. 
+        Please encorage them to get invovled! :) Have them <a href="/contact-us">contact us</a>.
 
 - content_for :left do
   .feature
