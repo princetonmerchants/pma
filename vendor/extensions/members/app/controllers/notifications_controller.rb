@@ -2,7 +2,7 @@ class NotificationsController < BaseController
   radiant_layout Proc.new { |c| 
     if %w{ index }.include?(c.action_name)
       'ThreeColumns' 
-    elsif %w{ more quick_look }.include?(c.action_name)
+    elsif %w{ more quick_look page_seen }.include?(c.action_name)
       'Blank' 
     else 
       Radiant::Config['membership.layout']
@@ -27,5 +27,10 @@ class NotificationsController < BaseController
   def quick_look
     @notifications_unseen = current_member.notifications.unseen.count
     @notifications = current_member.notifications.latest.find :all, :limit => 5
+  end
+  
+  def page_seen
+    Page.find_by_url(params[:page_url]).seen_by!(current_member.id)
+    render :text => ''
   end
 end

@@ -3,8 +3,12 @@ class MessageResponsesController < ApplicationController
   no_login_required
   
   def show
-    @message_response = MessageResponse.find(params[:id])
-    redirect_to @message_response.message
+    if MessageResponse.exists?(params[:id])
+      @message_response = MessageResponse.find(params[:id])
+      redirect_to @message_response.message
+    else
+      redirect_to '/page-not-found'
+    end
   end
  
   def create

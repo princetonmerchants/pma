@@ -1,6 +1,9 @@
 %li 
-  %a{:href => url_for(notification.notifiable), :class => (notification.seen? ? 'seen' : 'unseen')}     
-    = image_tag(notification.from_member.logo(:thumb)) if notification.from_member.logo?
+  %a{:href => notifiable_path(notification), :class => (notification.seen? ? 'seen' : 'unseen')}     
+    - if notification.from_member
+      = image_tag(notification.from_member.logo(:thumb)) if notification.from_member.logo?
+    - else
+      = image_tag '/images/pma-logo-thumb.gif'
     %h5
       = notification
     %abbr.timeago{:title => notification.created_at.iso8601}

@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.integer  "login_count",                           :default => 0
+    t.integer  "login_count",                               :default => 0
     t.datetime "last_request_at"
     t.datetime "last_login_at"
     t.datetime "current_login_at"
@@ -136,6 +136,9 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "profile_name"
     t.boolean  "notify_me_when_others_post_on_my_wall"
     t.boolean  "notify_me_when_others_respond"
+    t.boolean  "notify_me_when_articles_are_posted"
+    t.boolean  "notify_me_when_featured_events_are_posted"
+    t.boolean  "notify_me_when_resources_are_posted"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email"
@@ -177,9 +180,10 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.integer  "to_member_id"
     t.string   "notifiable_type"
     t.integer  "notifiable_id"
-    t.boolean  "seen",            :default => false
+    t.boolean  "seen",               :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "email_delivered_at"
   end
 
   create_table "old_page_attachments", :force => true do |t|

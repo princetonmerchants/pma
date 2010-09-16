@@ -3,7 +3,7 @@ class MessageResponse < ActiveRecord::Base
   belongs_to :message
   has_many :notifications, :as => :notifiable, :dependent => :destroy
   
-  after_save :notify!
+  after_create :notify!
   
   private
     

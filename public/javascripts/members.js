@@ -1,5 +1,6 @@
 $(document).ready(function () { 
-  load_notifications_quick_look();
+  log_page_seen();
+  load_notifications_quick_look(false);
   load_global_quick_search();
   init_local_quick_search();
   init_wall();
@@ -9,12 +10,27 @@ $(document).ready(function () {
   $('.accordion').accordion({autoHeight:false, collapsible:true, navigation:true});
   $('a.button').button();
   $('abbr.timeago').timeago();
-  $('textarea[class!=manualgrow]').autogrow();  
+  $('textarea[class!=manualgrow]').autogrow();
   init_expander();
 });
 
-function load_notifications_quick_look() {
-  if(current_member['authenticated']) {
+function log_page_seen() {
+  if(page_url) {
+    $.ajax({
+    	url: "/notifications/page_seen",
+    	cache: false,
+    	data: 'page_url=' + page_url,
+    	success: function(data) {
+        load_notifications_quick_look(true);
+    	}
+    });
+  } else {
+    load_notifications_quick_look(true);
+  }
+}
+
+function load_notifications_quick_look(pass) {
+  if((pass || !page_url) && current_member['authenticated']) {
     $.ajax({
     	url: "/notifications/quick_look",
     	cache: false,

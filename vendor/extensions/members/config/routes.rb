@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.notifications '/notifications', :controller => 'notifications'
   map.more_notifications '/notifications/more', :controller => 'notifications', :action => 'more'
   map.notifications_quick_look '/notifications/quick_look', :controller => 'notifications', :action => 'quick_look'
+  map.notification_seen_by '/notifications/page_seen', :controller => 'notifications', :action => 'page_seen'
   
   map.resource :member_session
   map.member_login '/login', :controller => '/member_sessions', :action => 'new'

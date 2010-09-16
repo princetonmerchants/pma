@@ -11,7 +11,7 @@ class MembersController < BaseController
   no_login_required
   before_filter :require_no_member, :only => [:new, :create]
   before_filter :require_member, :only => [:show_members_only, :others_more_messages, 
-    :account, :account_more_messages, :edit_account, :update_account, :change_password, :update_password]
+    :account_more_messages, :edit_account, :update_account, :change_password, :update_password]
   
   def index
     expires_in 5.minutes, :public => true, :private => false
@@ -44,6 +44,11 @@ class MembersController < BaseController
 
   def new
     @member = Member.new
+    @member.notify_me_when_articles_are_posted = true
+    @member.notify_me_when_featured_events_are_posted = true
+    @member.notify_me_when_resources_are_posted = true
+    @member.notify_me_when_others_post_on_my_wall = true
+    @member.notify_me_when_others_respond = true
     @title = 'Register Your Company'
   end
  

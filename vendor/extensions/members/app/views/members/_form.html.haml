@@ -198,17 +198,22 @@
       = f.text_area :keywords
     
   %h2 
-    %a{:href => '#notifications'} Notifications
+    %a{:href => '#email-notifications'} Email Notifications
     
   %div
   
-    %p
-      %div
-        = f.check_box :notify_me_when_others_post
-        %label{:for => "member_notify_me_when_others_post"} Notify me when others post
-      %div
-        = f.check_box :notify_me_when_others_post_on_my_wall
-        %label{:for => "member_notify_me_when_others_post_on_my_wall"} Notify me when others post on my wall only
-      %div
-        = f.check_box :notify_me_when_others_respond
-        %label{:for => "member_notify_me_when_others_respond"} Notify me when others respond to my posts or after my respones
+    %div
+      = f.check_box :notify_me_when_articles_are_posted
+      %label{:for => "member_notify_me_when_articles_are_posted"} Notify me when articles are posted
+    %div
+      = f.check_box :notify_me_when_featured_events_are_posted
+      %label{:for => "member_notify_me_when_featured_events_are_posted"} Notify me when featured events are posted
+    %div
+      = f.check_box :notify_me_when_resources_are_posted
+      %label{:for => "member_notify_me_when_resources_are_posted"} Notify me when resources are posted
+    %div
+      = f.check_box :notify_me_when_others_post_on_my_wall
+      %label{:for => "member_notify_me_when_others_post_on_my_wall"} Notify me when other members post on my wall
+    %div
+      = f.check_box :notify_me_when_others_respond
+      %label{:for => "member_notify_me_when_others_respond"} Notify me when other members respond to me

@@ -24,6 +24,8 @@ config.action_controller.page_cache_directory = "#{RAILS_ROOT}/tmp/cache"
 #   SiteController.cache_timeout = 12.hours
 # end
 
+config.action_mailer.default_url_options = {:host => Radiant::Config['site.url']}
+
 ActionMailer::Base.smtp_settings = {
   :address        => "smtp.sendgrid.net",
   :port           => "25",

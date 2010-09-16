@@ -1,5 +1,9 @@
 <%= @notification %> Use the URL below to view it:
 
-http://<%= Radiant::Config['site.url'] %><%= url_for(@notification.notifiable) %>
+http://<%= Radiant::Config['site.url'] %><%= notifiable_path(@notification) %>
 
-If the above URL does not work try copying and pasting it into your browser. If you continue to have problem please feel free to contact us.
+If the above URL does not work, it may help to copy and paste the *entire* URL into your browser. Please contact us if you continue to have problems.
+
+--
+
+To unsubscribe, use the following URL to change your email notifications: http://<%= Radiant::Config['site.url'] %>/edit-account#email-notifications

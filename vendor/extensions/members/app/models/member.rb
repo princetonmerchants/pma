@@ -12,6 +12,7 @@ class Member < ActiveRecord::Base
   named_scope :active, :conditions => "status = 'active'"
   named_scope :inactive, :conditions => "status = 'inactive'"
   named_scope :denied, :conditions => "status = 'denied'"
+  named_scope :with_email, :conditions => "email is not null and email != ''"
 
   has_attached_file :logo, 
     :styles => { 

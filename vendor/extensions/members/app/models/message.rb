@@ -10,7 +10,7 @@ class Message < ActiveRecord::Base
   attr_accessor :at_member_id
   
   before_save :apply_at_members
-  after_save :notify!
+  after_create :notify!
   
   default_scope :order => 'messages.created_at desc'
   named_scope :recent, :include => :at_members
@@ -30,13 +30,16 @@ class Message < ActiveRecord::Base
   private
   
     def apply_at_members
-      unless at_member_id.blank? or at_member_id == member.id or not Member.exists?(at_member_id)
+      unless at_member_id.blank? or at_member_id == member.id or not Member.exists?(at_member_id) or 
+      message_members.collect(&:member_id).include?(at_member_id)
         message_members << MessageMember.new(:member_id => at_member_id, :at_wall => true)
       end
       body2 = body.split("\n").collect do |line|
         line.split(' ').collect do |word|
-          if word[0] == 64 and (member2 = Member.find_by_profile_name(word[1..-1].strip)) and member2.id != member.id
-            at_members << member2
+          if word[0] == 64 and (member2 = Member.find_by_profile_name(word[1..-1].strip)) and member2.id != member.id 
+            unless message_members.collect(&:member_id).include?(member2.id)
+              message_members << MessageMember.new(:member_id => member2.id, :at_wall => false)
+            end
             %{"#{member2.profile_name}":/members-only/members/#{member2.to_param}}
           else
             word

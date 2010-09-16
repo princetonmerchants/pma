@@ -11,12 +11,30 @@ class MembersExtension < Radiant::Extension
     config.gem 'state_machine'
   end
   
-  def activate
-    Page.send :include, MemberTags
-  
+  def activate  
     tab 'Membership' do
       add_item "Members", "/admin/members"
       add_item "Categories", "/admin/categories"
+    end
+    
+    Page.class_eval do 
+      has_many :notifications, :as => :notifiable, :dependent => :destroy
+      after_save :notify!
+      
+      include MemberTags
+    
+      def seen_by!(member_id)
+        notifications.update_all 'seen = true', "to_member_id = #{member_id}"
+      end
+      
+      private  
+        
+        def notify!
+          return false unless status_id == 100 and notifications.empty?
+          Member.active.with_email.each do |member|
+            notifications.create :to_member_id => member.id
+          end
+        end
     end
     
     ApplicationController.class_eval do
@@ -26,6 +44,7 @@ class MembersExtension < Radiant::Extension
       include ActionView::Helpers::TextHelper
     
       private
+      
         def current_member_session
           return @current_member_session if defined?(@current_member_session)
           @current_member_session = MemberSession.find
