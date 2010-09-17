@@ -729,16 +729,19 @@ body #root #content-container #content #main .wall {
         margin: 0 7px 7px 0; }
       body #root #content-container #content #main .wall ol.reset li .inner-message {
         float: left;
-        width: 369px;
+        width: 362px;
         overflow-x: auto; }
         body #root #content-container #content #main .wall ol.reset li .inner-message .remove {
           display: none; }
         body #root #content-container #content #main .wall ol.reset li .inner-message .from-to {
           float: left;
           margin: 0 7px 0 0; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message .from-to img {
+            position: absolute; }
           body #root #content-container #content #main .wall ol.reset li .inner-message .from-to strong.from {
             font-weight: 550; }
           body #root #content-container #content #main .wall ol.reset li .inner-message .from-to strong.to {
+            padding-left: 9px;
             font-weight: 500; }
         body #root #content-container #content #main .wall ol.reset li .inner-message .expandable p {
           margin: 0 0 1em 0; }
@@ -763,7 +766,7 @@ body #root #content-container #content #main .wall {
             clear: both;
             margin: 0 0 1px 0;
             padding: 5px;
-            width: 358px;
+            width: 351px;
             border-bottom: 1px solid #e0e0e0;
             background: #f3f3f3; }
             body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li .logo {
@@ -773,7 +776,7 @@ body #root #content-container #content #main .wall {
             width: 35px;
             float: left; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new textarea {
-            width: 310px;
+            width: 303px;
             float: right; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li:hover .remove {
             display: inline; }
@@ -782,7 +785,7 @@ body #root #content-container #content #main .wall {
       float: right;
       font-size: 9px;
       position: absolute;
-      left: 410px;
+      left: 400px;
       z-index: 10000; }
     body #root #content-container #content #main .wall ol.reset li:hover .inner-message li .remove {
       display: none; }
