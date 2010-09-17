@@ -1,0 +1,80 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    RedCloth (4.2.3)
+    actionmailer (0.6.1)
+      actionpack (>= 0.9.5)
+    actionpack (1.4.0)
+    activemodel (3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      i18n (~> 0.4.1)
+    activerecord (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+      arel (~> 1.0.0)
+      tzinfo (~> 0.3.23)
+    activesupport (3.0.0)
+    acts_as_list (0.1.2)
+    arel (1.0.1)
+      activesupport (~> 3.0.0)
+    authlogic (2.1.6)
+      activesupport
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
+    bluecloth (2.0.7)
+    builder (2.1.2)
+    calendar_date_select (1.16.1)
+    exceptional (2.0.26)
+    fastercsv (1.5.3)
+    i18n (0.4.1)
+    mime-types (1.16)
+    nokogiri (1.4.3.1)
+    paperclip (2.3.1.1)
+    pg (0.9.0)
+    rack (1.1.0)
+    radiant (0.9.1)
+      RedCloth (>= 4.0.0)
+      rack (~> 1.1.0)
+      rake (>= 0.8.3)
+      will_paginate (~> 2.3.11)
+    rails (0.9.5)
+      actionmailer (>= 0.6.1)
+      actionpack (>= 1.4.0)
+      activerecord (>= 1.6.0)
+      rake (>= 0.4.15)
+    rake (0.8.7)
+    responds_to_parent (1.0.20091013)
+    rubypants (0.2.0)
+    sanitize (1.2.1)
+      nokogiri (~> 1.4.1)
+    state_machine (0.9.4)
+    tzinfo (0.3.23)
+    will_paginate (2.3.12)
+    xml-simple (1.0.12)
+    yaml_db (0.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  acts_as_list (= 0.1.2)
+  authlogic
+  aws-s3 (= 0.6.2)
+  bluecloth
+  calendar_date_select
+  exceptional
+  fastercsv
+  paperclip (= 2.3.1.1)
+  pg
+  rack (= 1.1.0)
+  radiant
+  rails
+  responds_to_parent (= 1.0.20091013)
+  rubypants
+  sanitize
+  state_machine
+  will_paginate (= 2.3.12)
+  yaml_db (= 0.1.0)
