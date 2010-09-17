@@ -30,7 +30,10 @@ class MembersExtension < Radiant::Extension
       private  
         
         def notify!
-          return false unless status_id == 100 and notifications.empty?
+          return false unless status_id == 100 and notifications.empty? 
+          parent_titles = ancestors.collect(&:title)
+          return unless parent_titles.include?('News') or parent_titles.include?('Resources') or 
+            parent_titles.include?('Events')
           Member.active.with_email.each do |member|
             notifications.create :to_member_id => member.id
           end
