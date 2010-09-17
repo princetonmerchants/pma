@@ -9,7 +9,7 @@ class Member < ActiveRecord::Base
   default_scope :order => 'company_name asc'
   named_scope :properties, :conditions => "level = 'Property'"
   named_scope :pending, :conditions => "status = 'pending'"
-  named_scope :active, :conditions => "status = 'active'"
+  named_scope :active, :conditions => "status = 'active' and profile_name not in ('TesterInc', 'Tester2Inc')"
   named_scope :inactive, :conditions => "status = 'inactive'"
   named_scope :denied, :conditions => "status = 'denied'"
   named_scope :with_email, :conditions => "email is not null and email != ''"

@@ -7,6 +7,8 @@
   = render :partial => 'shared/top'
   
   %ul#notifications.reset.notifications
+    - if @notifications.empty?
+      %li No notifications found.
     - @notifications.each do |notification|
       = render :partial => 'notifications/show', :locals => {:notification => notification}
   

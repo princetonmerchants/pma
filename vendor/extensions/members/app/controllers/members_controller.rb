@@ -16,7 +16,6 @@ class MembersController < BaseController
   def index
     expires_in 5.minutes, :public => true, :private => false
     @member = current_member
-    @members = Member.paginate :page => params[:p], :per_page => 20
     @title = 'Members'
   end
 

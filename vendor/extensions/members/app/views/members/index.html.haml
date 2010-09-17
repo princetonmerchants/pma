@@ -26,7 +26,7 @@
         %h2
           = category.name
         %ol.reset
-          - category.members.each do |member|
+          - category.members.active.each do |member|
             %li
               %h3
                 = link_to h(member.company_name), member
