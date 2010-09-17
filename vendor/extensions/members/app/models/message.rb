@@ -36,11 +36,19 @@ class Message < ActiveRecord::Base
       end
       body2 = body.split("\n").collect do |line|
         line.split(' ').collect do |word|
-          if word[0] == 64 and (member2 = Member.find_by_profile_name(word[1..-1].strip)) and member2.id != member.id 
-            unless message_members.collect(&:member_id).include?(member2.id)
-              message_members << MessageMember.new(:member_id => member2.id, :at_wall => false)
+          if match_start = word =~ /@[A-Za-z]+[A-Za-z0-9]*/
+            match_end = word.index(/[^A-Za-z0-9]/, match_start + 1)
+            potential_profile_name = match_end ? word[match_start..match_end-1] : word[match_start..-1]
+            if member2 = Member.find_by_profile_name(potential_profile_name[1..-1])
+              unless message_members.collect(&:member_id).include?(member2.id) or member2.id == member.id
+                message_members << MessageMember.new(:member_id => member2.id, :at_wall => false)
+              end
+              before = match_start > 0 ? word[0..match_start-1] : ''
+              after = match_end ? word[match_end..-1] : ''
+              %{#{before}<a href="/members-only/members/#{member2.to_param}">#{member2.company_name}</a>#{after}}
+            else
+              word 
             end
-            %{"#{member2.profile_name}":/members-only/members/#{member2.to_param}}
           else
             word
           end
