@@ -3,6 +3,8 @@
 = javascript_tag "member_id = #{@member.id}; page = 1; more_messages_exist = #{@more_messages_exist}"
 
 %ol#messages.reset
+  %li#message-loading{:style => 'display:none'}
+    = image_tag 'ajax-loader.gif'
   - @messages.each do |message|
     = render :partial => 'messages/show', :locals => {:message => message}
 

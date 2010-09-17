@@ -715,6 +715,9 @@ body #root #content-container #content #main .wall {
     margin: 30px 0 0 0;
     padding: 0;
     width: 100%; }
+    body #root #content-container #content #main .wall ol.reset li#message-loading {
+      text-align: center;
+      padding: 15px 0; }
     body #root #content-container #content #main .wall ol.reset li {
       float: left;
       clear: both;
@@ -772,6 +775,9 @@ body #root #content-container #content #main .wall {
             body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li .logo {
               width: 35px;
               height: 35px; }
+          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li#message-response-loading {
+            text-align: center;
+            padding: 10px 5px; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new .logo {
             width: 35px;
             float: left; }

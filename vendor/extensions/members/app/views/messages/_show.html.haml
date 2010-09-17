@@ -32,6 +32,8 @@
     %ol.responses.reset
       - message.responses.each do |message_response|
         = render :partial => 'message_responses/show', :locals => {:message_response => message_response}
+      %li#message-response-loading{:style => 'display:none'}
+        = image_tag 'ajax-loader.gif'
       
       %li.new{:style => 'display:none'}
         %a{:name => "new-response-#{message.id}"}

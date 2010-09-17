@@ -138,20 +138,26 @@ function init_wall() {
     target: null,
     resetForm: true,
     beforeSubmit: 
-      function() {
+      function(arr, $form, options) {
         if($('#message_body').val() == "" ||
         $('#message_body').val() == "What's your company up to?" ||
         $('#message_body').val() == "Write something...") {
           return false;
+        } else {
+          $form.find('input[type=submit]').attr('disabled', 'disabled');
+          $('#message-loading').show('blind');
         }
       },
     success: 
       function(responseText, statusText, xhr, $form)  { 
-        $(responseText).prependTo('#messages').hide().show("blind");
+        $('#message-loading').hide();
+        $(responseText).prependTo('#messages').hide().show("highlight", {color: '#fde5fd'});
+        $('#message-loading').prependTo('#messages');
         $('#message_body').css('height', '30px');
         $('#messages a.button').button();
         $('#messages abbr.timeago').timeago();
         init_responses();
+        $form.find('input[type=submit]').removeAttr('disabled');
       },
   });
   
@@ -169,14 +175,20 @@ function init_wall() {
         function(arr, $form, options) {
           if($form.find('#message_response_body').val() == "") {
             return false;
+          } else {
+            $form.find('input[type=submit]').attr('disabled', 'disabled');
+            $form.find('#message-response-loading').show('blind');
           }
         },
       success: 
         function(responseText, statusText, xhr, $form) { 
-          $(responseText).insertBefore($form.parentsUntil('.message').find('.responses .new')).hide().show("blind");
+          $('#message-response-loading').hide();
+          $(responseText).insertBefore($form.parentsUntil('.message').find('.responses .new')).hide().show("highlight", {color: '#fde5fd'});
+          $form.find('#message-response-loading').insertBefore($form.parentsUntil('.message').find('.responses .new'));
           $form.find('#message_response_body').css('height', '20px');
           $('a.button').button();
           $('abbr.timeago').timeago();
+          $form.find('input[type=submit]').removeAttr('disabled');
         },
     });
   }
