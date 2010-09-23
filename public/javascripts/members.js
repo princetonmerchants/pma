@@ -17,7 +17,7 @@ $(document).ready(function () {
 });
 
 function log_page_seen() {
-  if(page_url) {
+  if(page_url && current_member['authenticated']) {
     $.ajax({
     	url: "/notifications/page_seen",
     	cache: false,

@@ -91,5 +91,7 @@ Radiant::Initializer.run do |config|
     ActiveSupport::Inflector.inflections do |inflect|
       inflect.uncountable 'config'
     end
+    
+    SiteController.cache_timeout = 15.minutes
   end
 end

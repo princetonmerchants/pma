@@ -14,15 +14,17 @@ class MembersController < BaseController
     :account_more_messages, :edit_account, :update_account, :change_password, :update_password]
   
   def index
-    expires_in 5.minutes, :public => true, :private => false
+    expires_in 15.minutes, :public => true, :private => false
     @member = current_member
     @title = 'Members'
+    flash[:notice] = nil
   end
 
   def show
-    expires_in 5.minutes, :public => true, :private => false
+    expires_in 15.minutes, :public => true, :private => false
     @member = Member.find(params[:id])
     @title = @member.company_name
+    flash[:notice] = nil
     render :action => 'show_public'
   end
 
@@ -171,7 +173,7 @@ class MembersController < BaseController
   end  
   
   def search_auto_complete_json
-    expires_in 5.minutes, :public => true, :private => false
+    expires_in 15.minutes, :public => true, :private => false
     render :text => Member.active.collect { |m| 
       {
         :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
@@ -183,7 +185,7 @@ class MembersController < BaseController
   end
   
   def members_only_search_auto_complete_json
-    expires_in 5.minutes, :public => true, :private => false
+    expires_in 15.minutes, :public => true, :private => false
     render :text => Member.active.collect { |m| 
       {
         :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
@@ -195,7 +197,7 @@ class MembersController < BaseController
   end
   
   def at_auto_complete_json
-    expires_in 5.minutes, :public => true, :private => false
+    expires_in 15.minutes, :public => true, :private => false
     render :text => Member.active.collect { |m| 
       {
         :label => %{#{h(m.company_name)}<div style="display:none">#{h(m.tagline)} #{h(m.bio)} #{h(m.keywords)}</div>},
