@@ -17,4 +17,36 @@ class Notifier < ActionMailer::Base
     sent_on Time.now
     body :notification => notification
   end
+
+  def new_member(member)
+    subject "New member is pending"
+    from "#{Radiant::Config['site.title']} <info@princetonmerchants.org>"
+    recipients 'info@princetonmerchants.org, webmaster@princetonmerchants.org'
+    sent_on Time.now
+    body :member => member
+  end
+
+  def membership_denied(member)
+    subject "Sorry, you were denied membership"
+    from "#{Radiant::Config['site.title']} <info@princetonmerchants.org>"
+    recipients member.email
+    sent_on Time.now
+    body :member => member
+  end
+
+  def account_activated(member)
+    subject "Yay your account was activated"
+    from "#{Radiant::Config['site.title']} <info@princetonmerchants.org>"
+    recipients member.email
+    sent_on Time.now
+    body :member => member
+  end
+
+  def account_deactivated(member)
+    subject "Uh oh, your account was deactivated"
+    from "#{Radiant::Config['site.title']} <info@princetonmerchants.org>"
+    recipients member.email
+    sent_on Time.now
+    body :member => member
+  end
 end

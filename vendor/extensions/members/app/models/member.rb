@@ -6,6 +6,8 @@ class Member < ActiveRecord::Base
   has_many :responses, :class_name => 'MessageResponse', :foreign_key => 'member_id', :dependent => :destroy
   has_many :notifications, :foreign_key => 'to_member_id', :dependent => :destroy
   
+  after_create Proc.new {|m| Notifier.deliver_new_member(m)}
+  
   default_scope :order => 'company_name asc'
   named_scope :properties, :conditions => "level = 'Property'"
   named_scope :pending, :conditions => "status = 'pending'"
@@ -86,8 +88,18 @@ class Member < ActiveRecord::Base
       validates_presence_of :email, :name, :phone
     end
     state :denied
-    state :active
-    state :inactive
+    state :active 
+    state :inactive 
+    
+    after_transition any => :denied do |member, transition|
+      Notifier.deliver_membership_denied(member)
+    end
+    after_transition any => :active do |member, transition|
+      Notifier.deliver_account_activated(member)
+    end
+    after_transition any => :inactive do |member, transition|
+      Notifier.deliver_account_deactivated(member)
+    end
   end
   
   def claimed?
