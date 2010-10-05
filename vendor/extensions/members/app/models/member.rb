@@ -92,13 +92,13 @@ class Member < ActiveRecord::Base
     state :inactive 
     
     after_transition any => :denied do |member, transition|
-      Notifier.deliver_membership_denied(member)
+      Notifier.deliver_membership_denied(member) unless member.email.blank?
     end
     after_transition any => :active do |member, transition|
-      Notifier.deliver_account_activated(member)
+      Notifier.deliver_account_activated(member) unless member.email.blank?
     end
     after_transition any => :inactive do |member, transition|
-      Notifier.deliver_account_deactivated(member)
+      Notifier.deliver_account_deactivated(member) unless member.email.blank?
     end
   end
   
