@@ -21,7 +21,7 @@ Radiant::Initializer.run do |config|
   config.extensions = [ :help, :textile_filter, :markdown_filter, :smarty_pants_filter, 
     :page_preview, :layouts, :redirect, :import_export, :drag, :mailer, 
     :paperclipped, :paperclipped_uploader, :search, :file_system, :tags,
-    :comments, :archive, :dashboard, :members, :settings, :fragment_cacher ]
+    :comments, :archive, :dashboard, :members, :settings, :fragment_cacher, :rad_cache ]
   
   # By default, only English translations are loaded. Remove any of these from
   # the list below if you'd like to provide any of the supported languages

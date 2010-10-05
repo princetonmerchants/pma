@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20091003095744) do
     t.string   "upload_token"
   end
 
+  create_table "cache_dependencies", :force => true do |t|
+    t.integer  "cache_dependable_id"
+    t.string   "cache_dependable_type"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
