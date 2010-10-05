@@ -8,6 +8,7 @@
 require File.join(File.dirname(__FILE__), 'boot')
 
 require 'radius'
+require 'memcached'
 
 Radiant::Initializer.run do |config|
   # Skip frameworks you're not going to use (only works if using vendor/rails).
@@ -56,7 +57,8 @@ Radiant::Initializer.run do |config|
   #  :metastore => "radiant:tmp/cache/meta"
   #    Sets the meta store type and storage location.  We recommend you use
   #    radiant: since this will enable manual expiration and acceleration headers.
-  config.middleware.use ::Radiant::Cache
+  #config.middleware.use ::Radiant::Cache
+  config.cache_store = :mem_cache_store, Memcached::Rails.new(:namespace => "pma-#{Time.now.to_i}")
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
@@ -84,7 +86,7 @@ Radiant::Initializer.run do |config|
   config.gem 'bluecloth', :source => 'http://gemcutter.org'
   config.gem 'sanitize', :source => 'http://gemcutter.org'
   config.gem 'fastercsv', :source => 'http://gemcutter.org'
-  config.gem 'exceptional', :source => 'http://gemcutter.org'
+  config.gem 'memcached-northscale', :lib => 'memcached'
   
   config.after_initialize do
     # Add new inflection rules using the following format:

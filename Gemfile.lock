@@ -27,9 +27,9 @@ GEM
     bluecloth (2.0.7)
     builder (2.1.2)
     calendar_date_select (1.16.1)
-    exceptional (2.0.26)
     fastercsv (1.5.3)
     i18n (0.4.1)
+    memcached-northscale (0.19.5.4)
     mime-types (1.16)
     nokogiri (1.4.3.1)
     paperclip (2.3.1.1)
@@ -65,8 +65,8 @@ DEPENDENCIES
   aws-s3 (= 0.6.2)
   bluecloth
   calendar_date_select
-  exceptional
   fastercsv
+  memcached-northscale
   paperclip (= 2.3.1.1)
   pg
   rack (= 1.1.0)
