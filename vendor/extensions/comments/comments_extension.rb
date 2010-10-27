@@ -1,28 +1,15 @@
+require File.expand_path("../lib/radiant-comments-extension/version", __FILE__)
 class CommentsExtension < Radiant::Extension
-  version "#{File.read(File.expand_path(File.dirname(__FILE__)) + '/VERSION')}"
+  version RadiantCommentsExtension::VERSION
   description "Adds blog-like comments and comment functionality to pages."
   url "http://github.com/saturnflyer/radiant-comments"
-
-  define_routes do |map|
-    map.namespace :admin do |admin|
-      admin.connect 'comments/:status', :controller => 'comments', :status => 'unapproved', :conditions => { :method => :get }, :requirements => { :status => /all|unapproved|approved/ }
-      admin.connect 'comments/:status.:format', :controller => 'comments', :status => /all|approved|unapproved/, :conditions => { :method => :get }
-      admin.resources :comments, :member => { :remove => :get, :approve => :put, :unapprove => :put }, :collection => {:destroy_unapproved => :delete}
-      admin.page_enable_comments '/pages/:page_id/comments/enable', :controller => 'comments', :action => 'enable', :conditions => {:method => :put}
-    end
-    map.with_options(:controller => 'admin/comments') do |comments|
-      comments.connect 'admin/pages/:page_id/comments/:status', :status => /all|approved|unapproved/, :conditions => { :method => :get }
-      comments.connect 'admin/pages/:page_id/comments/:status.:format', :status => /all|approved|unapproved/, :conditions => { :method => :get }
-      comments.admin_page_comments 'admin/pages/:page_id/comments/:action'
-      comments.admin_page_comment 'admin/pages/:page_id/comments/:id/:action'
-    end
-    # This needs to be last, otherwise it hoses the admin routes.
-    map.resources :comments, :name_prefix => "page_", :path_prefix => "*url", :controller => "comments"
+  
+  extension_config do |config|
+    config.gem 'sanitize'
+    config.gem 'mollom'
   end
 
   def activate
-    require 'sanitize'
-    
     Dir["#{File.dirname(__FILE__)}/app/models/*_filter.rb"].each do |file|
       require file
     end
@@ -37,14 +24,11 @@ class CommentsExtension < Radiant::Extension
       admin.page.index.add :sitemap_head, "index_head_view_comments"
       admin.page.index.add :node, "index_view_comments"
     end
-    
-    if self.respond_to? :tab
-      tab "Content" do
-        add_item('Comments', '/admin/comments')
-      end
-    else
-      admin.tabs.add "Comments", "/admin/comments", :visibility => [:all]
-    end
+
+    tab "Content" do
+    	add_item("Comments", "/admin/comments")
+    end.
+
     require "fastercsv"
 
     ActiveRecord::Base.class_eval do

@@ -15,6 +15,7 @@ If you want to contribute features or fixes please write your specs and code and
 * Requires will_paginate Rails plugin (http://github.com/mislav/will_paginate/tree/master)
 * Requires fastercsv 1.2.3 or greater.
 * Requires sanitize 1.0.8 or greater.
+* Requires mollom 0.2.2 or greater.
 
 == Installation 
 
@@ -23,6 +24,14 @@ To install Comments, run:
   rake radiant:extensions:comments:install
 
 This _WILL_ delete any snippets named 'comment', 'comments' and 'comment_form' if these exist.
+
+If you are upgrading from a previous version with out the sanitizer run:
+
+  rake radiant:extensions:comments:initialize
+
+or if you want to clean up your initializer for the sanitize gem run:
+
+  rake radiant:extensions:comments:forced_initialize
 
 == More Help
 

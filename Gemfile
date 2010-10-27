@@ -18,4 +18,5 @@ gem 'pg'
 gem 'rails'
 gem 'authlogic'
 gem 'memcached-northscale', :require => 'memcached'
+gem 'mollom'
 

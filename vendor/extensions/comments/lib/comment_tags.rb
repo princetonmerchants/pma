@@ -206,6 +206,61 @@ module CommentTags
   tag 'comments:error:message' do |tag|
     tag.locals.error_message
   end
+  
+  desc %{
+    Renders the nested content if the posted comment was found unsure by Mollom.
+  }
+  tag "comments:if_unsure" do |tag|
+    tag.expand if tag.locals.page.captcha_url
+  end
+  desc %{
+    Renders the nested content unless the posted comment was found unsure by Mollom.
+  }
+  tag "comments:unless_unsure" do |tag|
+    tag.expand unless tag.locals.page.captcha_url
+  end
+  
+  desc %{
+    Renders a CAPTCHA if the posted comment was found unsure by Mollom.
+    
+    *Usage:*
+    <r:comments:mollom_captcha [label="hey.. are you even human?"] />
+  }
+  tag "comments:mollom_captcha" do |tag|
+    if tag.locals.page.captcha_url
+      url = tag.locals.page.captcha_url
+      text = tag.attr['label']||I18n.t('message_unsure')
+      return %{
+        <div id="captcha_form">
+          <form method="post" action="#{tag.locals.page.url}comments/solve_captcha">
+          <label for="captcha_answer">#{text}</label>
+          <img src="#{url}" alt="Mollom image CAPTCHA" /><br />
+          <input type="text" name="captcha_answer" />
+          <input type="hidden" name="comment_mollom_id" value="#{tag.locals.page.comment_mollom_id}"/>
+          <input type="submit" />
+          </form>
+        </div>
+      }
+    end
+  end
+  
+  desc %{
+    Only expands if the posted comment is thought to be spam.
+    
+    *Usage:*
+    <pre><code><r:comments:if_spam message="we don't like your spamming around here.." /></code></pre>
+    or use a double tag to send your own content:
+    <pre><code><r:comments:if_spam>&lt;p class="error">...&lt;/p></r:comments:if_spam></code></pre>
+  }
+  tag "comments:if_spam" do |tag|
+    if tag.locals.page.posted_comment_is_spam == true
+      if tag.double?
+        tag.expand
+      else
+        tag.attr["message"]
+      end
+    end
+  end
 
   %w(text password hidden).each do |type|
     desc %{Builds a #{type} form field for comments.}

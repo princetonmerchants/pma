@@ -8,8 +8,8 @@
 # http://rgrove.github.com/sanitize/
 
 COMMENT_SANITIZER_OPTION = 
-  Sanitize::Config::RELAXED # Gives you '<b><a href="http://foo.com/">foo</a></b><img src="http://foo.com/bar.jpg" />'
-  # Sanitize::Config::BASIC # Results in '<b><a href="http://foo.com/" rel="nofollow">foo</a></b>'
+  # Sanitize::Config::RELAXED # Gives you '<b><a href="http://foo.com/">foo</a></b><img src="http://foo.com/bar.jpg" />'
+  Sanitize::Config::BASIC # Results in '<b><a href="http://foo.com/" rel="nofollow">foo</a></b>'
   # Sanitize::Config::RESTRICTED # This results in '<b>foo</b>'
   
   # Or you may create your own sanitization rules. Uncomment all the lines below and edit them as you need.
