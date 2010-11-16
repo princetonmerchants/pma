@@ -35,8 +35,6 @@ class Member < ActiveRecord::Base
     :url => Radiant::Config["assets.url"] ? Radiant::Config["assets.url"] : "/:class/:id/:basename:no_original_style.:extension", 
     :path => Radiant::Config["assets.path"] ? Radiant::Config["assets.path"] : ":rails_root/public/:class/:id/:basename:no_original_style.:extension"
 
-  attr_accessor :password, :password_confirmation
-
   cattr_accessor :email_name_regex, :domain_head_regex, :domain_tld_regex, :email_regex, :domain_regex, :logo_delete
   
   self.email_name_regex = '[\w\.%\+\-]+'.freeze
