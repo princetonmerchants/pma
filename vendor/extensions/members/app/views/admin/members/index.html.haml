@@ -47,7 +47,7 @@
                     - elsif m.inactive?
                       = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
                     - elsif m.pending?
-                      = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
+                      = link_to image('plus') + ' Activate', activate_admin_member_path(m.id), :method => :post, :confirm => "Really activate #{m.name}?"
                       = link_to image('minus') + ' Deny', deny_admin_member_path(m.id), :method => :post, :confirm => "Really deny #{m.name}?"
                 %li
                   = link_to image('page_delete') + ' Delete', admin_member_path(m.id), :method => :delete, :confirm => "Really delete #{m.name}?"
