@@ -15,8 +15,7 @@ function init_slider() {
   // float the panels left if we're going horizontal
   if (horizontal) {
     $panels.css({
-      'float' : 'left',
-      'position' : 'relative' // IE fix to ensure overflow is hidden
+      'float' : 'left'
     });
     
     // calculate a new width for the container (so it holds all panels)
