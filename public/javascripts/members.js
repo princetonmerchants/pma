@@ -189,7 +189,7 @@ function init_wall() {
           $('a.button').button();
           $('abbr.timeago').timeago();
           $form.find('input[type=submit]').removeAttr('disabled');
-        },
+        }
     });
   }
   
