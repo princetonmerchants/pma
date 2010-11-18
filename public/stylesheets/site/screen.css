@@ -251,7 +251,7 @@ body #root #content-container #content .headline {
 body #root #content-container #content .block {
   margin: 0 0 20px 0; }
   body #root #content-container #content .block .inner {
-    padding: 0 20px 5px 20px; }
+    padding: 20px 20px 5px 20px; }
     body #root #content-container #content .block .inner .more {
       text-align: right;
       margin: 15px 5px 0 0; }
@@ -273,7 +273,7 @@ body #root #content-container #content #main #inner-right .block .headline .head
 body #root #content-container #content #main #inner-right .block .headline .btn-rss {
   margin: 0 18px 0 0; }
 body #root #content-container #content #main #inner-right .block .inner {
-  padding: 0 5px 5px 27px; }
+  padding: 20px 5px 5px 27px; }
 
 #help-us form .amount {
   float: left;
@@ -729,10 +729,12 @@ body #root #content-container #content #main .wall {
         float: left;
         width: 50px;
         height: 50px;
-        margin: 0 7px 7px 0; }
+        margin: 0; }
       body #root #content-container #content #main .wall ol.reset li .inner-message {
-        float: left;
-        width: 362px;
+        float: right;
+        width: 355px;
+        padding: 0;
+        margin: 0;
         overflow-x: auto; }
         body #root #content-container #content #main .wall ol.reset li .inner-message .remove {
           display: none; }
@@ -763,26 +765,27 @@ body #root #content-container #content #main .wall {
         body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset {
           margin: 0;
           padding: 0;
-          float: left; }
+          float: left;
+          width: 345px; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li {
-            float: left;
+            float: right;
             clear: both;
             margin: 0 0 1px 0;
             padding: 5px;
-            width: 351px;
             border-bottom: 1px solid #e0e0e0;
             background: #f3f3f3; }
             body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li .logo {
               width: 35px;
-              height: 35px; }
+              height: 35px;
+              margin: 0 5px 5px 5px; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li#message-response-loading {
             text-align: center;
             padding: 10px 5px; }
-          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new .logo {
+          body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new img {
             width: 35px;
             float: left; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li.new textarea {
-            width: 303px;
+            width: 290px;
             float: right; }
           body #root #content-container #content #main .wall ol.reset li .inner-message ol.reset li:hover .remove {
             display: inline; }
@@ -791,7 +794,7 @@ body #root #content-container #content #main .wall {
       float: right;
       font-size: 9px;
       position: absolute;
-      left: 400px;
+      left: 390px;
       z-index: 10000; }
     body #root #content-container #content #main .wall ol.reset li:hover .inner-message li .remove {
       display: none; }
