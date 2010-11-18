@@ -224,7 +224,9 @@ body {
 
 body #root #content-container #content .headline {
   width: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  margin: 0;
+  padding: 0; }
   body #root #content-container #content .headline .heading {
     height: 29px;
     max-width: 90%;
@@ -232,7 +234,7 @@ body #root #content-container #content .headline {
     float: left;
     background: #9acccd url(../../images/bg-heading2.gif) repeat-y 100% 0;
     margin: 1px 0 15px 0;
-    padding-right: 25px; }
+    padding: 0 25px 0 0; }
     body #root #content-container #content .headline .heading strong {
       color: #fff;
       display: block;
@@ -249,9 +251,11 @@ body #root #content-container #content .headline {
     margin: 1px 25px 0 0;
     display: inline; }
 body #root #content-container #content .block {
-  margin: 0 0 20px 0; }
+  margin: 0 0 20px 0;
+  padding: 0; }
   body #root #content-container #content .block .inner {
-    padding: 20px 20px 5px 20px; }
+    padding: 10px 20px 5px 20px;
+    margin: 0; }
     body #root #content-container #content .block .inner .more {
       text-align: right;
       margin: 15px 5px 0 0; }
@@ -273,13 +277,19 @@ body #root #content-container #content #main #inner-right .block .headline .head
 body #root #content-container #content #main #inner-right .block .headline .btn-rss {
   margin: 0 18px 0 0; }
 body #root #content-container #content #main #inner-right .block .inner {
-  padding: 20px 5px 5px 27px; }
+  padding: 10px 5px 5px 27px; }
 
-#help-us form .amount {
-  float: left;
-  padding: 10px 0 5px 0; }
-#help-us form input[type=text] {
-  width: 100px; }
+body #root #content-container #content #main #inner-right #help-us.block {
+  margin-top: 0;
+  padding-top: 0; }
+  body #root #content-container #content #main #inner-right #help-us.block .inner {
+    padding-top: 0;
+    margin-top: 0; }
+    body #root #content-container #content #main #inner-right #help-us.block .inner p {
+      margin: 0 0 10px 0;
+      padding: 0; }
+    body #root #content-container #content #main #inner-right #help-us.block .inner form input[type=text] {
+      width: 100px; }
 
 #featured-events {
   background: url(../../images/bg-left-nav-light.gif) repeat-y;
@@ -847,7 +857,7 @@ body.ThreeColumns #root {
         float: right;
         position: relative;
         top: -38px;
-        padding: 0 0 15px 0; }
+        padding: 10px 0 15px 0; }
 
 body.TwoColumnsLeft #root {
   background: url(../../images/bg-2-columns-left.gif) repeat-y; }
@@ -912,7 +922,7 @@ body.TwoColumnsRight #root {
         float: right;
         position: relative;
         top: -38px;
-        padding: 0 0 15px 0; }
+        padding: 10px 0 15px 0; }
 
 body.OneColumn #root {
   background: none; }
