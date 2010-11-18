@@ -85,7 +85,7 @@ function init_slider() {
     offset: offset,
     
     // duration of the sliding effect
-    duration: 800,
+    duration: 300,
     
     // easing - can be used with the easing plugin: 
     // http://gsgd.co.uk/sandbox/jquery/easing/
@@ -105,12 +105,11 @@ function init_slider() {
   // setting the duration to 1 because I don't want it to scroll in the
   // very first page load.  We don't always need this, but it ensures
   // the positioning is absolutely spot on when the pages loads.
-  scrollOptions.duration = 2;
+  scrollOptions.duration = 10;
   $.localScroll.hash(scrollOptions);
 
-  var auto_slider = $(document).everyTime(3000, function(i) {
+  var auto_slider = $(document).everyTime(4000, function(i) {
     $('span.scrollButtons.right').click();
   });  
   $('#slider').hover(function () {auto_slider.stopTime();});
-  $('#slider').blur(function () {alert();});
 }
