@@ -158,7 +158,7 @@ function init_wall() {
         $('#messages abbr.timeago').timeago();
         init_responses();
         $form.find('input[type=submit]').removeAttr('disabled');
-      },
+      }
   });
   
   init_responses();
